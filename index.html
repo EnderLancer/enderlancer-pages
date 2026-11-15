@@ -76,6 +76,18 @@ h3{font:600 16px Inter;margin:18px 0 8px}
 ul.tight{margin:6px 0;padding-left:18px} ul.tight li{margin:3px 0}
 .src li{margin:4px 0;font-size:14px}
 .filter{margin:8px 0 4px}
+.lead{color:var(--ink2);font-size:14px;max-width:820px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+ul.alarms{list-style:none;padding:0;margin:6px 0}
+ul.alarms li{display:grid;grid-template-columns:56px 1fr;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+ul.alarms li b{color:var(--sun);font-variant-numeric:tabular-nums}
+.pk label{display:flex;gap:8px;align-items:flex-start;padding:4px 0;font-size:14px;cursor:pointer}
+.q{display:grid;grid-template-columns:26px 1fr;gap:4px 6px;font-size:14px;margin-top:6px}
+.q span:nth-child(odd){text-align:center}
+.hook{font-size:14.5px;margin:2px 0 4px}
+.meter{letter-spacing:1px}
+.tag{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:999px;background:var(--azul2);color:var(--azul);margin-right:4px}
 footer{color:var(--muted);font-size:12px;text-align:center;padding:24px}
 </style>
 </head>
@@ -83,13 +95,14 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:24px}
 <header>
   <div class="wrap">
     <h1>Лісабон без пасток · 18–19.11.2026</h1>
-    <p class="sub">Дві доби на двох: Шіаду й Байру-Алту, захід сонця в Кашкайші, ранкова Пена. Оберіть сценарії, і таймлайн, карта та маршрут перебудуються.</p>
+    <p class="sub">Дві доби на двох із базою в Байші (Rua da Prata): Шіаду й Байру-Алту, захід сонця в Кашкайші, ранкова Пена. Оберіть сценарії, і таймлайн, карта та маршрут перебудуються.</p>
     <nav class="tabs" id="tabs">
       <button data-v="d1" class="on">Ср · 18.11</button>
       <button data-v="d2">Чт · 19.11</button>
       <button data-v="places">Усі місця</button>
       <button data-v="planb">План Б</button>
-      <button data-v="areas">Райони</button>
+      <button data-v="adhd">Швидкий режим</button>
+      <button data-v="areas">Нюанси</button>
       <button data-v="src">Джерела</button>
     </nav>
   </div>
@@ -139,8 +152,25 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:24px}
   <div class="pb" id="pb"></div>
 </section>
 
+<section class="view" id="v-adhd">
+  <h2>Швидкий режим: коротко, з таймерами, без зайвих рішень</h2>
+  <p class="lead">Кожна картка тут: чим місце зачепить, одна дія, скільки часу, рівень шуму й натовпу, і куди піти, якщо стало нудно або забагато. Будильники нижче беруться з того сценарію, який обрано у вкладках днів.</p>
+  <div class="grid2">
+    <div class="card"><h4>⏰ Будильники · середа</h4><ul class="alarms" id="al-d1"></ul></div>
+    <div class="card"><h4>⏰ Будильники · четвер</h4><ul class="alarms" id="al-d2"></ul></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h4>🎒 Що має бути в кишені</h4><div id="pocket"></div></div>
+    <div class="card"><h4>🪤 Пастки уваги</h4><ul class="tight" id="traps"></ul></div>
+  </div>
+  <h3>Місця коротко</h3>
+  <div class="seg filter" id="qf"></div>
+  <div class="cards" id="qcards"></div>
+</section>
+
 <section class="view" id="v-areas">
-  <h2>Нюанси районів</h2>
+  <h2>Нюанси й тонкощі</h2>
+  <div class="seg filter" id="nf"></div>
   <div class="pb" id="areas"></div>
 </section>
 
@@ -214,6 +244,32 @@ const S = {
  palSintra:["The Better Vacation · Палац Сінтри: азулежу, без слоту","https://thebettervacation.com/pt/Lisboa/pal%C3%A1cio-nacional-de-sintra/"],
  safeLT:["lisbontourism · безпека в Лісабоні","https://www.lisbontourism.org/?p=197"],
  safeNomad:["Nomado · шахрайство в Лісабоні","https://www.nomadotravel.app/en/guides/lisbon-safety-tips"],
+ fever:["Fever/Tiqets · Пена: пішки 45 хв від центру Сінтри","https://feverup.com/m/117180"],
+ metroTar:["Metro de Lisboa · тарифи 2026 (PDF)","https://www.metrolisboa.pt/wp-content/uploads/2025/12/Tarifas_site_2026_PT.pdf"],
+ cp24:["CP · квиток 24h Carris/Metro/CP: правила","https://cp.pt/info/w/24-hours-ticket"],
+ cpPrices:["CP · ціни приміських потягів 2026 (PDF)","https://cp.pt/info/documents/d/cp/precos-comboios-urbanos-lisboa"],
+ bringyou:["bring-you · Navegante: zapping і 24h не поєднуються","https://www.bring-you.info/?p=175760"],
+ tram4g:["4gnews · ціни Carris 2026 (тариф у трамваї)","https://4gnews.pt/andar-de-transportes-fica-mais-caro-em-lisboa-em-2026-novos-precos-da-carris/"],
+ vnvTransp:["Viaje na Viagem · транспорт Лісабона","https://www.viajenaviagem.com/destino/lisboa/transporte-lisboa"],
+ r2rBoca:["Rome2rio · автобус 27 Cascais → Boca do Inferno","https://www.rome2rio.com/s/Cascais-Terminal/Boca-do-Inferno"],
+ m27:["everyrail · MobiCascais M27 до Boca do Inferno","https://everyrail.com/portugal/cascais/"],
+ penaOff:["Parques de Sintra · гардероб і шафки на вході в парк","https://www.parquesdesintra.pt/en/parks-monuments/park-and-national-palace-of-pena/complete-visit/"],
+ penaRules:["Правила Пени: рюкзак спереду, гардероб безкоштовний","https://ts-pena-palace-tickets.pages.dev/rules-and-regulations/"],
+ penaHead:["Headout · Пена: перевірка сумок, тиха каплиця","https://guidebooks.headout.com/guides/pena-palace-sintra"],
+ penaMaze:["Boundless Roads · парк Пени як лабіринт","https://www.boundlessroads.com/how-to-visit-pena-palace-parking-issue/"],
+ sintraOri:["Rome2rio · Sintra → Oriente щодвадцять хвилин, 46 хв","https://www.rome2rio.com/s/Sintra/Lisbon-Oriente"],
+ sintraAirPT:["sintra-portugal · аеропорт ↔ Сінтра громадським транспортом","https://sintra-portugal.com/guides/Lisbon-airport-to-sintra.html"],
+ escal:["The Lisbon Connection · безкоштовні ескалатори Baixa-Chiado","https://www.thelisbonconnection.com/metro-station-lisbon-area-baixa-chiado-free-escalators-avoid-hundreds-of-stairs/"],
+ escal2:["LisbonLisboaPortugal · обхід підйомів через Baixa-Chiado","https://lisbonlisboaportugal.com/Baixa-Lisbon/Elevador-Santa-Justa-Lisbon-elevator-lift-guide.html"],
+ escalTO:["Time Out PT · ескалатори Baixa-Chiado часто стоять","https://www.timeout.pt/lisboa/pt/noticias/as-escadas-rolantes-da-estacao-baixa-chiado-estao-a-ser-modernizadas-010719"],
+ fadoLT:["lisbontourism · фаду: етикет","https://www.lisbontourism.org/?p=148"],
+ fadoNomado:["Nomado · фаду: прийти до 20:30, без телефонів","https://www.nomadotravel.app/en/guides/fado-lisbon-guide"],
+ fadoEN:["EuropeNightlife · аплодують лише після пісні","https://europenightlife.com/portugal/lisbon/authentic-bairro-alto-fado-experience"],
+ tipLT:["lisbontourism · чайові й couvert","https://www.lisbontourism.org/?p=161"],
+ dinnerOD:["Olá Daniela · вечеря з 19:00–19:30, місцеві о 20:30","https://oladaniela.com/essential-tips-first-time-portugal/"],
+ water:["Portugal Visitor · вода з-під крана безкоштовна за законом","https://www.portugalvisitor.com/eating-out-in-portugal-daily-costs"],
+ penaSignal:["Pena Visitors Guide · слабкий зв'язок у палаці","https://ts-pena-palace-tickets.pages.dev/visitors-guide/"],
+ safeTO:["takeoff · Лісабон: безпека","https://www.takeoff.to/destinations/lisbon"],
  safeCI:["Cities Insider · бруківка, «дилери»","https://citiesinsider.com/country/portugal/lisbon/guides/lisbon-safety/es"],
  rome2rio:["Rome2rio · Cais do Sodré → Cascais (таксі)","https://www.rome2rio.com/s/Cais-do-Sodr%C3%A9-Station/Cascais-Terminal"],
  penaStorm:["Observador · Пену закривали після шторму","https://observador.pt/2025/03/24/mau-tempo-palacio-da-pena-na-serra-de-sintra-reabre-na-terca-feira/"],
@@ -226,11 +282,11 @@ const srcShort = (k,t) => `<a href="${S[k][1]}" target="_blank" rel="noopener">$
 const gm = q => "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
 const P = {
  lis:{n:"Аеропорт LIS (Terminal 1)",a:"Лісабон",ll:[38.7686,-9.1281],cat:"logistics",q:"Aeroporto Humberto Delgado Terminal 1 Lisboa",
-   why:`У центр: метро червона лінія до Alameda, далі зелена до Baixa-Chiado, разом 20–25 хв за €1.90. На таксі 15–25 хв, €11–15. ${srcShort('airportLT')}`,
-   order:"—",price:"Метро €1.90 + картка Navegante €0.50",hours:"Метро ~6:30–1:00",book:"Ні",conf:"ok"},
- trindade:{n:"Житло біля Teatro da Trindade",a:"Шіаду / Байру-Алту",ll:[38.7117,-9.1428],cat:"logistics",q:"Teatro da Trindade INATEL Lisboa",
-   why:"База. Від Baixa-Chiado ~5 хв угору. До Cais do Sodré ~12–15 хв пішки вниз.",order:"—",price:"—",hours:"Заселення 15:00",book:"Заздалегідь попросити лишити валізи до заселення",conf:"chk"},
- tabuletas:{n:"Casa do Ferreira das Tabuletas",a:"Largo Rafael Bordalo Pinheiro · 2 хв від житла",ll:[38.7124,-9.1424],cat:"azulejo",q:"Casa do Ferreira das Tabuletas Largo Rafael Bordalo Pinheiro Lisboa",
+   why:`У центр: червона лінія метро → Alameda → зелена → Baixa-Chiado, 20–25 хв. ${srcShort('airportLT')}. Квиток Carris/Metro €1.90; доба Carris/Metro/CP €11.40 (з приміськими потягами на Кашкайш і Сінтру). ${srcShort('metroTar','Metro de Lisboa')}`,
+   order:"Купити в автоматі метро картку Navegante ocasional (€0.50) на кожного й завантажити 24h Carris/Metro/CP",price:"€0.50 + €11.40 на особу",hours:"Метро ~6:30–1:00",book:"Ні",conf:"ok"},
+ trindade:{n:"Житло · Rua da Prata",a:"Baixa (Santa Maria Maior), 1100-414",ll:[38.7105,-9.1366],cat:"logistics",q:"Rua da Prata, 1100-414 Lisboa",
+   why:"База в рівній Байші. Пішки: Rossio 6–8 хв, Cais do Sodré ~12 хв, Baixa-Chiado ~5 хв. У Шіаду ~12 хв, у Байру-Алту ~15–20 хв, обидва вгору. Алфама ~15–20 хв пішки. Найближче метро: Baixa-Chiado (зелена/синя) і Terreiro do Paço (синя).",order:"—",price:"—",hours:"Заселення 15:00",book:"Заздалегідь попросити лишити рюкзаки до заселення, а в четвер після виселення",conf:"chk"},
+ tabuletas:{n:"Casa do Ferreira das Tabuletas",a:"Largo Rafael Bordalo Pinheiro · Шіаду, ~12 хв угору від житла",ll:[38.7124,-9.1424],cat:"azulejo",q:"Casa do Ferreira das Tabuletas Largo Rafael Bordalo Pinheiro Lisboa",
    why:`Фасад 1864 року з азулежу-тромплеями: алегоричні фігури та стихії. ${srcShort('tabLP','Lonely Planet')}. Той самий майстер, Luís Ferreira, оздобив зал Cervejaria Trindade масонськими символами. ${srcShort('tabISCTE','ISCTE')}`,
    order:"Подивитися фасад; потім зазирнути в зал Cervejaria Trindade",price:"Безкоштовно",hours:"Фасад видно цілодобово",book:"Ні",conf:"ok"},
  saoroque:{n:"Igreja e Museu de São Roque",a:"Largo Trindade Coelho · 3 хв",ll:[38.7137,-9.1434],cat:"azulejo",q:"Igreja de São Roque Lisboa",
@@ -260,7 +316,7 @@ const P = {
  boca:{n:"Boca do Inferno",a:"Кашкайш · ~2 км від станції",ll:[38.6914,-9.4316],cat:"view",q:"Boca do Inferno Cascais",
    why:`Морська арка у вапнякових скелях; оглядовий майданчик для заходу сонця над Атлантикою. Від станції 20–25 хв уздовж Av. Rei Humberto II повз марину й маяк Santa Marta. ${srcShort('bocaRJ','Real Journey')} · ${srcShort('bocaCP','cascais-portugal')}`,
    order:"Захід 17:22, сутінки до 17:51 (розрахунок за координатами)",price:"Безкоштовно",hours:"Відкритий простір",book:"Ні",conf:"ok"},
- calhariz:{n:"Príncipe do Calhariz",a:"Calçada do Combro 28 · 5 хв від житла",ll:[38.7105,-9.1462],cat:"food",q:"Príncipe do Calhariz Calçada do Combro 28 Lisboa",
+ calhariz:{n:"Príncipe do Calhariz",a:"Calçada do Combro 28 · ~15 хв угору від житла",ll:[38.7105,-9.1462],cat:"food",q:"Príncipe do Calhariz Calçada do Combro 28 Lisboa",
    why:`Time Out PT: «одна з тасок Байру-Алту, де їжа не підводить». ${srcShort('calhariz','Time Out PT')}`,
    order:"Грильована риба дня, бакалау, домашні десерти",price:"≈ €15–25 / особу",hours:"Нд–пт 12–15 і 19–22:30 (у середу відкрито)",book:"Бажано зателефонувати",conf:"ok"},
  ribatejo:{n:"Adega do Ribatejo",a:"Нижня частина Байру-Алту",ll:[38.7114,-9.1446],cat:"food",q:"Adega do Ribatejo Bairro Alto Lisboa",
@@ -269,24 +325,33 @@ const P = {
  tagarro:{n:"Adega do Tagarro",a:"Байру-Алту",ll:[38.7128,-9.1455],cat:"food",q:"Adega do Tagarro Bairro Alto Lisboa",
    why:`Сімейна таска: доньки пана Антоніу її осучаснили, але суть лишили. ${srcShort('tagarro','Time Out PT')}`,
    order:"Петишкуш на двох + страва з казанка",price:"€€ (ціновий рівень 2/4)",hours:"Перевірити години в середу",book:"Перевірити",conf:"chk"},
- chico:{n:"A Tasca do Chico",a:"R. do Diário de Notícias 39 · 4 хв від житла",ll:[38.7121,-9.1452],cat:"fado",q:"A Tasca do Chico Rua do Diário de Notícias 39 Lisboa",
+ chico:{n:"A Tasca do Chico",a:"R. do Diário de Notícias 39 · ~15–20 хв угору від житла",ll:[38.7121,-9.1452],cat:"fado",q:"A Tasca do Chico Rua do Diário de Notícias 39 Lisboa",
    why:`Фаду ваді (співають аматори) щопонеділка й щосереди. ${srcShort('chicoLC','lifecooler')}. Вхід вільний, але мінімальна витрата €10. ${srcShort('chicoEN','Euronews 06/2026')}. Місце дуже туристичне, проте вечеряти не обов'язково. ${srcShort('chicoFWT','Free Walking Tour')}`,
    order:"Chouriço assado (ковбаска, підсмажена на столі), caldo verde, вино",price:"≈ €10–25 / особу",hours:"Щодня 19:00–03:00 (Time Out PT); фаду ~з 21:00",book:"Бронь не беруть: прийти о 20:30–20:45. Середу підтвердіть: +351 961 339 696",conf:"chk"},
- bela:{n:"Tasca da Bela",a:"R. dos Remédios 190 · Алфама",ll:[38.7126,-9.1270],cat:"fado",q:"Tasca da Bela Rua dos Remédios 190 Lisboa",
+ bela:{n:"Tasca da Bela",a:"R. dos Remédios 190 · Алфама, ~15 хв від житла",ll:[38.7126,-9.1270],cat:"fado",q:"Tasca da Bela Rua dos Remédios 190 Lisboa",
    why:`Тут співають професійні фадишти (Teresinha Landeiro, Carolina Varela Ribeiro та інші). ${srcShort('belaTO','Time Out PT')}. Співачка Carminho рекомендує як скромне, невимушене місце. ${srcShort('belaCarm','Carminho')}`,
    order:"Вечеря з шоу «все включено»",price:"€57.50 за вечерю й шоу (Time Out); місцеві згадують €45",hours:"Ср–нд 20:00–02:00 (у середу відкрито)",book:"Так, обов'язково (Instagram @tascadabela)",conf:"ok"},
- rossio:{n:"Станція Rossio",a:"Потяги на Сінтру",ll:[38.7142,-9.1410],cat:"logistics",q:"Estação do Rossio Lisboa",
+ bxch:{n:"Метро Baixa-Chiado (ескалатори)",a:"Вхід Rua do Crucifixo ↔ вихід Largo do Chiado",ll:[38.7106,-9.1396],cat:"logistics",q:"Estação Metro Baixa-Chiado Rua do Crucifixo",
+   why:`Безкоштовний «ліфт» у Шіаду: нижній вхід у Байші й верхній у Шіаду з'єднує каскад ескалаторів, тож замість сотень сходинок підйом займає ~5 хв. ${srcShort('escal','The Lisbon Connection')} · ${srcShort('escal2','LisbonLisboaPortugal')}. Ескалатори час від часу ламаються. ${srcShort('escalTO','Time Out PT')}`,
+   order:"Підйом і спуск між Байшею та Шіаду",price:"Безкоштовно (турнікети не потрібні)",hours:"Метро 6:30–1:00",book:"Ні",conf:"ok"},
+ cascaisSt:{n:"Станція Cascais",a:"Кінцева лінії · автобус M27",ll:[38.7006,-9.4183],cat:"logistics",q:"Estação de Cascais",
+   why:`Від станції до Boca do Inferno 20–25 хв пішки або MobiCascais M27 (кільцевий через Cidadela). ${srcShort('m27','everyrail')}. Автобус ходить кожні ~30 хв, їде ~15 хв, коштує ~€1. ${srcShort('r2rBoca','Rome2rio')}`,
+   order:"—",price:"Автобус ~€1 (як платити, перевірити в додатку MobiCascais)",hours:"M27 кожні ~30 хв",book:"Ні",conf:"chk"},
+ oriente:{n:"Станція Oriente",a:"Пересадка потяг → метро до аеропорту",ll:[38.7678,-9.0990],cat:"logistics",q:"Estação do Oriente Lisboa",
+   why:`Частина потягів Сінтри йде на Oriente, а не на Rossio: щодвадцять хвилин, 46 хв у дорозі. ${srcShort('sintraOri','Rome2rio')}. Звідти до аеропорту ~7 хв червоною лінією метро. ${srcShort('sintraAirPT','sintra-portugal')}`,
+   order:"—",price:"Потяг + метро (zapping)",hours:"—",book:"Ні",conf:"ok"},
+ rossio:{n:"Станція Rossio",a:"Потяги на Сінтру · 6–8 хв пішки від житла",ll:[38.7142,-9.1410],cat:"logistics",q:"Estação do Rossio Lisboa",
    why:`До Сінтри 40 хв, потяги кожні ~20 хв. ${srcShort('sintraTrain','everyrail')} · ${srcShort('omioSintra','Omio')}. На станції є шафки CP: тільки монети, не довше 24 год, часто зайняті. ${srcShort('luggLT','lisbontourism')}`,
    order:"—",price:"Потяг ≈ €2.5 в один бік (зони CP)",hours:"Шафки працюють у години станції",book:"Ні",conf:"ok"},
  sintra:{n:"Станція Sintra",a:"Сінтра",ll:[38.7984,-9.3860],cat:"logistics",q:"Estação de Sintra",
-   why:`Тут починається маршрут автобуса 434 до Пени. Добовий квиток €13.50 на 434 і 435 (онлайн ~на 8% дешевше). ${srcShort('bus434','lisbontourism')}. Разовий €4.10, перший автобус ~8:50 (інше джерело пише 9:15). ${srcShort('bus434b','tourismattractions')}`,
+   why:`Автобус 434 не входить у 24h Carris/Metro/CP. ${srcShort('bringyou','bring-you')}. Тут починається маршрут автобуса 434 до Пени. Добовий квиток €13.50 на 434 і 435 (онлайн ~на 8% дешевше). ${srcShort('bus434','lisbontourism')}. Разовий €4.10, перший автобус ~8:50 (інше джерело пише 9:15). ${srcShort('bus434b','tourismattractions')}`,
    order:"—",price:"434: €4.10 разовий / €13.50 доба",hours:"—",book:"Ні",conf:"chk"},
  locker:{n:"Locker in the City · Sintra",a:"Історичний центр, 5 хв від станції",ll:[38.7979,-9.3893],cat:"logistics",q:"Locker in the City Sintra",
    why:`Шафки в центрі Сінтри, 5 хв пішки від станції. ${srcShort('lockSintra','сайт')}. Деякі гіди пишуть, що камер у Сінтрі немає взагалі. ${srcShort('luggit','LUGGit')}. Тож бронювати лише заздалегідь.`,
    order:"—",price:"Див. сайт",hours:"Перевірити, чи відкрито о ~9:00",book:"Так, онлайн",conf:"chk"},
  pena:{n:"Palácio Nacional da Pena",a:"Сінтра",ll:[38.7876,-9.3906],cat:"view",q:"Palácio Nacional da Pena Sintra",
-   why:`Квиток «Visita Essencial»: самостійний огляд Нового палацу, тераси й парк. Дата й час обов'язкові. ${srcShort('penaEss','Parques de Sintra')}. На вхід без запізнень, слот стосується лише палацу. ${srcShort('penaFaq','FAQ')}. Від воріт парку до палацу ~30 хв пішки. ${srcShort('penaTiq','Tiqets')}`,
-   order:"Слот 10:00 (або 9:30); палац + тераси ~1–1.5 год",price:"У джерелах від €14 до €20: точна ціна при бронюванні",hours:"Відкриття взимку ~9:30 (перевірити). 17.11 зачиняється о 14:00, 19.11 обмежень не оголошено",book:"Так, лише онлайн і заздалегідь",conf:"chk"},
+   why:`Гардероб: ${srcShort('penaOff','Parques de Sintra')} · ${srcShort('penaRules','правила')}. Квиток «Visita Essencial»: самостійний огляд Нового палацу, тераси й парк. Дата й час обов'язкові. ${srcShort('penaEss','Parques de Sintra')}. На вхід без запізнень, слот стосується лише палацу. ${srcShort('penaFaq','FAQ')}. Від воріт парку до палацу ~30 хв пішки. ${srcShort('penaTiq','Tiqets')}`,
+   order:"Слот 10:00 (або 9:30); палац + тераси ~1–1.5 год. Рюкзаки: шафки й гардероб є на головному вході в парк і на початку маршруту палацом (офіційно). Маленький рюкзак можна взяти, але носити спереду; на вході перевіряють сумки",price:"У джерелах від €14 до €20: точна ціна при бронюванні",hours:"Відкриття взимку ~9:30 (перевірити). 17.11 зачиняється о 14:00, 19.11 обмежень не оголошено",book:"Так, лише онлайн і заздалегідь",conf:"chk"},
  tascantiga:{n:"Tascantiga",a:"Escadinhas da Fonte da Pipa 2 · центр Сінтри",ll:[38.7980,-9.3900],cat:"food",q:"Tascantiga Escadinhas da Fonte da Pipa Sintra",
    why:`Time Out PT: у самому центрі, але «місцеві запевняють, що це не пастка». ${srcShort('tascantigaTO','Time Out PT')}`,
    order:"Смажений бакалау на перцях з шоріссу, щічки конфі, prego із сиром queijo da serra",price:"€15–25 / особу",hours:"Щодня ~12:00–22:00 (низький сезон перевірити)",book:`Обідів не бронює: приходьте о 12:00. ${srcShort('tascantigaBT','BestTime')}`,conf:"chk"},
@@ -306,118 +371,145 @@ const P = {
 
 /* ---------- STATE ---------- */
 const st = {
-  d1:{bags:"acc", lunch:"prov", mcd:"yes", eve:"chico", dinner:"calhariz"},
-  d2:{bags:"A", lunch:"tascantiga", slot:"1000"}
+  d1:{bags:"carry", lunch:"prov", mcd:"yes", eve:"chico", dinner:"calhariz"},
+  d2:{bags:"R", lunch:"tascantiga", slot:"1000"}
 };
-try{const s=JSON.parse(localStorage.getItem("lx-st")||"null"); if(s){Object.assign(st.d1,s.d1||{});Object.assign(st.d2,s.d2||{});}}catch(e){}
-const save=()=>{try{localStorage.setItem("lx-st",JSON.stringify(st))}catch(e){}};
+try{const s=JSON.parse(localStorage.getItem("lx-st2")||"null"); if(s){Object.assign(st.d1,s.d1||{});Object.assign(st.d2,s.d2||{});}}catch(e){}
+const save=()=>{try{localStorage.setItem("lx-st2",JSON.stringify(st))}catch(e){}};
 
 const OPTS = {
  d1:[
-  ["bags","Багаж 9:30–15:00",[["acc","Залишити в житлі"],["bounce","Камера (Bounce/Stasher)"]]],
+  ["bags","Рюкзаки 9:30–15:00",[["carry","З собою"],["acc","Залишити в житлі"],["bounce","Камера (Bounce/Stasher)"]]],
   ["lunch","Обід",[["prov","A Provinciana (страва дня)"],["ramiro","Cervejaria Ramiro (морепродукти)"]]],
   ["mcd","McDonald's у Кашкайші",[["yes","Так, перед заходом"],["no","Ні"]]],
   ["eve","Вечір",[["chico","Вечеря в Байру-Алту + Tasca do Chico"],["bela","Вечеря з фаду в Tasca da Bela"]]],
   ["dinner","Вечеря (з Chico)",[["calhariz","Príncipe do Calhariz"],["ribatejo","Adega do Ribatejo"],["tagarro","Adega do Tagarro"],["prov2","A Provinciana"],["ramiro2","Ramiro (черга)"]]]
  ],
  d2:[
-  ["bags","Валізи",[["A","А · шафка в Сінтрі + таксі в LIS"],["B","Б · камера біля Rossio + повернення потягом"]]],
+  ["bags","Рюкзаки",[["R","З собою (гардероб Пени) → Oriente → LIS"],["A","Шафка в Сінтрі → Oriente → LIS"],["B","Шафка на Rossio → назад через Rossio"],["C","Лишити в житлі → назад через Rossio"]]],
   ["slot","Слот у Пену",[["1000","10:00 (рекомендую)"],["0930","9:30 (ранній потяг)"]]],
   ["lunch","Обід у Сінтрі",[["tascantiga","Tascantiga"],["ana","Tasca d'Ana"],["pendoa","Pendoa"]]]
  ]
 };
 
 /* ---------- TIMELINES ---------- */
-// item: [time, html, cls, placeKey]
+// item: [time, html, cls, placeKey, alarm]
 function tlD1(s){
-  const T=[];
-  T.push(["08:20","<b>Приліт у LIS.</b> Паспортний контроль + багаж; громадянам не з ЄС закладайте 30–60 хв.","key","lis"]);
-  T.push(["~09:30","Метро: червона лінія → Alameda → зелена → Baixa-Chiado, ~25 хв, €1.90 + €0.50 картка. З валізами простіше таксі: 15–25 хв, €11–15. "+srcShort('airportLT'),"move"]);
-  if(s.bags==="acc") T.push(["~10:15","<b>Валізи в житлі</b> біля Teatro da Trindade. Заздалегідь напишіть господарям, чи візьмуть речі до 15:00.","", "trindade"]);
-  else T.push(["~10:15","<b>Валізи в камеру</b> Bounce/Stasher біля Baixa-Chiado (бронь онлайн, ~€2–5 за місце). Шафки CP на вокзалах дешевші, але лише за монети й часто зайняті. "+srcShort('luggLT'),"","trindade"]);
+  const T=[]; const carry=s.bags==="carry";
+  T.push(["08:20","<b>Приліт у LIS.</b> Паспортний контроль; громадянам не з ЄС закладайте 30–60 хв.","key","lis"]);
+  T.push(["~09:30","<b>Квитки:</b> в автоматі метро кожному картку <b>Navegante ocasional</b> (€0.50) і на неї <b>24h Carris/Metro/CP</b> (€11.40). Діє 24 год від першого проходу: усе метро, потяги на Кашкайш і зранку в четвер потяг у Сінтру. Валідуйте на кожному вході. "+srcShort('cp24','CP'),"key","lis"]);
+  T.push(["09:35","Метро: червона → Alameda → зелена → <b>Baixa-Chiado</b>, ~25 хв","move","bxch"]);
+  if(carry){
+    T.push(["10:00","Не виходьте в Байшу: ескалаторами станції одразу нагору, на <b>Largo do Chiado</b> (~5 хв, безкоштовно). Рюкзаки в натовпі носіть спереду","move","bxch"]);
+  } else if(s.bags==="acc"){
+    T.push(["10:00","Вихід у Байшу (Rua do Crucifixo), 5 хв пішки до житла на Rua da Prata","move","bxch"]);
+    T.push(["10:05","<b>Рюкзаки в житлі.</b> Заздалегідь напишіть господарям, чи візьмуть речі до 15:00","","trindade"]);
+    T.push(["10:15","Назад у Baixa-Chiado й безкоштовними ескалаторами нагору в Шіаду, ~8 хв","move","bxch","Нагору в Шіаду"]);
+  } else {
+    T.push(["10:00","Вихід у Байшу, <b>рюкзаки в Bounce/Stasher</b> біля житла (бронь онлайн, ~€2–5 за місце). "+srcShort('luggLT'),"","trindade"]);
+    T.push(["10:15","Ескалаторами Baixa-Chiado нагору в Шіаду, ~8 хв","move","bxch","Нагору в Шіаду"]);
+  }
   T.push(["10:30","<b>Азулежу Ферейри даш Табулеташ</b> на фасаді + зал Cervejaria Trindade (15–20 хв)","","tabuletas"]);
-  T.push(["10:50","<b>São Roque</b>: панелі азулежу 1596 року, ~30–40 хв","","saoroque"]);
+  T.push(["10:55","<b>São Roque</b>: панелі азулежу 1596 року, ~30–40 хв","","saoroque","Виходимо з São Roque"]);
   T.push(["11:30","<b>Miradouro São Pedro de Alcântara</b>: панорама на замок, 20 хв","","spa"]);
   if(s.lunch==="prov"){
-    T.push(["11:55","Спуск Calçada da Glória пішки (фунікулер не працює) → Travessa do Forno, ~12 хв","move"]);
-    T.push(["12:10","<b>Обід: A Provinciana.</b> Прийти до 12:15; у середу pernil assado (свиняча нога). ~€10–15","","provinciana"]);
-    T.push(["13:20","Назад угору в Шіаду, ~15 хв","move"]);
+    T.push(["11:50","Пішки вниз Calçada da Glória (фунікулер не працює) → Restauradores → Travessa do Forno, ~12 хв","move",null,"Вниз на обід"]);
+    T.push(["12:05","<b>Обід: A Provinciana.</b> Прийти до 12:15; у середу pernil assado (свиняча нога). ~€10–15","","provinciana"]);
+    T.push(["13:20","Метро Rossio → Baixa-Chiado (зелена, 1 зупинка), ескалаторами нагору, ~10 хв","move","bxch"]);
   } else {
-    T.push(["11:50","Таксі/Bolt до Ramiro ~7 хв (або пішки ~25 хв через Rossio і Martim Moniz)","move"]);
-    T.push(["12:00","<b>Обід: Cervejaria Ramiro</b> одразу на відкритті, коли черги майже немає. ~€45–50","","ramiro"]);
+    T.push(["11:50","Пішки вниз Calçada da Glória → Rossio (~10 хв), метро зелена Rossio → Intendente (2 зупинки)","move",null,"Вниз до метро"]);
+    T.push(["12:10","<b>Обід: Cervejaria Ramiro.</b> Відкривається о 12:00, тож черга ще коротка. ~€45–50","","ramiro"]);
     T.push(["13:30","<b>Фасад Viúva Lamego</b>, 3 хв пішки","","viuva"]);
-    T.push(["13:45","Метро Intendente → Baixa-Chiado (зелена лінія), ~10 хв","move"]);
+    T.push(["13:45","Метро Intendente → Baixa-Chiado (зелена, без пересадок), ескалаторами нагору","move","bxch"]);
   }
   T.push(["14:00","<b>Паштел-де-ната в Manteigaria</b> + bica, повільна прогулянка Largo de Camões","","manteigaria"]);
-  if(s.bags==="bounce") T.push(["14:40","Забрати валізи з камери","move"]);
-  T.push(["15:00","<b>Заселення.</b> 15 хв на розпакування, з собою теплий шар (на березі вітер)","key","trindade"]);
-  T.push(["15:20","Пішки до Cais do Sodré, ~12–15 хв униз","move","caissodre"]);
-  T.push(["~15:40","Потяг на Кашкайш, ~40 хв, €2.55. Кожні ~20 хв: точний час у додатку CP","move","caissodre"]);
+  T.push(["14:40",(s.bags==="bounce"?"Ескалаторами вниз у Байшу, забрати рюкзаки з камери, до житла":"Ескалаторами Baixa-Chiado вниз у Байшу, до житла")+", ~10 хв","move","bxch","Вниз на заселення"]);
+  T.push(["15:00","<b>Заселення на Rua da Prata.</b> 15 хв перепочити, взяти теплий шар (на березі вітряно)","key","trindade"]);
+  T.push(["15:20","Метро Baixa-Chiado → Cais do Sodré (зелена, 1 зупинка) або 12 хв пішки рівною Rua do Arsenal","move","caissodre","ВИХІД на потяг у Кашкайш"]);
+  T.push(["~15:40","Потяг на Кашкайш, ~40 хв (входить у 24h, валідуйте на турнікеті CP). Ходить кожні ~20 хв: точний час у додатку CP","move","caissodre"]);
+  T.push(["16:20","Станція Cascais","", "cascaisSt"]);
   if(s.mcd==="yes"){
-    T.push(["16:20","<b>McDonald's Cascais</b> біля станції: беріть із собою. Перевірте в додатку, що з португальського є в листопаді","","mcd"]);
-    T.push(["16:45","Таксі/Bolt до Boca do Inferno, ~5 хв. Пішки 20–25 хв уже не встигаєте з запасом","move"]);
-    T.push(["16:55","<b>Boca do Inferno</b>: займіть місце на майданчику за поручнями","sun","boca"]);
+    T.push(["16:20","<b>McDonald's Cascais</b> біля станції: беріть із собою. Що з португальського меню є в листопаді, дивіться в додатку","","mcd","Виходимо з McDonald's"]);
+    T.push(["16:40","Пішки набережною до Boca do Inferno, 20–25 хв: повз марину, Cidadela й маяк Santa Marta. Або автобус M27 (кожні ~30 хв, ~15 хв, ~€1), якщо стоїть на зупинці","move","boca"]);
+    T.push(["17:05","<b>Boca do Inferno</b>: займіть місце на майданчику за поручнями","sun","boca"]);
   } else {
     T.push(["16:25","Пішки набережною повз марину й маяк Santa Marta, 20–25 хв","move"]);
     T.push(["16:50","<b>Boca do Inferno</b>: займіть місце на майданчику за поручнями","sun","boca"]);
   }
   T.push(["17:22","<b>Захід сонця</b> (світло до ~17:51)","sun","boca"]);
-  T.push(["17:45","Назад до станції: таксі ~5 хв або пішки 25 хв освітленою Av. Rei Humberto II","move"]);
-  T.push(["~18:20","Потяг до Cais do Sodré (~40 хв) → ~19:00. Після 21:50 у будні від Caxias їде автобус, тож не затримуйтеся. "+srcShort('cpCascais','CP'),"move","caissodre"]);
+  T.push(["17:45","Назад до станції: 25 хв пішки освітленою Av. Rei Humberto II або M27 зі зупинки «Boca do Inferno» (кожні ~30 хв; час у Citymapper). "+srcShort('r2rBoca','Rome2rio'),"move","cascaisSt","Йдемо на потяг назад"]);
+  T.push(["~18:20","Потяг до Cais do Sodré (~40 хв) → ~19:00. Після 21:50 у будні частину маршруту замінює автобус. "+srcShort('cpCascais','CP'),"move","caissodre"]);
   if(s.eve==="bela"){
-    T.push(["19:10","Таксі/Bolt Cais do Sodré → Алфама, ~10–15 хв. Можна заскочити в житло переодягнутися: це ще 15 хв","move"]);
-    T.push(["20:00","<b>Tasca da Bela</b>: вечеря + професійне фаду до пізнього вечора. Бронь обов'язкова","key","bela"]);
-    T.push(["~23:00","Таксі до житла ~10 хв; за бажання нічний мірадору São Pedro de Alcântara","move","spa"]);
+    T.push(["19:05","Метро Cais do Sodré → Baixa-Chiado (1 зупинка), 5 хв до житла: переодягнутися","move","trindade"]);
+    T.push(["19:40","Пішки в Алфаму, ~15–20 хв: Rua da Alfândega, далі трохи вгору до Rua dos Remédios","move",null,"Виходимо на фаду"]);
+    T.push(["20:00","<b>Tasca da Bela</b>: вечеря + професійне фаду. Бронь обов'язкова","key","bela"]);
+    T.push(["~23:00","Назад: 7 хв пішки до метро Santa Apolónia → синя лінія до Terreiro do Paço (1 зупинка) → 5 хв до житла. Або 15–20 хв пішки. Метро до 1:00","move","trindade"]);
   } else {
     const dmap={calhariz:"calhariz",ribatejo:"ribatejo",tagarro:"tagarro",prov2:"provinciana",ramiro2:"ramiro"};
-    const dk=dmap[s.dinner];
-    let warn="";
-    if(s.dinner==="prov2"&&s.lunch==="prov") warn=" <span class='buffer y'>двічі за день в одному місці</span>";
-    if(s.dinner==="ramiro2"&&s.lunch==="ramiro") warn=" <span class='buffer y'>двічі за день в одному місці</span>";
-    if(s.dinner==="ramiro2") T.push(["19:00","Таксі Cais do Sodré → Ramiro, ~10 хв. <b>Увечері черга</b>: місцеві радять приходити до 19:00","move"]);
-    else if(s.dinner==="prov2") T.push(["19:05","Метро Cais do Sodré → Rossio (зелена), ~5 хв","move"]);
-    else T.push(["19:05","Пішки вгору в Байру-Алту, ~10–15 хв","move"]);
-    T.push(["19:20","<b>Вечеря: "+P[dk].n+"</b>"+warn,"",dk]);
-    if(s.dinner==="ramiro2"||s.dinner==="prov2") T.push(["20:30","Таксі в Байру-Алту ~10 хв","move"]);
-    T.push(["20:40","<b>A Tasca do Chico</b>: фаду ваді в середу ~з 21:00, мінімальна витрата €10. Займайте місце до 21:00","key","chico"]);
-    T.push(["~22:30","Нічний Miradouro São Pedro de Alcântara, 4 хв пішки, потім у житло","", "spa"]);
+    const dk=dmap[s.dinner]; let warn="";
+    if((s.dinner==="prov2"&&s.lunch==="prov")||(s.dinner==="ramiro2"&&s.lunch==="ramiro")) warn=" <span class='buffer y'>двічі за день в одному місці</span>";
+    if(s.dinner==="ramiro2"){
+      T.push(["19:05","Метро Cais do Sodré → Intendente (зелена, без пересадок ~10 хв). <b>Увечері черга</b>: місцеві радять приходити до 19:00","move"]);
+      T.push(["19:20","<b>Вечеря: Cervejaria Ramiro</b>"+warn,"","ramiro","Розраховуємося, на фаду"]);
+      T.push(["20:25","Метро Intendente → Baixa-Chiado, ескалаторами нагору, ~8 хв пішки до Chico <span class='buffer y'>щільно</span>","move","bxch"]);
+    } else if(s.dinner==="prov2"){
+      T.push(["19:05","Метро Cais do Sodré → Rossio (зелена, 3 зупинки)","move"]);
+      T.push(["19:15","<b>Вечеря: A Provinciana</b>"+warn,"","provinciana","Розраховуємося, на фаду"]);
+      T.push(["20:25","Метро Rossio → Baixa-Chiado, ескалаторами нагору, ~8 хв пішки","move","bxch"]);
+    } else {
+      T.push(["19:05","Метро Cais do Sodré → Baixa-Chiado (1 зупинка), ескалаторами нагору, далі 5–8 хв пішки","move","bxch"]);
+      T.push(["19:20","<b>Вечеря: "+P[dk].n+"</b>"+warn,"",dk,"Розраховуємося, на фаду"]);
+    }
+    T.push(["20:40","<b>A Tasca do Chico</b>: фаду ваді щосереди ~з 21:00, мінімальна витрата €10. Прийдіть до 20:30–20:45","key","chico"]);
+    T.push(["~22:30","Нічний Miradouro São Pedro de Alcântara, 4 хв пішки","","spa"]);
+    T.push(["~22:50","Додому: 8 хв до Baixa-Chiado, ескалаторами вниз, 5 хв до Rua da Prata. Або пішки Calçada da Glória → Rossio, ~15–20 хв","move","bxch"]);
   }
   return T;
 }
 function tlD2(s){
-  const T=[]; const early = s.slot==="0930";
-  T.push([early?"06:50":"07:15","Кава/сніданок, виселення","", "trindade"]);
-  T.push([early?"07:15":"07:40","З валізами пішки до Rossio, ~8 хв униз Rua Garrett / Rua do Carmo","move","rossio"]);
-  if(s.bags==="B") T.push([early?"07:25":"07:50","<b>Валізи в шафку CP на Rossio</b> (монети!) або в Bounce/Stasher поруч, якщо шафки зайняті. "+srcShort('luggLT'),"","rossio"]);
-  T.push([early?"07:51":"08:11","Потяг Rossio → Sintra, 40 хв. Потяги кожні ~20 хв: точний час у додатку CP","move","rossio"]);
-  T.push([early?"08:31":"08:51","Станція Sintra","", "sintra"]);
-  if(s.bags==="A") T.push([early?"08:40":"09:00","<b>Валізи в Locker in the City</b>, 5 хв від станції. Якщо в цю годину ще зачинено, переходьте на варіант Б","key","locker"]);
+  const T=[]; const early=s.slot==="0930";
+  const t=(a,b)=>early?a:b;
+  T.push([t("06:50","07:15"),"Кава/сніданок, виселення. Учорашній квиток 24h ще діє приблизно до 9:30 (за пів години до кінця вхід уже не пускає). "+srcShort('cp24','CP'),"", "trindade"]);
+  T.push([t("07:15","07:40"),(s.bags==="C"?"Рюкзаки лишаєте в житлі (домовитися заздалегідь), пішки до Rossio ~7 хв":"З рюкзаками пішки до Rossio, ~7 хв рівною Байшею"),"move","rossio",t("Виходимо на Rossio","Виходимо на Rossio")]);
+  if(s.bags==="B") T.push([t("07:25","07:50"),"<b>Рюкзаки в шафку CP на Rossio</b> (лише монети, до 24 год). Якщо всі зайняті — Bounce/Stasher поруч. "+srcShort('luggLT'),"","rossio"]);
+  T.push([t("07:51","08:11"),"Потяг Rossio → Sintra, 40 хв (входить у 24h). Кожні ~20 хв: точний час у додатку CP","move","rossio"]);
+  T.push([t("08:31","08:51"),"Станція Sintra","", "sintra"]);
+  if(s.bags==="A") T.push([t("08:35","08:55"),"<b>Рюкзаки в Locker in the City</b>, 5 хв від станції. Перевірте години: якщо зачинено, беріть рюкзаки з собою і здайте в гардероб Пени","key","locker"]);
+  const busT=early?"08:50":(s.bags==="A"?"09:05":"09:00");
+  T.push([busT,"<b>Автобус 434</b> від станції до Пени, ~15 хв. У 24h не входить: разовий €4.10 водієві (на два — €8.20, вигідніше за добовий €13.50). Перший рейс ~8:50 (дані розходяться: 8:50–9:15). "+srcShort('bus434b','tourismattractions'),"move","sintra"]);
+  if(s.bags==="R") T.push([t("09:05","09:15"),"<b>Рюкзаки в гардероб або шафку на головному вході в парк</b> (офіційно є; маленький рюкзак можна взяти з собою спереду). "+srcShort('penaOff','Parques de Sintra'),"","pena"]);
   if(early){
-    T.push(["08:45","Таксі до воріт парку Пени, ~10 хв. Ціну домовляйтеся до посадки: у Сінтрі тарифи фіксовані. "+srcShort('bus434'),"move"]);
-    T.push(["08:55","Ворота парку → палац: 30 хв пішки або шатл. <span class='buffer y'>Лише якщо парк відкривається до 9:00, перевірте</span>","move","pena"]);
-    T.push(["09:30","<b>Слот у Палац Пена.</b> Без запізнень: черга на слот за 15–20 хв","key","pena"]);
-    T.push(["10:45","Тераси, вид на Castelo dos Mouros; за бажання частина парку","", "pena"]);
+    T.push(["09:10","Ворота парку → палац: 30 хв пішки вгору або шатл парку. <span class='buffer y'>Лише якщо парк відчиняється до ~9:00, перевірте</span>","move","pena"]);
+    T.push(["09:30","<b>Слот у Палац Пена.</b> Без запізнень","key","pena","СЛОТ ПЕНИ 9:30"]);
+    T.push(["10:45","Тераси, вид на Castelo dos Mouros","", "pena"]);
   } else {
-    T.push([s.bags==="A"?"09:10":"09:00","Автобус 434 (перший ~8:50–9:15) або таксі, ~10–15 хв до воріт Пени","move","sintra"]);
-    T.push(["09:25","Ворота парку → палац: 30 хв пішки вгору (або шатл)","move","pena"]);
-    T.push(["10:00","<b>Слот у Палац Пена.</b> Без запізнень: на слот ставайте в чергу о 9:45","key","pena"]);
-    T.push(["11:15","Тераси, вид на Castelo dos Mouros","", "pena"]);
+    T.push(["09:20","Ворота парку → палац: 30 хв пішки вгору або шатл парку","move","pena"]);
+    T.push(["10:00","<b>Слот у Палац Пена.</b> Без запізнень: на черзі будьте о 9:50","key","pena","Ставати в чергу на слот"]);
+    T.push(["11:15","Тераси, вид на Castelo dos Mouros. Парк — лабіринт, поставте будильник","", "pena","Виходимо з парку до 434"]);
   }
-  T.push(["11:40","Автобус 434 або таксі вниз до Sintra Vila, ~10–15 хв","move"]);
+  T.push(["11:40",(s.bags==="R"?"Забрати рюкзаки в гардеробі → ":"")+"автобус 434 вниз до Sintra Vila, ~10 хв (ще €4.10)","move","sintra"]);
   const L={tascantiga:"tascantiga",ana:"ana",pendoa:"pendoa"}[s.lunch];
   T.push(["12:00","<b>Обід: "+P[L].n+"</b>. Саме о 12:00: з 12:30 до 14:30 у старому місті все забито. "+srcShort('sintraEat'),"",L]);
-  if(s.bags==="A"){
-    T.push(["13:15","<b>Травесейруш у Piriquita</b> з собою, 10 хв","","piriquita"]);
-    T.push(["13:30","Забрати валізи з Locker in the City","move","locker"]);
-    T.push(["13:40","<b>Таксі/Uber/Bolt Сінтра → LIS</b>, ~25 км, 35–45 хв. Крайній виїзд о 14:15","key"]);
-    T.push(["~14:25","Аеропорт <span class='buffer g'>~65 хв запасу до 15:30</span>","key","lis"]);
+  if(s.bags==="R"||s.bags==="A"){
+    T.push(["13:10","<b>Травесейруш у Piriquita</b> з собою, 10 хв","","piriquita","Розраховуємося → травесейруш"]);
+    if(s.bags==="A") T.push(["13:20","Забрати рюкзаки з Locker in the City","move","locker"]);
+    T.push(["13:25","Пішки до станції ~10 хв. <b>Квиток:</b> добовий уже скінчився, тож в автоматі CP кожному завантажити zapping (мінімум €3, візьміть €5: потяг + метро)","move","sintra","Йдемо на потяг на Oriente"]);
+    T.push(["~13:40","<b>Потяг Sintra → Oriente</b>, 46 хв, кожні ~20 хв. Дивіться на табло кінцеву «Oriente». Якщо найближчий іде на Rossio — сідайте в нього, а там метро до аеропорту (+~10 хв). "+srcShort('sintraOri','Rome2rio'),"key","sintra"]);
+    T.push(["~14:26","Oriente → метро червона лінія → Aeroporto, ~7 хв","move","oriente"]);
+    T.push(["~14:40","Аеропорт <span class='buffer g'>~50 хв запасу до 15:30</span>","key","lis"]);
   } else {
-    T.push(["13:05","Травесейруш у Piriquita з собою, 5 хв","","piriquita"]);
-    T.push(["13:15","Пішки до станції ~10 хв","move","sintra"]);
+    T.push(["13:05","Травесейруш у Piriquita з собою, 5 хв","","piriquita","Розраховуємося → на потяг"]);
+    T.push(["13:15","Пішки до станції ~10 хв, в автоматі CP кожному zapping (€5: потяг + метро)","move","sintra"]);
     T.push(["~13:31","Потяг Sintra → Rossio, 40 хв. Не пізніше 13:31: з наступним запас буде менше 30 хв","key","sintra"]);
-    T.push(["14:11","Rossio → забрати валізи, ~10 хв","move","rossio"]);
-    T.push(["14:25","Таксі Rossio → LIS (15–25 хв) або метро зелена → Alameda → червона (~25 хв)","move"]);
-    T.push(["~14:50","Аеропорт <span class='buffer y'>~40 хв запасу до 15:30</span>","key","lis"]);
+    if(s.bags==="C"){
+      T.push(["14:11","Rossio → 7 хв пішки до житла, забрати рюкзаки","move","trindade"]);
+      T.push(["14:20","Метро Baixa-Chiado (зелена) → Alameda → червона → Aeroporto, ~30 хв","move","bxch"]);
+      T.push(["~14:55","Аеропорт <span class='buffer y'>~35 хв запасу до 15:30</span>","key","lis"]);
+    } else {
+      T.push(["14:11","Rossio → забрати рюкзаки з шафки, ~10 хв","move","rossio"]);
+      T.push(["14:20","Метро Rossio (зелена) → Alameda → червона → Aeroporto, ~25 хв","move"]);
+      T.push(["~14:50","Аеропорт <span class='buffer y'>~40 хв запасу до 15:30</span>","key","lis"]);
+    }
   }
   T.push(["15:30","<b>Крайній час в аеропорту.</b> Виліт 17:30","key","lis"]);
   return T;
@@ -425,12 +517,12 @@ function tlD2(s){
 
 /* ---------- MAP ---------- */
 const VIEWS = {
- region:{b:[-9.50,38.665,-9.10,38.815],label:"Регіон"},
+ region:{b:[-9.50,38.665,-9.07,38.815],label:"Регіон"},
  lisbon:{b:[-9.1500,38.7045,-9.1250,38.7245],label:"Центр Лісабона"},
  cascais:{b:[-9.4360,38.6880,-9.4140,38.7040],label:"Кашкайш"},
  sintra:{b:[-9.4010,38.7855,-9.3790,38.8010],label:"Сінтра"}
 };
-const COAST=[[-9.50,38.79],[-9.49,38.76],[-9.475,38.73],[-9.45,38.71],[-9.432,38.691],[-9.42,38.692],[-9.40,38.700],[-9.38,38.703],[-9.335,38.678],[-9.31,38.682],[-9.25,38.69],[-9.21,38.693],[-9.17,38.703],[-9.145,38.7052],[-9.136,38.7065],[-9.122,38.7125],[-9.105,38.735],[-9.10,38.75]];
+const COAST=[[-9.50,38.79],[-9.49,38.76],[-9.475,38.73],[-9.45,38.71],[-9.432,38.691],[-9.42,38.692],[-9.40,38.700],[-9.38,38.703],[-9.335,38.678],[-9.31,38.682],[-9.25,38.69],[-9.21,38.693],[-9.17,38.703],[-9.145,38.7052],[-9.136,38.7065],[-9.122,38.7125],[-9.105,38.735],[-9.095,38.75],[-9.09,38.78],[-9.07,38.80]];
 function renderMap(el,viewKey,route){
   const v=VIEWS[viewKey],[x0,y0,x1,y1]=v.b,W=600,H=Math.round(600*((y1-y0)/((x1-x0)*Math.cos(38.7*Math.PI/180))));
   const pj=([la,lo])=>[ (lo-x0)/(x1-x0)*W, H-(la-y0)/(y1-y0)*H ];
@@ -509,6 +601,7 @@ function renderDay(day){
   const wp=uniq.slice(1,-1).slice(0,9).map(k=>encodeURIComponent(P[k].q)).join("|");
   document.getElementById("route-"+day).href=`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(P[uniq[0]].q)}&destination=${encodeURIComponent(P[uniq[uniq.length-1]].q)}${wp?"&waypoints="+wp:""}`;
   document.getElementById("cards-"+day).innerHTML=uniq.map((k,i)=>cardHTML(k,i+1)).join("");
+  if(typeof renderAlarms==="function") renderAlarms();
 }
 
 /* ---------- ALL PLACES ---------- */
@@ -526,15 +619,57 @@ const PB=[
  ["🌧","Дощ (у листопаді в Кашкайші ~13 дощових днів)",`<ul class="tight"><li>Середа зранку: більше часу в São Roque та в залі Cervejaria Trindade, все під дахом.</li><li>Бруківка calçada після дощу слизька, як лід, особливо на спусках Байру-Алту й Шіаду. Беріть взуття з протектором. ${srcShort('safeCI','Cities Insider')}</li><li>Захід у Кашкайші за суцільних хмар: можна лишитися в Лісабоні. Тоді прогулянка Шіаду + ранній фаду, а McDonald's будь-який у центрі.</li><li>У шторм нижній майданчик Boca do Inferno можуть закрити. До краю скель не підходити: людей там змивало. ${srcShort('bocaRJ','Real Journey')}</li></ul>`],
  ["🌫","Туман над Пеною",`<ul class="tight"><li>З листопада по березень туман тримається низько, часом цілий день. ${srcShort('penaFog','гід Пени')}</li><li>Інтер'єр палацу бачите в будь-якому разі. Парк скоротіть і спустіться раніше на обід.</li><li>Після штормів парк Пени закривали на кілька днів. Напередодні гляньте «Avisos» на parquesdesintra.pt. ${srcShort('penaStorm','Observador')}</li></ul>`],
  ["⏰","Пропустили слот у Пену",`<ul class="tight"><li>Із запізненням у палац не пустять, квиток не повертають. ${srcShort('penaFaq','FAQ Parques de Sintra')}</li><li>Альтернатива: Palácio Nacional de Sintra в центрі. Азулежу мудежар, без слоту. ${srcShort('palSintra','The Better Vacation')}</li><li>Паркові тераси й вид на Пену знизу лишаються з тим самим квитком: слот стосується лише палацу.</li></ul>`],
- ["🚆","Потяг затримався / страйк CP",`<ul class="tight"><li>Кашкайш: таксі з Cais do Sodré ~20 хв, €35–45. ${srcShort('rome2rio','Rome2rio')} Якщо запізнюєтеся на захід, їдьте таксі одразу.</li><li>Сінтра → аеропорт: у разі будь-яких збоїв переходьте на таксі/Uber напряму. Uber і Bolt дешевші за звичайне таксі. ${srcShort('sintraAirport','sintra-portugal')}</li><li>Напередодні перевірте попередження на cp.pt.</li></ul>`],
- ["✈️","Рейс сів пізно в середу",`<ul class="tight"><li>Приземлилися після 11:00: прибирайте São Roque, обід не чіпайте.</li><li>Після 13:30 (A Provinciana видає останні обіди до ~15:30): одразу в житло, ната замість обіду.</li><li>Після 15:00: одразу на Cais do Sodré, McDonald's прибрати. Головне — Boca do Inferno до 17:15.</li></ul>`],
+ ["🚌","Автобус 434 переповнений або не приходить",`<ul class="tight"><li>Пішки від центру Сінтри до воріт Пени ~45 хв угору. ${srcShort('fever','Fever/Tiqets')}</li><li>Для слоту о 10:00 це реально, лише якщо вийти з центру до 9:05. Тоді таксі або тук-тук — винятком, а ціну домовляйтеся до посадки.</li><li>Униз: стежка Caminho de Santa Maria, ~30 хв до центру. ${srcShort('penaHead','Headout')}</li></ul>`],
+ ["🚆","Потяг затримався / страйк CP",`<ul class="tight"><li>Кашкайш: якщо потяг пропав, наступний буде за ~20 хв. Щоб устигнути на захід, виїжджайте не пізніше ~15:40–16:00.</li><li>Пізно ввечері (після 21:50) частину лінії обслуговує автобус, і квиток 24h на нього теж діє. ${srcShort('cpCascais','CP')}</li><li>Сінтра → аеропорт: потяги на Oriente й на Rossio — дві незалежні гілки, тож якщо затримується один, сідайте в інший. Крайній запасний варіант — Uber/Bolt напряму (35–45 хв). ${srcShort('sintraAirport','sintra-portugal')}</li><li>Напередодні перевірте попередження на cp.pt.</li></ul>`],
+ ["✈️","Рейс сів пізно в середу",`<ul class="tight"><li>Приземлилися після 11:00: прибирайте São Roque, обід не чіпайте.</li><li>Після 13:30 (A Provinciana видає останні обіди до ~15:30): одразу в житло, ната замість обіду.</li><li>Після 15:00: метро одразу на Cais do Sodré, McDonald's прибрати. Головне — Boca do Inferno до 17:15.</li></ul>`],
  ["🚪","Заклад зачинено або черга",`<ul class="tight"><li>A Provinciana ↔ Ramiro: міняються місцями.</li><li>Вечеря: Príncipe do Calhariz → Adega do Ribatejo → Adega do Tagarro, усі в 5 хв одна від одної.</li><li>У Chico немає місць або фаду: переходьте на Tasca da Bela (з 20:00, бронь потрібна) або просто нічний мірадору.</li><li>Сінтра: Tascantiga → Tasca d'Ana (щодня 10–21) → травесейруш у Piriquita II.</li></ul>`],
- ["🧳","Шафка в Сінтрі зачинена або повна",`<ul class="tight"><li>Одразу на варіант Б: валізи назад на Rossio. Часу втрачаєте ~20 хв, отже обід стискається до 12:00–13:05.</li><li>Ще варіант: LUGGit забирає валізи в житлі й привозить в аеропорт (від €2 за сумку). ${srcShort('luggit','LUGGit')}</li></ul>`]
+ ["🧳","Шафка зачинена або повна",`<ul class="tight"><li>Рюкзаки — не валізи: просто беріть з собою і здавайте в гардероб Пени на вході в парк. ${srcShort('penaOff','Parques de Sintra')}</li><li>Шафки CP на Rossio зайняті — Bounce/Stasher поруч зі станцією, бронь з телефону.</li></ul>`],
+ ["🛗","Ескалатори Baixa-Chiado стоять",`<ul class="tight"><li>Буває. ${srcShort('escalTO','Time Out PT')} Тоді пішки Rua do Carmo → Rua Garrett, ~12 хв угору.</li></ul>`]
+];
+const NUANCES=[
+ ["transport","🎫 Квитки: як не заплатити двічі",[
+  `Купіть одну картку <b>Navegante ocasional</b> (€0.50) на кожного: одна картка — одна людина. ${srcShort('cp24','CP')}`,
+  `<b>24h Carris/Metro/CP за €11.40</b> діє 24 години від першої валідації: метро, автобуси й трамваї Carris і потяги на Кашкайш та Сінтру. Валідувати треба на кожній поїздці, а в останні 30 хв на станціях CP можна лише вийти. ${srcShort('cp24','CP')}`,
+  `За нашим планом доба з ~9:30 середи покриває метро, обидва потяги в Кашкайш і ранковий потяг у Сінтру в четвер.`,
+  `Поки на картці активна 24h, zapping на неї не завантажити, і навпаки. Тому zapping на повернення з Сінтри кладіть, коли доба вже закінчилася. ${srcShort('bringyou','bring-you')}`,
+  `Разовий квиток Carris/Metro €1.90 діє годину, але двічі поспіль у метро не пускає. ${srcShort('metroTar','Metro de Lisboa')}`,
+  `Автобус 434 у Сінтрі й MobiCascais у Кашкайші в 24h не входять: платите окремо.`,
+  `У трамваї квиток у водія коштує €3.30 — помітно дорожче, ніж з картки. ${srcShort('tram4g','4gnews')}`]],
+ ["transport","🚇 Пересування без таксі",[
+  `<b>Baixa-Chiado</b> — безкоштовний «ліфт»: ескалатори всередині станції з'єднують Байшу з Шіаду, тож підйом займає ~5 хв замість сотень сходинок. ${srcShort('escal','The Lisbon Connection')}`,
+  `Фунікулери Glória, Bica, Lavra й ліфт Santa Justa не працюють, нового фунікулера Glória чекають до 2029 року. ${srcShort('elev','RFM')}`,
+  `Метро ходить 6:30–1:00, після нього вже лише таксі/Bolt.`,
+  `Лінія Сінтри має дві кінцеві в Лісабоні: Rossio (центр) і Oriente (поруч з аеропортом). Сідаючи, дивіться на табло. ${srcShort('sintraOri','Rome2rio')}`,
+  `Потяги на Кашкайш від Cais do Sodré ходять кожні ~20 хв, а в будні після 21:50 від Caxias далі їде автобус. ${srcShort('cpCascais','CP')}`]],
+ ["food","🍽 За столом",[
+  `<b>Couvert</b> (хліб, маслини, паштет) приносять без запиту і рахують за кожну позицію (€1.50–5). Не хочете — «não, obrigado/a», і заберуть. ${srcShort('tipLT','lisbontourism')}`,
+  `Вечеряти починають з 19:00–19:30, місцеві бронюють на ~20:30, кухні працюють до ~22:00. ${srcShort('dinnerOD','Olá Daniela')}`,
+  `Воду з-під крана (água da torneira) за законом мають дати безкоштовно. ${srcShort('water','Portugal Visitor')}`,
+  `Чайові не обов'язкові: місцеві лишають ~5%, туристи ~10%. ${srcShort('tipLT','lisbontourism')}`,
+  `Prato do dia — це саме обід. Увечері меню звичайне, і порції дорожчі.`]],
+ ["fado","🎶 Етикет фаду",[
+  `Коли співають — повна тиша: ні розмов, ні телефонів, ні дзвону келихів. Офіціанти можуть і шикнути. ${srcShort('fadoLT','lisbontourism')}`,
+  `Аплодують лише після пісні, а не під час. ${srcShort('fadoEN','EuropeNightlife')}`,
+  `На безкоштовне фаду ваді в Tasca do Chico приходьте до 20:30 у понеділок чи середу. ${srcShort('fadoNomado','Nomado')}`,
+  `Пакети «фаду + вечеря» на Rua Augusta й біля Praça do Comércio — це туристичний продукт, їх краще оминати. ${srcShort('fadoNomado','Nomado')}`]],
+ ["sintra","🏰 Пена й Сінтра",[
+  `Невеликий рюкзак у палац можна взяти, але носити спереду; на вході перевіряють сумки. Більші — в гардероб або шафки на вході в парк. ${srcShort('penaOff','Parques de Sintra')} · ${srcShort('penaHead','Headout')}`,
+  `Каплиця палацу помітно тихіша за коридори — там можна перевести подих 5 хв. ${srcShort('penaHead','Headout')}`,
+  `У палаці слабкий мобільний зв'язок: QR квитка й офлайн-карту завантажте заздалегідь. ${srcShort('penaSignal','Pena Visitors Guide')}`,
+  `Парк Пени — справжній лабіринт, де легко загубитися на кілька годин. ${srcShort('penaMaze','Boundless Roads')}`]],
+ ["money","💶 Гроші й дрібниці",[
+  `Синьо-жовтих банкоматів Euronet уникайте: там погана конвертація. Беріть у Multibanco. ${srcShort('safeTO','takeoff')}`,
+  `Монети потрібні для шафок CP на вокзалах.`,
+  `Екстрені служби: 112.`]]
 ];
 const AREAS=[
- ["Шіаду","Дорогий за мірками Лісабона, але гарний. Головний ризик тут — кишенькові злодії в натовпі біля Largo do Chiado та Rua Garrett. Ще: кафе на площах, де без запиту приносять закуски й рахують їх.",[
+ ["Байша (житло)","Рівна сітка вулиць після землетрусу 1755 року; тут найзручніше з рюкзаками. Але саме Байша й Rossio — головна зона вуличного шахрайства.",[
+  "Найбільше «дилерів», петицій на планшетах і наперсточників у Байші й на Rossio. Не зупиняйтеся: поки ви відмовляєте, другий тягне гаманець. "+srcShort('safeNomad','Nomado'),
+  "Rua Augusta — це зазивали й меню з фото кількома мовами, тобто якраз ваші ознаки пастки. Їсти йдіть у бічні провулки або за межі Байші",
+  "Вночі «дилерів» більше біля Rossio і Praça do Comércio, але вони не агресивні: тверде «ні» або просто ігнор. "+srcShort('safeTO','takeoff')]],
+ ["Шіаду","Дорогий за мірками Лісабона, але гарний. Головний ризик тут — кишенькові злодії в натовпі біля Largo do Chiado та Rua Garrett.",[
   "Без запиту couvert (хліб, маслини) додадуть у рахунок; не хочете — просто відсуньте",
-  "Фунікулери Bica і Glória та ліфт Santa Justa не працюють: усі підйоми пішки. "+srcShort('elev','RFM'),
+  "Піднімайтеся ескалаторами Baixa-Chiado, а не пішки. "+srcShort('escal2','LisbonLisboaPortugal'),
   "На спусках calçada слизька навіть суха"]],
  ["Байру-Алту","Вдень сонний, з вечора гучний. Безпечний, але хаотичний після півночі. Найчастіший ризик — телефон, забутий на столику.",[
   "«Хашиш? Кока?» шепочуть шахраї: «товар» — це лавр або борошно, а розмова відволікає, поки другий тягне гаманець. Не зупиняйтеся. "+srcShort('safeNomad','Nomado'),
@@ -549,11 +684,83 @@ const AREAS=[
   "Обідати з 12:30 до 14:30 у центрі погано: черги й 40 хв очікування. "+srcShort('sintraEat','lisbontourism'),
   "Злодії працюють у 434 і на зупинці біля станції, як у трамваї 28. "+srcShort('safeLT','lisbontourism')]]
 ];
+const NCATS=[["all","Усі"],["areas","Райони"],["transport","Транспорт"],["food","Їжа"],["fado","Фаду"],["sintra","Пена"],["money","Гроші"]];
+let ncat="all";
 function renderPB(){
   document.getElementById("pb").innerHTML=PB.map(([i,t,b])=>`<div class="card"><h4><span>${i}</span>${t}</h4>${b}</div>`).join("");
-  document.getElementById("areas").innerHTML=AREAS.map(([t,d,l])=>`<div class="card"><h4>${t}</h4><p style="margin:4px 0 6px;font-size:14px">${d}</p><ul class="tight">${l.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")
-   +`<div class="card"><h4>Загальне</h4><ul class="tight"><li>Номер екстрених служб 112</li><li>Трамвай 28 — головна точка кишенькових злодіїв; у нашому маршруті його немає, і це добре. ${srcShort('safeLT','lisbontourism')}</li><li>Музей азулежу закритий на ремонт, тому азулежу дивимося на вулицях, у São Roque та в Сінтрі. ${srcShort('azulejoMus','Visit Lisboa')}</li></ul></div>`;
+  const nf=document.getElementById("nf");
+  nf.innerHTML=NCATS.map(([c,t])=>`<button data-c="${c}" class="${ncat===c?'on':''}">${t}</button>`).join("");
+  nf.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{ncat=b.dataset.c;renderPB()}));
+  let h="";
+  if(ncat==="all"||ncat==="areas") h+=AREAS.map(([t,d,l])=>`<div class="card"><span class="tag">район</span><h4>${t}</h4><p style="margin:4px 0 6px;font-size:14px">${d}</p><ul class="tight">${l.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+  h+=NUANCES.filter(n=>ncat==="all"||n[0]===ncat).map(([c,t,l])=>`<div class="card"><h4>${t}</h4><ul class="tight">${l.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+  document.getElementById("areas").innerHTML=h;
   document.getElementById("srclist").innerHTML=Object.keys(S).map(k=>`<li>${src(k)}</li>`).join("");
+}
+
+/* ---------- QUICK MODE ---------- */
+// noise/crowd 1..3
+const QUICK=[
+ ["tabuletas","d1","🧩","Цілий фасад-ребус із масонськими символами. Шукайте «око, що все бачить».","Знайти 3 символи на фасаді й у залі Trindade","15 хв",1,2,"Нудно → 2 хв до São Roque"],
+ ["saoroque","d1","💎","Зовні скромна церква, а всередині — багато оздоблені каплиці й азулежу 1596 року.","Обійти каплиці й знайти панелі «діамант»","30 хв",1,1,"Втомились → Miradouro за 3 хв"],
+ ["spa","d1","🏰","Балкон на весь центр і замок навпроти.","Знайти керамічну табличку-мапу й звірити, що бачите","15 хв",2,2,"Тиша → нижній ярус саду"],
+ ["provinciana","d1","🍲","Сімейна таска, де в середу ріжуть свинячу ногу. Жодних рішень: страва дня.","Сказати «prato do dia» й чекати","50 хв",2,2,"Черга → Ramiro (метро 2 зупинки)"],
+ ["ramiro","d1","🦐","Гучна легендарна марішкейра: морепродукти приносять швидко.","Креветки à guilho + prego (стейк у булці) на десерт","60–80 хв",3,3,"Черга > 20 хв → A Provinciana"],
+ ["manteigaria","d1","🥧","Ната ще тепла, видно, як їх печуть.","2 ната + bica (еспресо) стоячи біля стійки","10 хв",2,2,"Черга → будь-яка pastelaria поруч"],
+ ["bxch","d1","🛗","Каскад ескалаторів замість сотень сходинок.","Вниз — вихід «Baixa», вгору — «Chiado»","5 хв",1,2,"Стоять → Rua do Carmo пішки"],
+ ["mcd","d1","🍔","Португальський McDonald's: перевірити, чи є щось локальне.","Відкрити меню в додатку ще в потязі","15 хв",2,2,"Довго → беріть з собою"],
+ ["boca","d1","🌊","Атлантика б'є в арку, сонце сідає у воду о 17:22.","Стати за поручнями й нічого не робити 10 хв","40 хв",3,2,"Холодно → назад до станції о 17:45"],
+ ["chico","d1","🎤","Аматори по черзі співають фаду в маленькій тісній таверні.","Прийти до 20:30, взяти chouriço assado й вино","1.5–2 год",2,3,"Тісно → нічний Miradouro за 4 хв"],
+ ["bela","d1","🎻","Професійне фаду впритул, за вечерею.","Забронювати, далі просто їсти й слухати","3 год",2,2,"Довго → піти після 2-го сету"],
+ ["calhariz","d1","🐟","Таска, де «їжа не підводить», без шоу.","Риба дня на грилі","60 хв",2,2,"Повно → Adega do Ribatejo поруч"],
+ ["pena","d2","🎨","Палац кольору фломастерів на вершині гори.","Пройти маршрутом палацу, потім Queen's Terrace","75 хв",2,3,"Шумно → каплиця, 5 хв тиші"],
+ ["tascantiga","d2","🥘","Таска в центрі, яку хвалять місцеві.","Bacalhau à Brás або щічки конфі","60 хв",2,2,"Черга → Tasca d'Ana"],
+ ["ana","d2","🔥","Гриль на вугіллі й feijoada з дикого кабана.","Feijoada de javali","60 хв",2,2,"Повно → Tascantiga"],
+ ["piriquita","d2","🥐","Травесейру — гаряча подушечка з мигдалем і яєчним кремом.","2 травесейру з собою","10 хв",2,3,"Черга → Piriquita II вище вулицею"]
+];
+const POCKET=[
+ ["nav","Navegante ocasional на кожного (одна картка — одна людина)"],
+ ["qr","QR квитка в Пену офлайн (слот 10:00)"],
+ ["map","Офлайн-карти Лісабона й Сінтри (у палаці слабкий зв'язок)"],
+ ["coin","Монети на шафку CP (якщо обрано шафку на Rossio)"],
+ ["warm","Теплий шар на Boca do Inferno й у Сінтру"],
+ ["pwr","Павербанк: телефон — це квитки, карти й будильники"],
+ ["shoe","Взуття з протектором (бруківка слизька)"],
+ ["cp","Додаток CP (розклад потягів) і Citymapper"]
+];
+const TRAPS=[
+ "Фото на Boca do Inferno затягують: будильник о 17:35, а о 17:45 — останній комфортний вихід до потяга.",
+ "Парк Пени — лабіринт. Будильник о 11:05, інакше обід зсунеться на 13:00 із чергами.",
+ "Rua Augusta блищить і кличе. Це зона пасток: проходимо, не зупиняємось.",
+ "У Байру-Алту телефон на столі — легка здобич. Він у кишені, а не біля келиха.",
+ "Під час фаду телефон теж у кишені: ні фото, ні сповіщень.",
+ "У четвер не «ще один кадр»: аеропорт до 15:30, будильник на вихід до потяга о 13:15."
+];
+function minus10(t){const m=t.match(/(\d{2}):(\d{2})/);if(!m)return t;let x=+m[1]*60+ +m[2]-10;return String(Math.floor(x/60)).padStart(2,"0")+":"+String(x%60).padStart(2,"0")}
+function renderAlarms(){
+  ["d1","d2"].forEach(d=>{
+    const el=document.getElementById("al-"+d); if(!el)return;
+    const T=d==="d1"?tlD1(st.d1):tlD2(st.d2);
+    el.innerHTML=T.filter(r=>r[4]).map(r=>`<li><b>${minus10(r[0])}</b><span>${r[4]} <span style="color:var(--muted)">(подія о ${r[0].replace("~","")})</span></span></li>`).join("");
+  });
+}
+let qday="all";
+function renderQuick(){
+  const f=document.getElementById("qf");
+  f.innerHTML=[["all","Усі"],["d1","Середа"],["d2","Четвер"]].map(([c,t])=>`<button data-c="${c}" class="${qday===c?'on':''}">${t}</button>`).join("");
+  f.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{qday=b.dataset.c;renderQuick()}));
+  const m=n=>"●".repeat(n)+"○".repeat(3-n);
+  document.getElementById("qcards").innerHTML=QUICK.filter(q=>qday==="all"||q[1]===qday).map(([k,d,e,hook,act,time,noise,crowd,bail])=>
+   `<div class="card"><h4>${e} ${P[k].n}</h4><div class="hook">${hook}</div>
+    <div class="q"><span>🎯</span><span><b>${act}</b></span><span>⏱</span><span>${time}</span><span>🔊</span><span class="meter">${m(noise)} шум</span><span>👥</span><span class="meter">${m(crowd)} натовп / черга</span><span>🚪</span><span>${bail}</span></div>
+    <div class="links"><a href="${gm(P[k].q)}" target="_blank" rel="noopener">Google Maps ↗</a></div></div>`).join("");
+  let done={}; try{done=JSON.parse(localStorage.getItem("lx-pocket")||"{}")}catch(e){}
+  const pk=document.getElementById("pocket");
+  pk.className="pk";
+  pk.innerHTML=POCKET.map(([k,t])=>`<label><input type="checkbox" data-k="${k}" ${done[k]?"checked":""}> <span>${t}</span></label>`).join("");
+  pk.querySelectorAll("input").forEach(i=>i.addEventListener("change",()=>{done[i.dataset.k]=i.checked;try{localStorage.setItem("lx-pocket",JSON.stringify(done))}catch(e){}}));
+  document.getElementById("traps").innerHTML=TRAPS.map(t=>`<li>${t}</li>`).join("");
+  renderAlarms();
 }
 
 /* ---------- TABS ---------- */
@@ -565,7 +772,7 @@ function show(v){
 document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.v)));
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(document.getElementById("v-"+h))show(h)});
 
-renderDay("d1"); renderDay("d2"); renderAll(); renderPB();
+renderDay("d1"); renderDay("d2"); renderAll(); renderPB(); renderQuick();
 {const h=location.hash.slice(1); if(h&&document.getElementById("v-"+h)) show(h);}
 </script>
 </body>
