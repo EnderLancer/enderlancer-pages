@@ -1,9 +1,10 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="uk">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Лісабон · 18–19 листопада 2026</title>
+<title>Рим і Лісабон</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -53,7 +54,8 @@ h3{font:600 16px Inter;margin:18px 0 8px}
 .ev .plink{font-size:12px;margin-left:6px;cursor:pointer;text-decoration:underline;color:var(--azul)}
 .buffer{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;margin-left:6px}
 .buffer.g{background:var(--okbg);color:var(--ok)} .buffer.y{background:var(--warnbg);color:var(--warn)} .buffer.r{background:var(--badbg);color:var(--bad)}
-.mapbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:10px}
+.mapbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:10px;align-self:start}
+@media(max-width:860px){.grid .mapbox{order:-1;position:static}}
 .mapbox .seg{margin-bottom:8px}
 .mapbox svg{width:100%;height:auto;display:block;border-radius:10px;background:#fbfaf7}
 .mapnote{font-size:12px;color:var(--muted);margin-top:6px}
@@ -67,7 +69,8 @@ h3{font:600 16px Inter;margin:18px 0 8px}
 .card dt{color:var(--muted)}
 .card dd{margin:0}
 .badge{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px}
-.badge.ok{background:var(--okbg);color:var(--ok)} .badge.chk{background:var(--warnbg);color:var(--warn)}
+.badge.ok{background:var(--okbg);color:var(--ok)} .badge.chk{background:var(--warnbg);color:var(--warn)} .badge.bad{background:var(--badbg);color:var(--bad)}
+.verdict{margin:0 0 8px;font-size:13.5px;padding:8px 10px;border-radius:8px;background:#faf8f4;border:1px solid var(--line)}
 .card .links{margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;font-size:13px}
 .note{background:var(--azul2);border-left:4px solid var(--azul);padding:10px 14px;border-radius:8px;margin:12px 0;font-size:14px}
 .warnbox{background:var(--warnbg);border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;margin:12px 0;font-size:14px}
@@ -88,18 +91,54 @@ ul.alarms li b{color:var(--sun);font-variant-numeric:tabular-nums}
 .hook{font-size:14.5px;margin:2px 0 4px}
 .meter{letter-spacing:1px}
 .tag{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:999px;background:var(--azul2);color:var(--azul);margin-right:4px}
+.photos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:56px 56px;gap:4px;margin:0 0 10px;border-radius:10px;overflow:hidden}
+.photos a{display:flex;align-items:flex-end;padding:6px 8px;color:#fff;text-decoration:none;font:600 12px Inter;text-shadow:0 1px 2px rgba(0,0,0,.35);position:relative}
+.photos a:first-child{grid-row:1/3;font-size:13px}
+.photos a span.e{position:absolute;top:6px;right:8px;font-size:20px;text-shadow:none}
+.photos a:hover{filter:brightness(1.08)}
+.card dd.more{color:var(--ink)}
+.pron{font-size:12.5px;color:var(--muted);margin:-2px 0 6px}
+.season{background:var(--warnbg);color:var(--warn)}
 footer{color:var(--muted);font-size:12px;text-align:center;padding:24px}
+body.rome{--azul:#9a3b22;--azul2:#f8e9e2;--azul3:#ebc3b3;--sun:#c9781f}
+nav.tabs[hidden]{display:none}
+.city{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.city button{border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;font:600 13px Inter;padding:7px 13px;border-radius:999px;cursor:pointer}
+.city button.on{background:#fff;color:var(--azul);border-color:#fff}
+.seg button[disabled]{opacity:.38;cursor:not-allowed;text-decoration:line-through}
+.csum{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;color:var(--ink2)}
+.csum b{color:var(--ink)}
+.csum button{margin-left:auto;border:1px solid var(--azul3);background:#fff;color:var(--azul);font:600 13px Inter;padding:8px 14px;border-radius:999px;cursor:pointer}
+.choices .rows.closed{display:none}
+.choices .hint{font-size:12px;color:var(--muted);margin:2px 0 0}
+.routes{display:flex;flex-wrap:wrap;gap:6px}
+.minimap{margin-top:10px}
+.card.wide{grid-column:1/-1}
+@media(min-width:861px){.card.wide{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:0 18px}.card.wide>h4,.card.wide>.pron{grid-column:1/-1}.card.wide>dl{grid-column:1}.card.wide>.minimap{grid-column:2;grid-row:3/6;margin-top:0}.card.wide>.routebtn,.card.wide>.mapnote{grid-column:2}.card.wide>.routebtn{justify-self:start}}
+ol.tlist{margin:0;padding-left:18px} ol.tlist li{margin:3px 0}
+@media(max-width:520px){.seg button{padding:9px 13px;font-size:13.5px}.ev .plink{display:inline-block;padding:6px 4px}h1{font-size:24px}nav.tabs button{padding:8px 10px;font-size:13px}.choices .lbl{min-width:100%}}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <h1>Лісабон без пасток · 18–19.11.2026</h1>
-    <p class="sub">Дві доби на двох із базою в Байші (Rua da Prata): Шіаду й Байру-Алту, захід сонця в Кашкайші, ранкова Пена. Оберіть сценарії, і таймлайн, карта та маршрут перебудуються.</p>
+    <div class="city" id="city"><button data-c="rome">🇮🇹 Рим · вт 17.11</button><button data-c="lx">🇵🇹 Лісабон · 18–19.11</button></div>
+    <h1 id="hh1">Лісабон без пасток · 18–19.11.2026</h1>
+    <p class="sub" id="hsub">Дві доби на двох із базою в Байші (Rua da Prata): Шіаду й Байру-Алту, захід сонця в Кашкайші, ранкова Пена. Оберіть сценарії, і таймлайн, карта та маршрут перебудуються.</p>
+    <nav class="tabs" id="rtabs" hidden>
+      <button data-v="r-day">Вт · 17.11</button>
+      <button data-v="r-places">Усі місця</button>
+      <button data-v="r-menu">Меню 🇮🇹</button>
+      <button data-v="r-planb">План Б</button>
+      <button data-v="r-adhd">Швидкий режим</button>
+      <button data-v="r-areas">Нюанси</button>
+      <button data-v="r-src">Джерела</button>
+    </nav>
     <nav class="tabs" id="tabs">
       <button data-v="d1" class="on">Ср · 18.11</button>
       <button data-v="d2">Чт · 19.11</button>
       <button data-v="places">Усі місця</button>
+      <button data-v="menu">Меню 🇵🇹</button>
       <button data-v="planb">План Б</button>
       <button data-v="adhd">Швидкий режим</button>
       <button data-v="areas">Нюанси</button>
@@ -147,6 +186,13 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:24px}
   <div class="cards" id="cards-all"></div>
 </section>
 
+<section class="view" id="v-menu">
+  <h2>Меню: що їсти в Португалії й Лісабоні</h2>
+  <p class="lead">Фірмові страви з поясненням, як вимовляти, що це таке, скільки коштує і де в нашому маршруті спробувати. Сезонне на листопад позначене окремо.</p>
+  <div class="seg filter" id="mf"></div>
+  <div class="cards" id="menucards"></div>
+</section>
+
 <section class="view" id="v-planb">
   <h2>План Б</h2>
   <div class="pb" id="pb"></div>
@@ -180,8 +226,71 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:24px}
   <ul class="src" id="srclist"></ul>
 </section>
 
+<!-- ================= ROME ================= -->
+<section class="view" id="v-r-day">
+  <h2>Вівторок: Ватикан → Навона → Пантеон → Треві → Іспанські сходи → Колізей у вогнях</h2>
+  <div class="warnbox">Колізей стоїть у вашому маршруті останнім, а взимку він зачиняється о 16:30 (останній вхід о 15:30). Тож у плані це вечірній Колізей зовні, з підсвіткою. Якщо хочете всередину, подивіться «План Б».</div>
+  <div class="choices" id="rc-day"></div>
+  <div class="grid">
+    <div class="tl" id="rtl-day"></div>
+    <div class="mapbox">
+      <div class="seg" id="rmz-day"></div>
+      <div id="rmap-day"></div>
+      <div class="routes"><a class="routebtn" id="rroute-a" href="#" target="_blank" rel="noopener">Маршрут 1: Ватикан → Треві ↗</a><a class="routebtn" id="rroute-b" href="#" target="_blank" rel="noopener">Маршрут 2: Треві → Колізей → вечеря ↗</a></div>
+      <div class="mapnote">Схема з орієнтовними координатами, не масштаб вулиць. Синя смуга — Тибр. Номери на карті збігаються з номерами карток нижче; натисніть маркер, щоб відкрити картку. Google Maps приймає до 10 точок, тому маршрут розбито на дві частини.</div>
+    </div>
+  </div>
+  <h3>Місця цього дня (з урахуванням вибору)</h3>
+  <div class="cards" id="rcards-day"></div>
+</section>
+
+<section class="view" id="v-r-places">
+  <h2>Рим: усі місця</h2>
+  <div class="seg filter" id="rpf"></div>
+  <div class="cards" id="rcards-all"></div>
+</section>
+
+<section class="view" id="v-r-menu">
+  <h2>Меню: що їсти в Римі</h2>
+  <p class="lead">Римська класика: як вимовляти, що це, який смак, скільки коштує і де на сьогоднішньому маршруті спробувати. Те, що не по сезону або не по дню тижня, позначено окремо.</p>
+  <div class="seg filter" id="rmf"></div>
+  <div class="cards" id="rmenucards"></div>
+</section>
+
+<section class="view" id="v-r-planb">
+  <h2>Рим: план Б</h2>
+  <div class="pb" id="rpb"></div>
+</section>
+
+<section class="view" id="v-r-adhd">
+  <h2>Швидкий режим: Рим</h2>
+  <p class="lead">Кожна картка: чим місце зачепить, одна дія, скільки часу, рівень шуму й натовпу та куди піти, якщо нудно або забагато людей. Будильники беруться з обраного сценарію й дзвонять за 10 хв до кінця кроку, щоб устигнути зібратися.</p>
+  <div class="grid2">
+    <div class="card"><h4>⏰ Будильники · вівторок</h4><ul class="alarms" id="ral"></ul></div>
+    <div class="card"><h4>🪤 Пастки уваги</h4><ul class="tight" id="rtraps"></ul></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h4>🎒 Що має бути в кишені</h4><div id="rpocket"></div></div>
+    <div class="card"><h4>🧭 Порядок дня одним рядком</h4><p id="roneline" style="font-size:14px;margin:6px 0"></p></div>
+  </div>
+  <h3>Місця коротко</h3>
+  <div class="cards" id="rqcards"></div>
+</section>
+
+<section class="view" id="v-r-areas">
+  <h2>Рим: нюанси й тонкощі</h2>
+  <div class="seg filter" id="rnf"></div>
+  <div class="pb" id="rareas"></div>
+</section>
+
+<section class="view" id="v-r-src">
+  <h2>Рим: джерела</h2>
+  <p style="color:var(--ink2);font-size:14px">Як і для Лісабона, Reddit мій пошук не індексує. Основа тут — італомовні Gambero Rosso, Turismo Roma, Open й Finestre sull'Arte, офіційні colosseo.it і сторінка Пантеону на сайті Міністерства культури, а також гіди, які живуть у Римі (Romewise, Romeing, The Roman Food Tour). Усе зібрано 17.11.2026. Час заходу сонця (16:48) і кінця сутінків (17:18) розраховано за координатами. Позначка «перевірити» означає, що години не підтверджені офіційним джерелом.</p>
+  <ul class="src" id="rsrclist"></ul>
+</section>
+
 </div></main>
-<footer>Зібрано 15.11.2026. Години й розклади можуть змінитися: позначене «перевірити» підтвердіть за день до поїздки.</footer>
+<footer>Рим зібрано 17.11.2026, Лісабон — 15.11.2026. Години й розклади можуть змінитися: позначене «перевірити» підтвердіть на місці.</footer>
 
 <script>
 /* ---------- SOURCES ---------- */
@@ -227,9 +336,6 @@ const S = {
  chicoTO:["Time Out PT · найкращі фаду-хаузи (години)","https://www.timeout.pt/lisboa/pt/restaurantes/as-melhores-casas-de-fado-em-lisboa"],
  chicoEN:["Euronews · Лісабон як місцевий, 06.2026","https://www.euronews.com/2026/06/18/explore-lisbon-like-a-local-seven-tips-for-seven-hills"],
  chicoFWT:["Free Walking Tour · фаду в Лісабоні","https://freewalkingtour.com/blog/understanding-fado-music-lisbon/"],
- belaTO:["Time Out PT · Tasca da Bela","https://www.timeout.pt/lisboa/pt/restaurantes/bela"],
- belaCarm:["Carminho про фаду-бари (Yahoo / T+L)","https://www.yahoo.com/entertainment/music/articles/best-fado-bars-lisbon-according-202852398.html"],
- belaVV:["Viaje na Viagem · фаду: Bela vs Chico","https://www.viajenaviagem.com/lisboa-experiencias-fado"],
  tascantigaTO:["Time Out PT · Tascantiga","https://www.timeout.pt/lisboa/pt/restaurantes/tascantiga"],
  tascantigaDP:["Dica de Portugal · ресторани Сінтри","https://dicadeportugal.com/sintra/melhores-restaurantes-em-sintra/"],
  tascantigaBT:["BestTime · Tascantiga (обідів не бронює)","https://besttime.app/app/Portugal/Sintra/restaurant"],
@@ -245,6 +351,26 @@ const S = {
  safeLT:["lisbontourism · безпека в Лісабоні","https://www.lisbontourism.org/?p=197"],
  safeNomad:["Nomado · шахрайство в Лісабоні","https://www.nomadotravel.app/en/guides/lisbon-safety-tips"],
  fever:["Fever/Tiqets · Пена: пішки 45 хв від центру Сінтри","https://feverup.com/m/117180"],
+ beachAAA:["AAA · Praia da Conceição: 3 хв від станції","https://www.aaa.com/tripcanvas/attraction/praia-da-conceicao-VA102771"],
+ beachCM:["Câmara de Cascais · Praia da Conceição","https://www.cascais.pt/galeria-de-imagens/praia-da-conceicao?page=1"],
+ beachCT:["Culture Trip · пляжі Кашкайша (спокійна вода)","https://theculturetrip.com/europe/portugal/articles/the-most-beautiful-beaches-in-or-near-cascais-portugal"],
+ seaTemp:["temperaturadomar · вода в Кашкайші в листопаді","https://www.temperaturadomar.pt/europa/portugal/cascais/month/novembro/"],
+ martaLS:["Lisboa Secreta · Praia de Santa Marta","https://lisboasecreta.co/praia-de-santa-marta/"],
+ martaID:["idealista · Santa Marta: ~15 хв від станції","https://www.idealista.pt/news/node/71360"],
+ martaEK:["e-konomista · Santa Marta: звідси веломаршрут до Boca","https://www.e-konomista.pt/praia-de-santa-marta/"],
+ castTO:["Time Out PT · продавці каштанів у Лісабоні","https://www.timeout.pt/lisboa/pt/noticias/no-ano-passado-a-castanha-era-muito-podre-este-ano-esta-melhor-121024"],
+ castNG:["Nomad · каштани на вулицях Байші й Шіаду","https://www.nomadglobal.com/conteudos/outono-em-lisboa"],
+ castDN:["DN · каштани в Шіаду: €3.50 за дюжину","https://www.dn.pt/dinheiro/interior/quentes-e-caras-as-castanhas-nao-chegam-para-as-encomendas-10122332.html"],
+ ginjLK:["Linkiesta · де пити ginjinha","https://www.linkiesta.it/2022/03/piatti-tipici-migliori-ristoranti-pasteis-lisbona/"],
+ trevoDP:["Dica de Portugal · біфана в O Trevo","https://dicadeportugal.com/?p=19223"],
+ dishLS:["Lisboa Secreta · найтиповіші страви Лісабона","https://lisboasecreta.co/os-pratos-mais-tipicos-de-lisboa/"],
+ dishTR:["travel.com.br · словник португальських страв","https://travel.com.br/lisboa-portugal/comer-beber/"],
+ dishID:["idealista · страви Лісабона, Bife à Marrare","https://www.idealista.pt/news/node/69230"],
+ dishNO:["Nomado · що їсти в Лісабоні","https://www.nomadotravel.app/pt/guides/lisbon-food-guide"],
+ dishMM:["Mitzie Mee · прегу й біфана","https://mitziemee.com/what-to-eat-in-lisbon-traditional-portuguese-dishes-you-need-to-try/"],
+ dishDP:["Dica de Portugal · страви Лісабона й ціни","https://dicadeportugal.com/?p=10414"],
+ dishCT:["Culture Trip · 11 страв Лісабона","https://theculturetrip.com/europe/portugal/articles/11-traditional-lisbon-dishes-you-need-to-try"],
+ ramiroEF:["Eroica Fenice · Ramiro: замовляють на вагу","https://www.eroicafenice.com/salotto-culturale/viaggi/dove-mangiare-a-lisbona-guida-ai-10-migliori-ristoranti-tascas-e-mercati/"],
  metroTar:["Metro de Lisboa · тарифи 2026 (PDF)","https://www.metrolisboa.pt/wp-content/uploads/2025/12/Tarifas_site_2026_PT.pdf"],
  cp24:["CP · квиток 24h Carris/Metro/CP: правила","https://cp.pt/info/w/24-hours-ticket"],
  cpPrices:["CP · ціни приміських потягів 2026 (PDF)","https://cp.pt/info/documents/d/cp/precos-comboios-urbanos-lisboa"],
@@ -283,95 +409,135 @@ const gm = q => "https://www.google.com/maps/search/?api=1&query="+encodeURIComp
 const P = {
  lis:{n:"Аеропорт LIS (Terminal 1)",a:"Лісабон",ll:[38.7686,-9.1281],cat:"logistics",q:"Aeroporto Humberto Delgado Terminal 1 Lisboa",
    why:`У центр: червона лінія метро → Alameda → зелена → Baixa-Chiado, 20–25 хв. ${srcShort('airportLT')}. Квиток Carris/Metro €1.90; доба Carris/Metro/CP €11.40 (з приміськими потягами на Кашкайш і Сінтру). ${srcShort('metroTar','Metro de Lisboa')}`,
+   more:"Станція «Aeroporto» — кінцева червоної лінії, тож метро не сплутаєте. Автомати з квитками стоять просто біля турнікетів, меню є англійською.",
    order:"Купити в автоматі метро картку Navegante ocasional (€0.50) на кожного й завантажити 24h Carris/Metro/CP",price:"€0.50 + €11.40 на особу",hours:"Метро ~6:30–1:00",book:"Ні",conf:"ok"},
  trindade:{n:"Житло · Rua da Prata",a:"Baixa (Santa Maria Maior), 1100-414",ll:[38.7105,-9.1366],cat:"logistics",q:"Rua da Prata, 1100-414 Lisboa",
-   why:"База в рівній Байші. Пішки: Rossio 6–8 хв, Cais do Sodré ~12 хв, Baixa-Chiado ~5 хв. У Шіаду ~12 хв, у Байру-Алту ~15–20 хв, обидва вгору. Алфама ~15–20 хв пішки. Найближче метро: Baixa-Chiado (зелена/синя) і Terreiro do Paço (синя).",order:"—",price:"—",hours:"Заселення 15:00",book:"Заздалегідь попросити лишити рюкзаки до заселення, а в четвер після виселення",conf:"chk"},
+   why:"База в рівній Байші. Пішки: Rossio 6–8 хв, Cais do Sodré ~12 хв, Baixa-Chiado ~5 хв. У Шіаду ~12 хв, у Байру-Алту ~15–20 хв, обидва вгору. Алфама ~15–20 хв пішки. Найближче метро: Baixa-Chiado (зелена/синя) і Terreiro do Paço (синя).",order:"—",price:"—",hours:"Заселення 15:00",book:"Заздалегідь попросити лишити рюкзаки до заселення, а в четвер після виселення",more:"Rua da Prata — одна з паралельних вулиць Байші між Rossio та Praça do Comércio, рівна, без підйомів. Сусідня Rua Augusta — туристична вулиця із зазивалами; їсти там не варто.",conf:"chk"},
  tabuletas:{n:"Casa do Ferreira das Tabuletas",a:"Largo Rafael Bordalo Pinheiro · Шіаду, ~12 хв угору від житла",ll:[38.7124,-9.1424],cat:"azulejo",q:"Casa do Ferreira das Tabuletas Largo Rafael Bordalo Pinheiro Lisboa",
    why:`Фасад 1864 року з азулежу-тромплеями: алегоричні фігури та стихії. ${srcShort('tabLP','Lonely Planet')}. Той самий майстер, Luís Ferreira, оздобив зал Cervejaria Trindade масонськими символами. ${srcShort('tabISCTE','ISCTE')}`,
+   more:`Майстер Luís Ferreira «das Tabuletas» оздобив і фасад Viúva Lamego. Якщо обідатимете в Ramiro, побачите його роботу двічі за день. ${srcShort('azRoute','Visit Lisboa')}`,
    order:"Подивитися фасад; потім зазирнути в зал Cervejaria Trindade",price:"Безкоштовно",hours:"Фасад видно цілодобово",book:"Ні",conf:"ok"},
  saoroque:{n:"Igreja e Museu de São Roque",a:"Largo Trindade Coelho · 3 хв",ll:[38.7137,-9.1434],cat:"azulejo",q:"Igreja de São Roque Lisboa",
    why:`На маршруті азулежу Turismo de Lisboa: панелі «діамант» 1596 року з португальських і, можливо, іспанських майстерень. ${srcShort('azRoute','Visit Lisboa')}`,
+   more:"Скромний фасад — оманливий: усередині азулежу кінця XVI століття і багато оздоблені бічні каплиці. Тихе, прохолодне місце, щоб перевести подих після підйому.",
    order:"Каплиці з азулежу; на музей ~30 хв",price:"Вартість музею перевірте на місці",hours:"Музей жовт.–бер.: пн 13–18, вт–нд 10–18 (у середу 10–18)",book:"Ні",conf:"chk"},
  spa:{n:"Miradouro de São Pedro de Alcântara",a:"Байру-Алту · 5 хв",ll:[38.7154,-9.1446],cat:"view",q:"Miradouro de São Pedro de Alcântara Lisboa",
    why:`Time Out PT: «É o miradouro» (той самий мірадору). Двоярусний сад із видом на замок São Jorge. ${srcShort('spaTO','Time Out')} · ${srcShort('spaAAA','AAA')}. Фунікулер Glória не працює (новий обіцяють у 2029), тож лише пішки. ${srcShort('elev','RFM')}`,
+   more:"Двоярусний сад-балкон: угорі лавки й кіоск, унизу тихіше. Видно замок São Jorge, а внизу Байшу, де ви живете.",
    order:"Вдень на панораму; вночі після фаду",price:"Безкоштовно",hours:"Відкритий простір",book:"Ні",conf:"ok"},
  provinciana:{n:"A Provinciana",a:"Travessa do Forno 23, біля Rossio",ll:[38.7148,-9.1396],cat:"food",q:"A Provinciana Travessa do Forno 23 Lisboa",
    why:`Сімейна таска: тато, донька Карла в залі, мама Жудіте на кухні. За Time Out, щодня своя страва: у середу печена свиняча нога з квасолею й капустою, у четвер восьминіг. ${srcShort('provTO','Time Out PT')}. Кабідела закінчується рано, просіть одразу. ${srcShort('provDEB','Do Eat Better')}`,
+   more:`Сюди на обід ходять працівники з Байші: домашня кухня, швидка подача, страви дня за тижневим графіком. Популярне закінчується рано, тож приходьте до 12:15. ${srcShort('provDEB','Do Eat Better')}`,
    order:"Страва дня (у середу pernil assado, свиняча нога), вино з бочки",price:"€10–15 / особу",hours:"Пн–пт 12:00–15:30 і 19:00–22:00 (у середу відкрито)",book:"Ні, прийти до 12:15",conf:"ok"},
  ramiro:{n:"Cervejaria Ramiro",a:"Av. Almirante Reis 1H · Інтенденте",ll:[38.7203,-9.1356],cat:"food",q:"Cervejaria Ramiro Avenida Almirante Reis 1H Lisboa",
    why:`Головна марішкейра Лісабона з 1950-х; є в списках «must visit», але місцеві її визнають. Броні немає, лише черга. ${srcShort('ramiroEP','En Primeur')} · ${srcShort('ramiroPearl','Pearl')}`,
+   more:`Морепродукти тут замовляють на вагу, а наприкінці за традицією беруть prego — стейк у булці — як «десерт». Атмосфера гучна й швидка. ${srcShort('ramiroEF','Eroica Fenice')}`,
    order:"Креветки à guilho, amêijoas à Bulhão Pato, percebes; наприкінці prego (стейк у булці)",price:"≈ €45–50 / особу",hours:"Вт–нд 12:00–00:00/00:30, пн вихідний",book:"Ні: прийти до відкриття (12:00) або ввечері до 19:00",conf:"ok"},
  viuva:{n:"Фасад Viúva Lamego",a:"Largo do Intendente 25 · 3 хв від Ramiro",ll:[38.7222,-9.1353],cat:"azulejo",q:"Viúva Lamego Largo do Intendente 25 Lisboa",
    why:`Будівля 1849–1865 років, фасад повністю в фігурних азулежу Ferreira das Tabuletas; об'єкт суспільного значення. ${srcShort('azRoute','Visit Lisboa')}`,
+   more:"Колишня фабрика й крамниця кераміки; повністю вкритий фігурним азулежу фасад — один з найфотогенічніших у Лісабоні.",
    order:"Фото фасаду (5 хв)",price:"Безкоштовно",hours:"Фасад видно завжди",book:"Ні",conf:"ok"},
  manteigaria:{n:"Manteigaria (паштел-де-ната)",a:"Rua do Loreto 2 · Largo de Camões",ll:[38.7107,-9.1440],cat:"food",q:"Manteigaria Rua do Loreto 2 Lisboa",
    why:`Зведення Reddit (r/portugal, r/lisboa, r/VisitPortugalGuide): «одні з найстабільніших, завжди теплі». ${srcShort('natas','tabiji')} · адреса: ${srcShort('manteig','Viaje na Viagem')}`,
+   more:"Печуть на очах, тож ната часто ще теплі. Посипте корицею (canela) й цукровою пудрою з дозаторів на стійці.",
    order:"2 ната з корицею + bica (еспресо)",price:"≈ €1.30–2.50 за ната",hours:"Денні години (перевірити)",book:"Ні",conf:"chk"},
  caissodre:{n:"Станція Cais do Sodré",a:"Лінія на Кашкайш",ll:[38.7060,-9.1450],cat:"logistics",q:"Estação Cais do Sodré Lisboa",
    why:`До Кашкайша ~40 хв, €2.55 в один бік на картці Navegante. Розклад діє з 8.11.2026. ${srcShort('everyrail','everyrail')}. Через ремонт у будні з 21:50 від Caxias до Кашкайша їде автобус. ${srcShort('cpCascais','CP')}`,
+   more:"Вокзал на березі Тежу. На турнікети CP прикладайте ту саму картку Navegante, що й у метро.",
    order:"—",price:"€2.55 в один бік",hours:"Удень потяг ~кожні 20 хв (перевірити в додатку CP)",book:"Ні",conf:"ok"},
  mcd:{n:"McDonald's Cascais",a:"R. Sebastião José de Carvalho e Melo 15-17 · біля станції",ll:[38.7013,-9.4196],cat:"food",q:"McDonald's Rua Sebastião José de Carvalho e Melo 15 Cascais",
    why:`Найближчий McDonald's до станції. ${srcShort('mcdLoc','адреса')}. Португальське меню (McBifana з соусом à cervejeira, McPrego, суп caldo verde) у 2026 році було лімітованим, лише до 29 червня. ${srcShort('mcdNit','NiT')} · ${srcShort('mcdEcho','Echo Boomer')}. Супи (sopa) є в «Menu Almoço», тобто в обідньому меню. ${srcShort('mcdAlmoco',"McDonald's PT")}`,
+   more:"Поруч зі станцією й першим пляжем. Можна взяти з собою й поїсти просто на піску Conceição.",
    order:"Що португальського є в листопаді, дивіться в додатку McDonald's PT; суп, якщо подають після обіду",price:"≈ €5–8",hours:"Перевірити",book:"Ні",conf:"chk"},
  boca:{n:"Boca do Inferno",a:"Кашкайш · ~2 км від станції",ll:[38.6914,-9.4316],cat:"view",q:"Boca do Inferno Cascais",
    why:`Морська арка у вапнякових скелях; оглядовий майданчик для заходу сонця над Атлантикою. Від станції 20–25 хв уздовж Av. Rei Humberto II повз марину й маяк Santa Marta. ${srcShort('bocaRJ','Real Journey')} · ${srcShort('bocaCP','cascais-portugal')}`,
+   more:"До води тут не спуститися: скелі й обриви. Ноги мочимо на Conceição або Santa Marta, а сюди йдемо дивитися на хвилі й захід.",
    order:"Захід 17:22, сутінки до 17:51 (розрахунок за координатами)",price:"Безкоштовно",hours:"Відкритий простір",book:"Ні",conf:"ok"},
  calhariz:{n:"Príncipe do Calhariz",a:"Calçada do Combro 28 · ~15 хв угору від житла",ll:[38.7105,-9.1462],cat:"food",q:"Príncipe do Calhariz Calçada do Combro 28 Lisboa",
    why:`Time Out PT: «одна з тасок Байру-Алту, де їжа не підводить». ${srcShort('calhariz','Time Out PT')}`,
+   more:"Звичайна сусідська таска без шоу: телевізор, швидкі офіціанти, місцеві за столиками. Добре, якщо хочеться просто поїсти перед фаду.",
    order:"Грильована риба дня, бакалау, домашні десерти",price:"≈ €15–25 / особу",hours:"Нд–пт 12–15 і 19–22:30 (у середу відкрито)",book:"Бажано зателефонувати",conf:"ok"},
  ribatejo:{n:"Adega do Ribatejo",a:"Нижня частина Байру-Алту",ll:[38.7114,-9.1446],cat:"food",q:"Adega do Ribatejo Bairro Alto Lisboa",
    why:`Time Out: давня таска з нормальним обслуговуванням; більшість основних страв дешевші за €10. ${srcShort('ribatejo','Time Out')}`,
+   more:"Стара таска внизу Байру-Алту з недорогими основними стравами — бюджетний варіант перед фаду.",
    order:"Bitoque, бакалау, вино da casa",price:"≈ €12–20 / особу",hours:"Перевірити години в середу",book:"Перевірити",conf:"chk"},
  tagarro:{n:"Adega do Tagarro",a:"Байру-Алту",ll:[38.7128,-9.1455],cat:"food",q:"Adega do Tagarro Bairro Alto Lisboa",
    why:`Сімейна таска: доньки пана Антоніу її осучаснили, але суть лишили. ${srcShort('tagarro','Time Out PT')}`,
+   more:"Осучаснена сімейна таска: петишкуш (закуски на всіх), щоб поділити на двох.",
    order:"Петишкуш на двох + страва з казанка",price:"€€ (ціновий рівень 2/4)",hours:"Перевірити години в середу",book:"Перевірити",conf:"chk"},
  chico:{n:"A Tasca do Chico",a:"R. do Diário de Notícias 39 · ~15–20 хв угору від житла",ll:[38.7121,-9.1452],cat:"fado",q:"A Tasca do Chico Rua do Diário de Notícias 39 Lisboa",
    why:`Фаду ваді (співають аматори) щопонеділка й щосереди. ${srcShort('chicoLC','lifecooler')}. Вхід вільний, але мінімальна витрата €10. ${srcShort('chicoEN','Euronews 06/2026')}. Місце дуже туристичне, проте вечеряти не обов'язково. ${srcShort('chicoFWT','Free Walking Tour')}`,
+   more:"Маленька кімната, де між піснями гамірно й тісно, а під час пісні раптом тиша. Співають усі охочі: від сусідів до напівпрофесіоналів.",
    order:"Chouriço assado (ковбаска, підсмажена на столі), caldo verde, вино",price:"≈ €10–25 / особу",hours:"Щодня 19:00–03:00 (Time Out PT); фаду ~з 21:00",book:"Бронь не беруть: прийти о 20:30–20:45. Середу підтвердіть: +351 961 339 696",conf:"chk"},
- bela:{n:"Tasca da Bela",a:"R. dos Remédios 190 · Алфама, ~15 хв від житла",ll:[38.7126,-9.1270],cat:"fado",q:"Tasca da Bela Rua dos Remédios 190 Lisboa",
-   why:`Тут співають професійні фадишти (Teresinha Landeiro, Carolina Varela Ribeiro та інші). ${srcShort('belaTO','Time Out PT')}. Співачка Carminho рекомендує як скромне, невимушене місце. ${srcShort('belaCarm','Carminho')}`,
-   order:"Вечеря з шоу «все включено»",price:"€57.50 за вечерю й шоу (Time Out); місцеві згадують €45",hours:"Ср–нд 20:00–02:00 (у середу відкрито)",book:"Так, обов'язково (Instagram @tascadabela)",conf:"ok"},
  bxch:{n:"Метро Baixa-Chiado (ескалатори)",a:"Вхід Rua do Crucifixo ↔ вихід Largo do Chiado",ll:[38.7106,-9.1396],cat:"logistics",q:"Estação Metro Baixa-Chiado Rua do Crucifixo",
    why:`Безкоштовний «ліфт» у Шіаду: нижній вхід у Байші й верхній у Шіаду з'єднує каскад ескалаторів, тож замість сотень сходинок підйом займає ~5 хв. ${srcShort('escal','The Lisbon Connection')} · ${srcShort('escal2','LisbonLisboaPortugal')}. Ескалатори час від часу ламаються. ${srcShort('escalTO','Time Out PT')}`,
+   more:"Дорогою зверніть увагу на білі стіни станції: її проєктував Álvaro Siza Vieira. Біля виходу на Largo do Chiado стоїть бронзовий Пессоа біля кав'ярні A Brasileira.",
    order:"Підйом і спуск між Байшею та Шіаду",price:"Безкоштовно (турнікети не потрібні)",hours:"Метро 6:30–1:00",book:"Ні",conf:"ok"},
  cascaisSt:{n:"Станція Cascais",a:"Кінцева лінії · автобус M27",ll:[38.7006,-9.4183],cat:"logistics",q:"Estação de Cascais",
    why:`Від станції до Boca do Inferno 20–25 хв пішки або MobiCascais M27 (кільцевий через Cidadela). ${srcShort('m27','everyrail')}. Автобус ходить кожні ~30 хв, їде ~15 хв, коштує ~€1. ${srcShort('r2rBoca','Rome2rio')}`,
+   more:"Кінцева лінії: пляж Conceição — одразу через дорогу, а McDonald's — через кільце.",
    order:"—",price:"Автобус ~€1 (як платити, перевірити в додатку MobiCascais)",hours:"M27 кожні ~30 хв",book:"Ні",conf:"chk"},
  oriente:{n:"Станція Oriente",a:"Пересадка потяг → метро до аеропорту",ll:[38.7678,-9.0990],cat:"logistics",q:"Estação do Oriente Lisboa",
    why:`Частина потягів Сінтри йде на Oriente, а не на Rossio: щодвадцять хвилин, 46 хв у дорозі. ${srcShort('sintraOri','Rome2rio')}. Звідти до аеропорту ~7 хв червоною лінією метро. ${srcShort('sintraAirPT','sintra-portugal')}`,
+   more:"Великий скляний вокзал Сантьяго Калатрави; метро — на нижньому рівні, позначки «Metro» видно від платформ.",
    order:"—",price:"Потяг + метро (zapping)",hours:"—",book:"Ні",conf:"ok"},
+ conceicao:{n:"Praia da Conceição / Duquesa",a:"Кашкайш · 3 хв від станції",ll:[38.7003,-9.4165],cat:"view",q:"Praia da Conceição Cascais",
+   why:`Пісок і Атлантика за 3 хв від станції. ${srcShort('beachAAA','AAA')}. Тут одна з найспокійніших вод на всьому узбережжі. ${srcShort('beachCT','Culture Trip')}`,
+   more:`Невелика міська бухта між Chalet Faial і капличкою Nossa Senhora da Conceição. Під час відпливу зливається з сусідньою Duquesa; спуск сходами й пандусом. ${srcShort('beachCM','Câmara de Cascais')}. Вода в листопаді 16.6–19.6°C, у середньому ~18°C: свіжо, але для ніг саме те. ${srcShort('seaTemp','temperaturadomar')}`,
+   order:"Зняти взуття, 10–15 хв по кісточки у воді",price:"Безкоштовно",hours:"Публічний пляж",book:"Ні",conf:"ok"},
+ santamarta:{n:"Praia de Santa Marta",a:"Кашкайш · дорогою до Boca do Inferno, ~15 хв від станції",ll:[38.6936,-9.4214],cat:"view",q:"Praia de Santa Marta Cascais",
+   why:`Крихітна прихована бухта між мариною й музеєм Condes de Castro Guimarães, навпроти маяка Santa Marta. Найгарніша при відпливі, коли крізь прозору воду видно кам'янисте дно. ${srcShort('martaLS','Lisboa Secreta')}`,
+   more:`Від станції ~15 хв пішки. ${srcShort('martaID','idealista')}. Тут під старим містком у море впадає струмок, а біля бухти починається веломаршрут на Boca do Inferno. ${srcShort('martaEK','e-konomista')}. Мінус: пляж маленький, і під час припливу піску може майже не лишитися. Тоді мочимо ноги на Conceição.`,
+   order:"Спуститися до води біля містка, 10 хв",price:"Безкоштовно",hours:"Публічний пляж",book:"Ні",conf:"chk"},
+ ginjinha:{n:"A Ginjinha (Espinheira)",a:"Largo São Domingos 8 · 3 хв від Rossio",ll:[38.7146,-9.1384],cat:"food",q:"A Ginjinha Largo de São Domingos 8 Lisboa",
+   why:`Найвідоміша стійка з ginjinha (вишневою наливкою) у Лісабоні. ${srcShort('ginjLK','Linkiesta')}. Стоїть між житлом і Rossio, тож можна заскочити дорогою.`,
+   more:"Тут п'ють стоячи на площі, з однієї маленької чарки. Питають «com ou sem?» — з ягодою чи без. Площа поруч жвава, тож гаманці тримайте ближче.",
+   order:"Ginjinha com elas (з вишнею)",price:"≈ €1.50–2",hours:"Перевірити",book:"Ні",conf:"chk"},
+ trevo:{n:"O Trevo (біфана)",a:"Praça Luís de Camões 48 · Шіаду",ll:[38.7109,-9.1431],cat:"food",q:"O Trevo Praça Luís de Camões 48 Lisboa",
+   why:`Маленька закусочна, де завжди людно, а біфана «гідна поваги». ${srcShort('trevoDP','Dica de Portugal')}. Стоїть поруч з Manteigaria, тож це солоний варіант замість або перед ната.`,
+   more:"Біфану їдять стоячи біля стійки, з гірчицею й маленьким пивом (imperial). Замовлення займає 5 хв, тому підходить як перекус між обідом і заселенням.",
+   order:"Bifana + mostarda + imperial",price:"≈ €3–5",hours:"Перевірити",book:"Ні",conf:"chk"},
  rossio:{n:"Станція Rossio",a:"Потяги на Сінтру · 6–8 хв пішки від житла",ll:[38.7142,-9.1410],cat:"logistics",q:"Estação do Rossio Lisboa",
    why:`До Сінтри 40 хв, потяги кожні ~20 хв. ${srcShort('sintraTrain','everyrail')} · ${srcShort('omioSintra','Omio')}. На станції є шафки CP: тільки монети, не довше 24 год, часто зайняті. ${srcShort('luggLT','lisbontourism')}`,
+   more:"Вокзал з неомануелінським фасадом і двома підковоподібними порталами; потяги на Сінтру відходять з верхнього рівня, куди піднімаються ескалатори.",
    order:"—",price:"Потяг ≈ €2.5 в один бік (зони CP)",hours:"Шафки працюють у години станції",book:"Ні",conf:"ok"},
  sintra:{n:"Станція Sintra",a:"Сінтра",ll:[38.7984,-9.3860],cat:"logistics",q:"Estação de Sintra",
    why:`Автобус 434 не входить у 24h Carris/Metro/CP. ${srcShort('bringyou','bring-you')}. Тут починається маршрут автобуса 434 до Пени. Добовий квиток €13.50 на 434 і 435 (онлайн ~на 8% дешевше). ${srcShort('bus434','lisbontourism')}. Разовий €4.10, перший автобус ~8:50 (інше джерело пише 9:15). ${srcShort('bus434b','tourismattractions')}`,
+   more:"Невелика кінцева станція; 434 стоїть праворуч від виходу, черга видна одразу.",
    order:"—",price:"434: €4.10 разовий / €13.50 доба",hours:"—",book:"Ні",conf:"chk"},
  locker:{n:"Locker in the City · Sintra",a:"Історичний центр, 5 хв від станції",ll:[38.7979,-9.3893],cat:"logistics",q:"Locker in the City Sintra",
    why:`Шафки в центрі Сінтри, 5 хв пішки від станції. ${srcShort('lockSintra','сайт')}. Деякі гіди пишуть, що камер у Сінтрі немає взагалі. ${srcShort('luggit','LUGGit')}. Тож бронювати лише заздалегідь.`,
+   more:"Шафки працюють через сайт: код приходить на телефон.",
    order:"—",price:"Див. сайт",hours:"Перевірити, чи відкрито о ~9:00",book:"Так, онлайн",conf:"chk"},
  pena:{n:"Palácio Nacional da Pena",a:"Сінтра",ll:[38.7876,-9.3906],cat:"view",q:"Palácio Nacional da Pena Sintra",
    why:`Гардероб: ${srcShort('penaOff','Parques de Sintra')} · ${srcShort('penaRules','правила')}. Квиток «Visita Essencial»: самостійний огляд Нового палацу, тераси й парк. Дата й час обов'язкові. ${srcShort('penaEss','Parques de Sintra')}. На вхід без запізнень, слот стосується лише палацу. ${srcShort('penaFaq','FAQ')}. Від воріт парку до палацу ~30 хв пішки. ${srcShort('penaTiq','Tiqets')}`,
+   more:"Палац XIX століття в стилі романтизму на вершині гори: жовті й червоні фасади, мавританські й мануелінські мотиви. Вид з терас — на Атлантику й Castelo dos Mouros.",
    order:"Слот 10:00 (або 9:30); палац + тераси ~1–1.5 год. Рюкзаки: шафки й гардероб є на головному вході в парк і на початку маршруту палацом (офіційно). Маленький рюкзак можна взяти, але носити спереду; на вході перевіряють сумки",price:"У джерелах від €14 до €20: точна ціна при бронюванні",hours:"Відкриття взимку ~9:30 (перевірити). 17.11 зачиняється о 14:00, 19.11 обмежень не оголошено",book:"Так, лише онлайн і заздалегідь",conf:"chk"},
  tascantiga:{n:"Tascantiga",a:"Escadinhas da Fonte da Pipa 2 · центр Сінтри",ll:[38.7980,-9.3900],cat:"food",q:"Tascantiga Escadinhas da Fonte da Pipa Sintra",
    why:`Time Out PT: у самому центрі, але «місцеві запевняють, що це не пастка». ${srcShort('tascantigaTO','Time Out PT')}`,
+   more:"Петишкуш і основні страви в маленькій залі поруч із палацом Сінтри; можна поділити кілька тарілок на двох.",
    order:"Смажений бакалау на перцях з шоріссу, щічки конфі, prego із сиром queijo da serra",price:"€15–25 / особу",hours:"Щодня ~12:00–22:00 (низький сезон перевірити)",book:`Обідів не бронює: приходьте о 12:00. ${srcShort('tascantigaBT','BestTime')}`,conf:"chk"},
  ana:{n:"Tasca d'Ana",a:"R. Serpa Pinto 5 · Сінтра",ll:[38.7990,-9.3882],cat:"food",q:"Tasca d'Ana Rua Serpa Pinto 5 Sintra",
    why:`Гриль на вугіллі; feijoada з дикого кабана. Мінус: є скарги, що один офіціант грубіший з туристами. ${srcShort('ana','Bella Ciao')}`,
+   more:"Вугільний гриль видно й чути одразу — простий, ситний обід після гори.",
    order:"Грильоване м'ясо, feijoada de javali",price:"≈ €15–25 / особу",hours:"Щодня 10:00–21:00",book:"Не обов'язково",conf:"ok"},
  pendoa:{n:"Pendoa",a:"Сінтра",ll:[38.7995,-9.3872],cat:"food",q:"Restaurante Pendoa Sintra",
    why:`Відгук: «обідаємо тут щоразу, як буваємо в Сінтрі»; хвалять bacalhau à Brás. Але відгуки з 2024 року. ${srcShort('pendoa','carta.menu')}`,
+   more:"Тихіша альтернатива центральним закладам; якщо працює — гарний варіант без черг.",
    order:"Bacalhau à Brás",price:"≈ €15–20 / особу",hours:"Перевірити, чи працює",book:"Перевірити",conf:"chk"},
  piriquita:{n:"Casa Piriquita (травесейруш)",a:"Rua das Padarias 1 · Сінтра",ll:[38.7974,-9.3910],cat:"food",q:"Casa Piriquita Rua das Padarias 1 Sintra",
    why:`Time Out: у Сінтрі травесейру з'їсти треба обов'язково. ${srcShort('piriq','Time Out')}. Місцеві радять Piriquita II, вище тією ж вулицею: тихіше, ната ті самі гарячі. ${srcShort('piriq2','відгуки')}`,
+   more:"Стара пекарня Сінтри; травесейру тут роблять за власним рецептом, кейжади — інша місцева солодка класика.",
    order:"Травесейру (листкове тісто з яєчним кремом і мигдалем) + кейжада",price:"≈ €2 / шт.",hours:"Перевірити",book:"Ні, взяти з собою",conf:"chk"},
  palsintra:{n:"Palácio Nacional de Sintra",a:"Центр Сінтри",ll:[38.7976,-9.3907],cat:"azulejo",q:"Palácio Nacional de Sintra",
    why:`Азулежу мудежар і розписані дерев'яні стелі; слоту немає, квиток діє весь день. ${srcShort('palSintra','The Better Vacation')}. Запасний варіант, якщо пропустили слот у Пену або все в тумані.`,
+   more:"Дві величезні конусні кухонні труби видно з усього центру — це він. Усередині зали з азулежу XV–XVI століть.",
    order:"Зали з азулежу",price:"Перевірити",hours:"Перевірити",book:"Ні",conf:"chk"}
 };
 
 /* ---------- STATE ---------- */
 const st = {
-  d1:{bags:"carry", lunch:"prov", mcd:"yes", eve:"chico", dinner:"calhariz"},
+  d1:{beach:"conc",bags:"carry", lunch:"prov", mcd:"yes", eve:"chico", dinner:"calhariz"},
   d2:{bags:"R", lunch:"tascantiga", slot:"1000"}
 };
 try{const s=JSON.parse(localStorage.getItem("lx-st2")||"null"); if(s){Object.assign(st.d1,s.d1||{});Object.assign(st.d2,s.d2||{});}}catch(e){}
@@ -381,8 +547,8 @@ const OPTS = {
  d1:[
   ["bags","Рюкзаки 9:30–15:00",[["carry","З собою"],["acc","Залишити в житлі"],["bounce","Камера (Bounce/Stasher)"]]],
   ["lunch","Обід",[["prov","A Provinciana (страва дня)"],["ramiro","Cervejaria Ramiro (морепродукти)"]]],
+  ["beach","Ноги в океані",[["conc","Praia da Conceição (3 хв від станції)"],["marta","Praia de Santa Marta (дорогою до Boca)"],["no","Ні"]]],
   ["mcd","McDonald's у Кашкайші",[["yes","Так, перед заходом"],["no","Ні"]]],
-  ["eve","Вечір",[["chico","Вечеря в Байру-Алту + Tasca do Chico"],["bela","Вечеря з фаду в Tasca da Bela"]]],
   ["dinner","Вечеря (з Chico)",[["calhariz","Príncipe do Calhariz"],["ribatejo","Adega do Ribatejo"],["tagarro","Adega do Tagarro"],["prov2","A Provinciana"],["ramiro2","Ramiro (черга)"]]]
  ],
  d2:[
@@ -422,29 +588,32 @@ function tlD1(s){
     T.push(["13:30","<b>Фасад Viúva Lamego</b>, 3 хв пішки","","viuva"]);
     T.push(["13:45","Метро Intendente → Baixa-Chiado (зелена, без пересадок), ескалаторами нагору","move","bxch"]);
   }
-  T.push(["14:00","<b>Паштел-де-ната в Manteigaria</b> + bica, повільна прогулянка Largo de Camões","","manteigaria"]);
+  T.push(["14:00","<b>Паштел-де-ната в Manteigaria</b> + bica, повільна прогулянка Largo de Camões. Солоний варіант поруч — біфана в O Trevo","","manteigaria"]);
+  T.push(["14:35","Дорогою вниз: у листопаді на вулицях Шіаду й Байші продають смажені каштани («quentes e boas!») — кульок на двох. "+srcShort('castNG','Nomad'),"",null]);
   T.push(["14:40",(s.bags==="bounce"?"Ескалаторами вниз у Байшу, забрати рюкзаки з камери, до житла":"Ескалаторами Baixa-Chiado вниз у Байшу, до житла")+", ~10 хв","move","bxch","Вниз на заселення"]);
   T.push(["15:00","<b>Заселення на Rua da Prata.</b> 15 хв перепочити, взяти теплий шар (на березі вітряно)","key","trindade"]);
-  T.push(["15:20","Метро Baixa-Chiado → Cais do Sodré (зелена, 1 зупинка) або 12 хв пішки рівною Rua do Arsenal","move","caissodre","ВИХІД на потяг у Кашкайш"]);
-  T.push(["~15:40","Потяг на Кашкайш, ~40 хв (входить у 24h, валідуйте на турнікеті CP). Ходить кожні ~20 хв: точний час у додатку CP","move","caissodre"]);
-  T.push(["16:20","Станція Cascais","", "cascaisSt"]);
-  if(s.mcd==="yes"){
-    T.push(["16:20","<b>McDonald's Cascais</b> біля станції: беріть із собою. Що з португальського меню є в листопаді, дивіться в додатку","","mcd","Виходимо з McDonald's"]);
-    T.push(["16:40","Пішки набережною до Boca do Inferno, 20–25 хв: повз марину, Cidadela й маяк Santa Marta. Або автобус M27 (кожні ~30 хв, ~15 хв, ~€1), якщо стоїть на зупинці","move","boca"]);
-    T.push(["17:05","<b>Boca do Inferno</b>: займіть місце на майданчику за поручнями","sun","boca"]);
+  T.push(["15:15","Метро Baixa-Chiado → Cais do Sodré (зелена, 1 зупинка) або 12 хв пішки рівною Rua do Arsenal. Сідайте на перший потяг, на який встигнете: що раніше приїдете, то довше на океані","move","caissodre","ВИХІД на потяг у Кашкайш"]);
+  T.push(["~15:40","Потяг на Кашкайш, не пізніше ~15:40, ~40 хв (входить у 24h, валідуйте на турнікеті CP). Ходить кожні ~20 хв: точний час у додатку CP","move","caissodre"]);
+  T.push(["16:20","Станція Cascais (якщо приїхали раніше — ці хвилини йдуть на пляж)","", "cascaisSt"]);
+  const mcd=s.mcd==="yes", bch=s.beach;
+  if(mcd) T.push(["16:20","<b>McDonald's Cascais</b> біля станції: беріть із собою"+(bch==="conc"?" й їжте на пляжі":"")+". Що з португальського меню є в листопаді, дивіться в додатку","","mcd","Беремо їжу й на пляж"]);
+  if(bch==="conc"){
+    T.push([mcd?"16:30":"16:23","<b>🦶 Ноги в океані: Praia da Conceição</b>, 3 хв від станції. Вода в листопаді в середньому ~18°C. Взуття в руки, 10–15 хв у воді; рушник у рюкзак. "+srcShort('seaTemp','temperaturadomar'),"sun","conceicao","Взуваємося, на Boca"]);
+    T.push([mcd?"16:50":"16:40","Набережною до Boca do Inferno, 20–25 хв: повз марину, Cidadela й маяк Santa Marta. Або автобус M27 (кожні ~30 хв, ~15 хв, ~€1)","move","boca"]);
+    T.push([mcd?"17:15":"17:05","<b>Boca do Inferno</b>: займіть місце на майданчику за поручнями"+(mcd?" <span class='buffer y'>щільно: якщо приїхали о 16:20, на пляжі лише ~15 хв</span>":""),"sun","boca"]);
+  } else if(bch==="marta"){
+    T.push([mcd?"16:35":"16:22","Пішки до Praia de Santa Marta, ~15 хв, на ходу доїдаючи","move","santamarta"]);
+    T.push([mcd?"16:50":"16:37","<b>🦶 Ноги в океані: Praia de Santa Marta</b>, маленька бухта під містком навпроти маяка. Якщо приплив і піску немає — помочіть ноги з каменів біля спуску або поверніться на Conceição. "+srcShort('martaLS','Lisboa Secreta'),"sun","santamarta","Взуваємося, на Boca"]);
+    T.push([mcd?"17:05":"16:52","Ще ~10–12 хв набережною до Boca do Inferno","move","boca"]);
+    T.push([mcd?"17:17":"17:04","<b>Boca do Inferno</b>: займіть місце на майданчику за поручнями","sun","boca"]);
   } else {
-    T.push(["16:25","Пішки набережною повз марину й маяк Santa Marta, 20–25 хв","move"]);
-    T.push(["16:50","<b>Boca do Inferno</b>: займіть місце на майданчику за поручнями","sun","boca"]);
+    T.push([mcd?"16:40":"16:25","Пішки набережною до Boca do Inferno, 20–25 хв, або автобус M27 (кожні ~30 хв, ~15 хв, ~€1)","move","boca"]);
+    T.push([mcd?"17:05":"16:50","<b>Boca do Inferno</b>: займіть місце на майданчику за поручнями","sun","boca"]);
   }
   T.push(["17:22","<b>Захід сонця</b> (світло до ~17:51)","sun","boca"]);
   T.push(["17:45","Назад до станції: 25 хв пішки освітленою Av. Rei Humberto II або M27 зі зупинки «Boca do Inferno» (кожні ~30 хв; час у Citymapper). "+srcShort('r2rBoca','Rome2rio'),"move","cascaisSt","Йдемо на потяг назад"]);
   T.push(["~18:20","Потяг до Cais do Sodré (~40 хв) → ~19:00. Після 21:50 у будні частину маршруту замінює автобус. "+srcShort('cpCascais','CP'),"move","caissodre"]);
-  if(s.eve==="bela"){
-    T.push(["19:05","Метро Cais do Sodré → Baixa-Chiado (1 зупинка), 5 хв до житла: переодягнутися","move","trindade"]);
-    T.push(["19:40","Пішки в Алфаму, ~15–20 хв: Rua da Alfândega, далі трохи вгору до Rua dos Remédios","move",null,"Виходимо на фаду"]);
-    T.push(["20:00","<b>Tasca da Bela</b>: вечеря + професійне фаду. Бронь обов'язкова","key","bela"]);
-    T.push(["~23:00","Назад: 7 хв пішки до метро Santa Apolónia → синя лінія до Terreiro do Paço (1 зупинка) → 5 хв до житла. Або 15–20 хв пішки. Метро до 1:00","move","trindade"]);
-  } else {
+  {
     const dmap={calhariz:"calhariz",ribatejo:"ribatejo",tagarro:"tagarro",prov2:"provinciana",ramiro2:"ramiro"};
     const dk=dmap[s.dinner]; let warn="";
     if((s.dinner==="prov2"&&s.lunch==="prov")||(s.dinner==="ramiro2"&&s.lunch==="ramiro")) warn=" <span class='buffer y'>двічі за день в одному місці</span>";
@@ -561,10 +730,23 @@ function renderMap(el,viewKey,route){
 }
 
 /* ---------- CARDS ---------- */
+const CATCOL={food:["#b3261e","#e07a3f"],fado:["#4b2a7a","#8a5cc2"],azulejo:["#1f4e9c","#4f86d6"],view:["#1d7a4f","#3fae7c"],logistics:["#4a5674","#7d89a6"],dish:["#a15c00","#d9a03b"]};
+const CATEMO={food:"🍽",fado:"🎶",azulejo:"🔷",view:"🌅",logistics:"🚉",dish:"🍲"};
+function photos(name,query,cat){
+  const [c1,c2]=CATCOL[cat]||CATCOL.view, e=CATEMO[cat]||"📷";
+  const img="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(query);
+  const com="https://commons.wikimedia.org/w/index.php?title=Special:MediaSearch&type=image&search="+encodeURIComponent(name.replace(/\s*\(.*\)/,""));
+  const map=cat==="dish"?"https://www.google.com/search?tbm=isch&q="+encodeURIComponent(name+" tasca Lisboa"):gm(query);
+  return `<div class="photos" title="Фото відкриваються в новій вкладці">
+   <a href="${img}" target="_blank" rel="noopener" style="background:linear-gradient(135deg,${c1},${c2})"><span class="e">${e}</span>📷 Фото: Google Картинки</a>
+   <a href="${map}" target="_blank" rel="noopener" style="background:linear-gradient(135deg,${c2},${c1})">${cat==="dish"?"🍴 У тасках Лісабона":"📍 Фото відвідувачів"}</a>
+   <a href="${com}" target="_blank" rel="noopener" style="background:linear-gradient(160deg,${c1}cc,${c2}cc)">🖼 Wikimedia</a></div>`;
+}
 function cardHTML(k,idx){
   const p=P[k];
   return `<div class="card" id="card-${k}"><h4>${idx?idx+". ":""}${p.n}</h4><div class="area">${p.a}</div>
-  <dl><dt>Чому</dt><dd>${p.why}</dd><dt>Що взяти</dt><dd>${p.order}</dd><dt>Ціна</dt><dd>${p.price}</dd><dt>Години</dt><dd>${p.hours}</dd><dt>Бронь</dt><dd>${p.book}</dd>
+  ${photos(p.n,p.q,p.cat)}
+  <dl><dt>Чому</dt><dd>${p.why}</dd>${p.more?`<dt>Детальніше</dt><dd class="more">${p.more}</dd>`:""}<dt>Що взяти</dt><dd>${p.order}</dd><dt>Ціна</dt><dd>${p.price}</dd><dt>Години</dt><dd>${p.hours}</dd><dt>Бронь</dt><dd>${p.book}</dd>
   <dt>Статус</dt><dd>${p.conf==="ok"?'<span class="badge ok">підтверджено</span>':'<span class="badge chk">варто перевірити</span>'}</dd></dl>
   <div class="links"><a href="${gm(p.q)}" target="_blank" rel="noopener">Google Maps ↗</a></div></div>`;
 }
@@ -578,7 +760,6 @@ const mapView={d1:"region",d2:"region"};
 function renderChoices(day){
   const box=document.getElementById("c-"+day); let h="";
   OPTS[day].forEach(([key,label,opts])=>{
-    if(day==="d1"&&key==="dinner"&&st.d1.eve!=="chico")return;
     h+=`<div class="row"><span class="lbl">${label}</span><span class="seg">`+opts.map(([v,t])=>`<button data-day="${day}" data-k="${key}" data-v="${v}" class="${st[day][key]===v?'on':''}">${t}</button>`).join("")+`</span></div>`;
   });
   box.innerHTML=h;
@@ -622,7 +803,7 @@ const PB=[
  ["🚌","Автобус 434 переповнений або не приходить",`<ul class="tight"><li>Пішки від центру Сінтри до воріт Пени ~45 хв угору. ${srcShort('fever','Fever/Tiqets')}</li><li>Для слоту о 10:00 це реально, лише якщо вийти з центру до 9:05. Тоді таксі або тук-тук — винятком, а ціну домовляйтеся до посадки.</li><li>Униз: стежка Caminho de Santa Maria, ~30 хв до центру. ${srcShort('penaHead','Headout')}</li></ul>`],
  ["🚆","Потяг затримався / страйк CP",`<ul class="tight"><li>Кашкайш: якщо потяг пропав, наступний буде за ~20 хв. Щоб устигнути на захід, виїжджайте не пізніше ~15:40–16:00.</li><li>Пізно ввечері (після 21:50) частину лінії обслуговує автобус, і квиток 24h на нього теж діє. ${srcShort('cpCascais','CP')}</li><li>Сінтра → аеропорт: потяги на Oriente й на Rossio — дві незалежні гілки, тож якщо затримується один, сідайте в інший. Крайній запасний варіант — Uber/Bolt напряму (35–45 хв). ${srcShort('sintraAirport','sintra-portugal')}</li><li>Напередодні перевірте попередження на cp.pt.</li></ul>`],
  ["✈️","Рейс сів пізно в середу",`<ul class="tight"><li>Приземлилися після 11:00: прибирайте São Roque, обід не чіпайте.</li><li>Після 13:30 (A Provinciana видає останні обіди до ~15:30): одразу в житло, ната замість обіду.</li><li>Після 15:00: метро одразу на Cais do Sodré, McDonald's прибрати. Головне — Boca do Inferno до 17:15.</li></ul>`],
- ["🚪","Заклад зачинено або черга",`<ul class="tight"><li>A Provinciana ↔ Ramiro: міняються місцями.</li><li>Вечеря: Príncipe do Calhariz → Adega do Ribatejo → Adega do Tagarro, усі в 5 хв одна від одної.</li><li>У Chico немає місць або фаду: переходьте на Tasca da Bela (з 20:00, бронь потрібна) або просто нічний мірадору.</li><li>Сінтра: Tascantiga → Tasca d'Ana (щодня 10–21) → травесейруш у Piriquita II.</li></ul>`],
+ ["🚪","Заклад зачинено або черга",`<ul class="tight"><li>A Provinciana ↔ Ramiro: міняються місцями.</li><li>Вечеря: Príncipe do Calhariz → Adega do Ribatejo → Adega do Tagarro, усі в 5 хв одна від одної.</li><li>У Chico немає місць або фаду: нічний Miradouro São Pedro de Alcântara і келих у будь-якій сусідній тасці.</li><li>Сінтра: Tascantiga → Tasca d'Ana (щодня 10–21) → травесейруш у Piriquita II.</li></ul>`],
  ["🧳","Шафка зачинена або повна",`<ul class="tight"><li>Рюкзаки — не валізи: просто беріть з собою і здавайте в гардероб Пени на вході в парк. ${srcShort('penaOff','Parques de Sintra')}</li><li>Шафки CP на Rossio зайняті — Bounce/Stasher поруч зі станцією, бронь з телефону.</li></ul>`],
  ["🛗","Ескалатори Baixa-Chiado стоять",`<ul class="tight"><li>Буває. ${srcShort('escalTO','Time Out PT')} Тоді пішки Rua do Carmo → Rua Garrett, ~12 хв угору.</li></ul>`]
 ];
@@ -703,15 +884,16 @@ function renderPB(){
 const QUICK=[
  ["tabuletas","d1","🧩","Цілий фасад-ребус із масонськими символами. Шукайте «око, що все бачить».","Знайти 3 символи на фасаді й у залі Trindade","15 хв",1,2,"Нудно → 2 хв до São Roque"],
  ["saoroque","d1","💎","Зовні скромна церква, а всередині — багато оздоблені каплиці й азулежу 1596 року.","Обійти каплиці й знайти панелі «діамант»","30 хв",1,1,"Втомились → Miradouro за 3 хв"],
- ["spa","d1","🏰","Балкон на весь центр і замок навпроти.","Знайти керамічну табличку-мапу й звірити, що бачите","15 хв",2,2,"Тиша → нижній ярус саду"],
+ ["spa","d1","🏰","Балкон на весь центр і замок навпроти.","Знайти замок São Jorge, а внизу — свою Байшу","15 хв",2,2,"Тиша → нижній ярус саду"],
  ["provinciana","d1","🍲","Сімейна таска, де в середу ріжуть свинячу ногу. Жодних рішень: страва дня.","Сказати «prato do dia» й чекати","50 хв",2,2,"Черга → Ramiro (метро 2 зупинки)"],
  ["ramiro","d1","🦐","Гучна легендарна марішкейра: морепродукти приносять швидко.","Креветки à guilho + prego (стейк у булці) на десерт","60–80 хв",3,3,"Черга > 20 хв → A Provinciana"],
  ["manteigaria","d1","🥧","Ната ще тепла, видно, як їх печуть.","2 ната + bica (еспресо) стоячи біля стійки","10 хв",2,2,"Черга → будь-яка pastelaria поруч"],
  ["bxch","d1","🛗","Каскад ескалаторів замість сотень сходинок.","Вниз — вихід «Baixa», вгору — «Chiado»","5 хв",1,2,"Стоять → Rua do Carmo пішки"],
  ["mcd","d1","🍔","Португальський McDonald's: перевірити, чи є щось локальне.","Відкрити меню в додатку ще в потязі","15 хв",2,2,"Довго → беріть з собою"],
+ ["conceicao","d1","🦶","Атлантика по кісточки за 3 хв від потяга.","Взуття в руки, 10 хв у воді, витерти ноги","15 хв",2,1,"Холодно → одразу на набережну до Boca"],
+ ["santamarta","d1","🏝","Секретна бухта під містком з видом на маяк.","Спуститися біля містка й торкнутися води","10 хв",1,1,"Приплив, піску нема → Conceição"],
  ["boca","d1","🌊","Атлантика б'є в арку, сонце сідає у воду о 17:22.","Стати за поручнями й нічого не робити 10 хв","40 хв",3,2,"Холодно → назад до станції о 17:45"],
  ["chico","d1","🎤","Аматори по черзі співають фаду в маленькій тісній таверні.","Прийти до 20:30, взяти chouriço assado й вино","1.5–2 год",2,3,"Тісно → нічний Miradouro за 4 хв"],
- ["bela","d1","🎻","Професійне фаду впритул, за вечерею.","Забронювати, далі просто їсти й слухати","3 год",2,2,"Довго → піти після 2-го сету"],
  ["calhariz","d1","🐟","Таска, де «їжа не підводить», без шоу.","Риба дня на грилі","60 хв",2,2,"Повно → Adega do Ribatejo поруч"],
  ["pena","d2","🎨","Палац кольору фломастерів на вершині гори.","Пройти маршрутом палацу, потім Queen's Terrace","75 хв",2,3,"Шумно → каплиця, 5 хв тиші"],
  ["tascantiga","d2","🥘","Таска в центрі, яку хвалять місцеві.","Bacalhau à Brás або щічки конфі","60 хв",2,2,"Черга → Tasca d'Ana"],
@@ -724,11 +906,13 @@ const POCKET=[
  ["map","Офлайн-карти Лісабона й Сінтри (у палаці слабкий зв'язок)"],
  ["coin","Монети на шафку CP (якщо обрано шафку на Rossio)"],
  ["warm","Теплий шар на Boca do Inferno й у Сінтру"],
+ ["towel","Маленький рушник або вологі серветки для ніг після океану"],
  ["pwr","Павербанк: телефон — це квитки, карти й будильники"],
  ["shoe","Взуття з протектором (бруківка слизька)"],
  ["cp","Додаток CP (розклад потягів) і Citymapper"]
 ];
 const TRAPS=[
+ "Пляж затягує не менше за фото: на Conceição будильник «взуваємося», інакше Boca під загрозою.",
  "Фото на Boca do Inferno затягують: будильник о 17:35, а о 17:45 — останній комфортний вихід до потяга.",
  "Парк Пени — лабіринт. Будильник о 11:05, інакше обід зсунеться на 13:00 із чергами.",
  "Rua Augusta блищить і кличе. Це зона пасток: проходимо, не зупиняємось.",
@@ -751,7 +935,7 @@ function renderQuick(){
   f.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{qday=b.dataset.c;renderQuick()}));
   const m=n=>"●".repeat(n)+"○".repeat(3-n);
   document.getElementById("qcards").innerHTML=QUICK.filter(q=>qday==="all"||q[1]===qday).map(([k,d,e,hook,act,time,noise,crowd,bail])=>
-   `<div class="card"><h4>${e} ${P[k].n}</h4><div class="hook">${hook}</div>
+   `<div class="card"><h4>${e} ${P[k].n}</h4>${photos(P[k].n,P[k].q,P[k].cat)}<div class="hook">${hook}</div>
     <div class="q"><span>🎯</span><span><b>${act}</b></span><span>⏱</span><span>${time}</span><span>🔊</span><span class="meter">${m(noise)} шум</span><span>👥</span><span class="meter">${m(crowd)} натовп / черга</span><span>🚪</span><span>${bail}</span></div>
     <div class="links"><a href="${gm(P[k].q)}" target="_blank" rel="noopener">Google Maps ↗</a></div></div>`).join("");
   let done={}; try{done=JSON.parse(localStorage.getItem("lx-pocket")||"{}")}catch(e){}
@@ -763,8 +947,58 @@ function renderQuick(){
   renderAlarms();
 }
 
+/* ---------- MENU ---------- */
+const MENU=[
+ {n:"Pastel de nata",p:"паштéл де нáта",c:"sweet",w:"Кошик листкового тіста з яєчним кремом, карамелізованим зверху до плям.",t:"Хрусткий, теплий, ванільно-яєчний; з корицею й цукровою пудрою.",at:["manteigaria"],pr:"≈ €1.30–2.50",s:["dishLS","natas"]},
+ {n:"Bifana",p:"біфáна",c:"lisbon",w:"Тонка свинина, тушкована з часником і вином, у м'якій булці.",t:"Соковита, часникова, з гірчицею; їдять стоячи біля стійки.",at:["trevo"],pr:"≈ €3–5",s:["trevoDP","dishNO"]},
+ {n:"Prego (no pão / no prato)",p:"прéгу",c:"lisbon",w:"Тонкий біфштекс з часником у булці. «No prato» — на тарілці з картоплею фрі, рисом і яйцем.",t:"Простіший і менш соковитий за біфану, акцент на м'ясі.",at:["ramiro","tascantiga"],pr:"≈ €5–10",s:["dishMM"]},
+ {n:"Amêijoas à Bulhão Pato",p:"амейжуаш а Булйáу Пáту",c:"lisbon",w:"Молюски, тушковані з оливковою олією, часником, коріандром і вином. Названі на честь поета Bulhão Pato.",t:"Морське, часникове. Соус вимочують хлібом — це головне.",at:["ramiro"],pr:"≈ €12–18",s:["dishTR","dishNO"]},
+ {n:"Bacalhau à Brás",p:"бакалЯу а Браш",c:"lisbon",w:"Тріска, розібрана на волокна, з картоплею-соломкою, цибулею, яйцем і маслинами.",t:"Ніжне, кремове, з хрусткими нотками; найлегший вхід у світ бакалау.",at:["pendoa","tascantiga"],pr:"≈ €12–16",s:["dishTR","dishNO"]},
+ {n:"Pastéis de bacalhau",p:"паштéйш де бакалЯу",c:"portugal",w:"Обсмажені кульки з тріски, картоплі й трав.",t:"Хрусткі зовні, м'які всередині; закуска до пива.",at:["chico","calhariz"],pr:"≈ €1.50–2 / шт",s:["dishLS"]},
+ {n:"Caldo verde",p:"кáлду вéрде",c:"portugal",w:"Суп із тонко нарізаної капусти, картоплі й часто шматочка шоріссу.",t:"Гарячий, ситний — ідеально в листопадовий вечір.",at:["chico","calhariz"],pr:"≈ €3–6",s:["dishDP"]},
+ {n:"Chouriço assado",p:"шоурíсу асáду",c:"portugal",w:"Ковбаска, яку підпалюють просто на столі в глиняному човнику з алкоголем.",t:"Димна, гостра; маленьке шоу перед фаду.",at:["chico"],pr:"≈ €6–9",s:["chicoLC"]},
+ {n:"Polvo à lagareiro",p:"пóлву а лагарéйру",c:"portugal",w:"Запечений восьминіг з картоплею, «вдавленою» кулаком, щедро политий оливковою олією. Назва — від виробництва олії.",t:"Ніжний восьминіг, багато часнику й олії.",at:[],pr:"≈ €16–24",s:["dishCT"]},
+ {n:"Arroz de marisco",p:"арóш де марíшку",c:"portugal",w:"Рис із морепродуктами: креветки, молюски, мідії.",t:"Вологий, майже як суп; одна велика каструля на двох.",at:["ramiro"],pr:"≈ €20–35 на двох",s:["dishTR"]},
+ {n:"Gambas / camarão ao alho",p:"гáмбаш ау áлью",c:"lisbon",w:"Креветки в часниковій олії.",t:"Пряні, часникові; знову вмочуємо хліб.",at:["ramiro"],pr:"≈ €12–20",s:["ramiroEF"]},
+ {n:"Bife à Marrare",p:"біф а Маррáре",c:"lisbon",w:"Біфштекс, обсмажений на маслі, з вершковим соусом. Придумав неаполітанець António Marrare у кафе Лісабона на початку XIX століття.",t:"Класика старого Лісабона: масло, вершки, перець.",at:[],pr:"≈ €15–25",s:["dishID"]},
+ {n:"Bitoque",p:"бітóке",c:"portugal",w:"Тонкий стейк із яйцем зверху, картоплею фрі й рисом — повсякденний обід Португалії.",t:"Просто і ситно, недорого в будь-якій тасці.",at:["ribatejo"],pr:"≈ €8–12",s:["ribatejo"]},
+ {n:"Feijoada de javali",p:"фейжуáда де жавалí",c:"portugal",w:"Тушкована квасоля з м'ясом дикого кабана.",t:"Густа, ситна, «гірська» — якраз у Сінтрі.",at:["ana"],pr:"≈ €14–18",s:["ana"]},
+ {n:"Pernil assado",p:"перніл асáду",c:"lisbon",w:"Печена свиняча нога: страва середи в A Provinciana.",t:"Домашня, з квасолею й капустою.",at:["provinciana"],pr:"≈ €10–13",s:["provTO"]},
+ {n:"Sardinhas assadas",p:"сардíньяш асáдаш",c:"season",season:"Не сезон",w:"Сардини на вугіллі: символ Лісабона. Пік сезону — червень і свято Santo António.",t:"У листопаді свіжих майже немає. Краще купіть консерву на сувенір.",at:[],pr:"—",s:["dishNO"]},
+ {n:"Castanhas assadas",p:"каштáньяш асáдаш",c:"season",season:"Сезон: листопад",w:"Смажені каштани з вуличних жаровень у паперовому кульку. Продавці гукають «Quentes e boas!» — «гарячі й смачні!».",t:"Димні, солонуваті, гріють руки.",at:["manteigaria"],pr:"≈ €3.50 за дюжину",s:["castDN","castTO"]},
+ {n:"Ginjinha",p:"жінжíнья",c:"drink",w:"Вишнева наливка; п'ють стоячи на Largo São Domingos.",t:"Солодка, міцна; «com elas» — з вишнею на дні.",at:["ginjinha"],pr:"≈ €1.50–2",s:["ginjLK"]},
+ {n:"Bica",p:"бíка",c:"drink",w:"Так у Лісабоні називають еспресо.",t:"Коротка, міцна; до ната обов'язково.",at:["manteigaria"],pr:"≈ €1",s:[]},
+ {n:"Travesseiro de Sintra",p:"травесéйру",c:"sweet",w:"«Подушечка» з листкового тіста з мигдально-яєчним кремом.",t:"Тепла, ніжна, обсипана цукром.",at:["piriquita"],pr:"≈ €2",s:["piriq"]},
+ {n:"Queijada de Sintra",p:"кейжáда",c:"sweet",w:"Маленький тарт із сиром, корицею й цукром у тонкому тісті.",t:"Щільна, солодка, з корицею.",at:["piriquita"],pr:"≈ €1.50",s:["piriq"]}
+];
+const MCATS=[["all","Усе"],["lisbon","Лісабон"],["portugal","Португалія"],["sweet","Солодке"],["drink","Пити"],["season","Сезон"]];
+let mcat="all";
+function renderMenu(){
+  const f=document.getElementById("mf");
+  f.innerHTML=MCATS.map(([c,t])=>`<button data-c="${c}" class="${mcat===c?'on':''}">${t}</button>`).join("");
+  f.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{mcat=b.dataset.c;renderMenu()}));
+  document.getElementById("menucards").innerHTML=MENU.filter(d=>mcat==="all"||d.c===mcat).map(d=>{
+    const where=d.at.length?d.at.map(k=>`<a href="#places" onclick="goPlace('${k}');return false">${P[k].n}</a>`).join(", "):"<span style='color:var(--muted)'>у нашому маршруті не заплановано</span>";
+    return `<div class="card"><h4>${d.n} ${d.season?`<span class="badge season">${d.season}</span>`:""}</h4><div class="pron">🔊 ${d.p}</div>
+    ${photos(d.n,d.n+" prato português",'dish')}
+    <dl><dt>Що це</dt><dd>${d.w}</dd><dt>Смак</dt><dd>${d.t}</dd><dt>Де в плані</dt><dd>${where}</dd><dt>Ціна</dt><dd>${d.pr}</dd>${d.s.length?`<dt>Джерела</dt><dd>${d.s.map(k=>srcShort(k,S[k][0].split(" · ")[0])).join(" · ")}</dd>`:""}</dl></div>`;
+  }).join("");
+}
+function goPlace(k){ pcat="all"; renderAll(); show("places"); setTimeout(()=>focusCard(k),60); }
+
 /* ---------- TABS ---------- */
+const HEAD={
+ lx:["Лісабон без пасток · 18–19.11.2026","Дві доби на двох із базою в Байші (Rua da Prata): Шіаду й Байру-Алту, захід сонця в Кашкайші, ранкова Пена. Оберіть сценарії, і таймлайн, карта та маршрут перебудуються."],
+ rome:["Рим без пасток · 17.11.2026","Один день пішки: Ватикан, Навона, Пантеон, Треві, Іспанські сходи, захід сонця о 16:48 і Колізей у вогнях. Оберіть сценарії, і таймлайн, карта та маршрут перебудуються."]
+};
 function show(v){
+  const city=v.startsWith("r-")?"rome":"lx";
+  document.body.classList.toggle("rome",city==="rome");
+  document.querySelectorAll("#city button").forEach(b=>b.classList.toggle("on",b.dataset.c===city));
+  document.getElementById("tabs").hidden=city!=="lx";
+  document.getElementById("rtabs").hidden=city!=="rome";
+  document.getElementById("hh1").textContent=HEAD[city][0];
+  document.getElementById("hsub").textContent=HEAD[city][1];
   document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
   document.querySelectorAll("section.view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
   if(location.hash!=="#"+v) history.replaceState(null,"","#"+v);
@@ -772,8 +1006,653 @@ function show(v){
 document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.v)));
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(document.getElementById("v-"+h))show(h)});
 
-renderDay("d1"); renderDay("d2"); renderAll(); renderPB(); renderQuick();
-{const h=location.hash.slice(1); if(h&&document.getElementById("v-"+h)) show(h);}
+document.querySelectorAll("#city button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.c==="rome"?"r-day":"d1")));
+renderDay("d1"); renderDay("d2"); renderAll(); renderPB(); renderQuick(); renderMenu();
+</script>
+<script>
+/* ================= ROME ================= */
+(function(){
+const S={
+ vmus:["The Better Vacation · Музеї Ватикану: квитки 2026, дрес-код","https://thebettervacation.com/it/rome/vatican-museum-tickets/"],
+ spb:["The Better Vacation · Собор Св. Петра: години, купол, черги","https://thebettervacation.com/it/Roma/basilica-di-san-pietro-a-roma/"],
+ spbNews:["Avvenire · 400 років собору: події листопада 2026","https://www.avvenire.it/chiesa/la-terrazza-aperta-lo-smart-pass-lapp-per-le-messe-tutte-le-novita-della-basilica-di-san-pietro_104662"],
+ panMC:["Ministero della Cultura · Пантеон: години, ціни","https://cultura.gov.it/luogo/pantheon"],
+ pan7:["Finestre sull'Arte · Пантеон €7 з 1 липня 2026","https://www.finestresullarte.info/attualita/da-luglio-2026-biglietto-d-accesso-al-pantheon-costera-7-euro"],
+ trevi:["Turismo Roma · Треві: новий порядок доступу","https://turismoroma.it/it/notizie/fontana-di-trevi-nuovo-sistema-di-accesso-uno-dei-simboli-di-roma"],
+ trevi2:["Open · Треві за €2: як працює, каса на Via della Stamperia","https://www.open.online/2026/01/28/fontana-di-trevi-pagamento-due-euro-come-funziona-orari-accesso-sito/"],
+ colos:["colosseo.it · години й квитки (зима 2026/27)","https://colosseo.it/visita/orari-e-biglietti/"],
+ colos2:["rome.info · Колізей: інша версія зимових годин","https://www.rome.info/vatican/opening-hours/"],
+ colView:["Romewise · найкращі безкоштовні види на Колізей","https://romewise.com/colosseum/finding-the-best-view-of-the-colosseum/"],
+ fine:["Money.it · сидіти на Іспанських сходах: штраф до €400","https://www.money.it/Roma-vietato-sedersi-scalinata-trinita-dei-monti"],
+ pincio:["Nomado · Terrazza del Pincio: як дійти, захід","https://www.nomadotravel.app/it/attractions/pincio-terrace"],
+ pincioTR:["Turismo Roma · Terrazza e Passeggiata del Pincio","https://www.turismoroma.it/it/luoghi/terrazza-e-passeggiata-del-pincio"],
+ getting:["The Better Vacation · транспорт Рима 2026: BIT, tap&go","https://thebettervacation.com/it/rome/getting-around-rome/"],
+ paper27:["Wanted in Rome · паперові квитки скасують у 2027","https://www.wantedinrome.com/news/rome-to-scrap-paper-bus-tickets-in-2027.html"],
+ scams:["tabiji · шахрайство в Римі 2026","https://tabiji.pages.dev/scams/rome"],
+ ftrVat:["The Roman Food Tour · де їдять місцеві біля Ватикану","https://foodtourrome.com/where-do-locals-eat-near-the-vatican/"],
+ pizzTO:["Time Out · Bonci Pizzarium","https://www.timeout.com/rome/restaurants/bonci-pizzarium"],
+ gr:["Gambero Rosso · найкращі супплі Рима","https://www.gamberorossointernational.com/news/the-best-suppli-in-rome-to-eat-while-walking/"],
+ supTR:["Turismo Roma · Supplizio","https://www.turismoroma.it/en/node/130711"],
+ supDis:["Dissapore · супплі за €3 і рейтинг після Supplizio","https://www.dissapore.com/grande-notizia/suppli-roma-migliori/"],
+ gelato:["Romeing · найкращі джелатерії Рима","https://www.romeing.it/rome-best-of-gelateria-guide/"],
+ coffee:["Italy Planner · Sant'Eustachio проти Tazza d'Oro, кава стоячи","https://italyplanner.com/best-coffee-shops-rome.html"],
+ rwPan:["Romewise · де їсти біля Пантеону (і куди не варто)","https://romewise.com/pantheon/eat-at-our-favorite-restaurants-near-the-pantheon-in-rome/"],
+ mli:["Mama Loves Italy · де їсти в Римі, 2026","https://mamalovesitaly.com/where-to-eat-in-rome/"],
+ mlrCol:["Mama Loves Rome · ресторани біля Колізею, 2026","https://mamalovesrome.com/restaurants-near-colosseum"],
+ monti:["Romeing · де їсти в Монті (дні роботи)","https://www.romeing.it/it/migliori-ristoranti-del-rione-monti-roma/"],
+ luzzi:["Time Out · Luzzi","https://www.timeout.com/rome/restaurants/luzzi"],
+ scal:["Turismo Roma · Ai Tre Scalini","https://turismoroma.it/it/accoglienza/ai-tre-scalini"],
+ rwCol:["Romewise · де їсти біля Колізею (і де пастки)","https://romewise.com/colosseum/our-complete-guide-to-where-to-eat-near-the-colosseum/"],
+ revLuzzi:["Revealed Rome · Luzzi: «гарний варіант серед поганих»","https://revealedrome.com/tag/luzzi/"],
+ revTav:["Revealed Rome · занепад Taverna dei Fori Imperiali","https://revealedrome.com/2011/03/the-demise-of-a-once-good-restaurant-rome-tripadvisor/"],
+ carbRM:["Romeing · La Carbonara: остерія з 1906 року","https://www.romeing.it/la_carbonara_restaurant/"],
+ carbMP:["Mes Prestiges · La Carbonara: години, телефон","https://mesprestiges.com/en/roma/places/la-carbonara"],
+ minchilli:["Elizabeth Minchilli · де їсти в Монті","https://www.elizabethminchilli.com/?p=11078"],
+ fodScal:["Fodor's · Ai Tre Scalini: популярне в місцевих","https://www.fodors.com/world/europe/italy/rome/things-to-do/nightlife/reviews/ai-tre-scalini-454569"],
+ corsiEP:["En Primeur · Enoteca Corsi: хто там обідає, години","https://www.enprimeurclub.com/restaurants/enoteca-corsi-rome-restaurant"],
+ ginoAIR:["An American in Rome · Da Gino al Parlamento","https://anamericaninrome.com/?p=11782"],
+ parla:["Katie Parla · кавові бари Рима","https://katieparla.com/a-guide-to-romes-best-coffee-shops/"],
+ nrt:["The New Roman Times · суб'єктивний список джелато (2024)","https://newromantimes.substack.com/p/a-very-subjective-list-of-the-best-f2f"],
+ pizzTR:["Turismo Roma · Pizzarium (вихідний — понеділок)","https://www.turismoroma.it/it/accoglienza/pizzarium"],
+ tiraRM:["Romeing · гід по тірамісу Рима","https://www.romeing.it/best-tiramisu-in-rome/"],
+ tiraDV:["Devour Tours · найкраще тірамісу в Римі","https://devourtours.com/blog/best-tiramisu-rome"],
+ tiraSDG:["Scatti di Gusto · 10 найкращих тірамісу Італії (2019)","https://www.scattidigusto.it/tiramisu-migliori"],
+ tiraEHT:["Everybody Hates a Tourist · тірамісу в Римі (2025)","https://everybodyhatesatourist.net/best-tiramisu-in-rome-italy/"],
+ cofDis:["Dissapore · Sciascia Caffè 1919: 8/10 (2023, оновл. 2025)","https://www.dissapore.com/locali/sciascia-caffe-1919-a-roma-recensione/"],
+ cofAIR:["An American in Rome · найкраща кава в Римі","https://anamericaninrome.com/?p=14500"],
+ cofFoglio:["Il Foglio · де пити каву в Римі (за Gambero Rosso 2025)","https://www.ilfoglio.it/roma-capoccia/2024/10/10/news/dove-prendere-un-caffe-a-roma--108187"],
+ cofZero:["Zero · Roscioli Caffè: адреса й години","https://zero.eu/it/luoghi/36380-roscioli-caffe,roma/"],
+ cofLuna:["Caffe Atlas · Luna by Faro: адреса й години","https://www.caffeatlas.com/luna-caffe-specialty-rome"],
+ greco:["Wanted in Rome · Caffè Greco зачинили (жовт. 2025)","https://www.wantedinrome.com/news/romes-caffe-greco-closes-its-doors-after-long-eviction-battle.html"],
+ wcRW:["Romewise · повний гід по туалетах Рима","https://romewise.com/essential-things/my-complete-and-essential-guide-to-bathrooms-in-rome/"],
+ wcTIR:["Tourist in Rom · громадські туалети: адреси, ціни, години","https://www.tourist-in-rom.com/en/public-toilets-in-rome/"],
+ grPiatti:["Gambero Rosso · римські страви: історія","https://www.gamberorosso.it/notizie/storie/piatti-tipici-romani-quali-sono-la-loro-storia-dove-mangiarli/"]
+};
+const L=(k,t)=>`<a href="${S[k][1]}" target="_blank" rel="noopener">${t||'джерело'}</a>`;
+const gmr=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+
+/* ---------- PLACES ---------- */
+const P={
+ r_ott:{n:"Метро Ottaviano (лінія A)",a:"Prati · 10 хв до Ватикану",ll:[41.9093,12.4580],cat:"logistics",q:"Metro Ottaviano Roma",
+  why:`Найближча до Ватикану станція. Квиток BIT €1.50: 100 хв автобусів і трамваїв плюс один вхід у метро. Доба €8.50. Або tap&go безконтактною карткою чи телефоном: оплата за поїздку, денна стеля €8.50. ${L('getting','The Better Vacation')}`,
+  more:"На турнікет прикладайте ту саму картку весь день, і в кожного своя: тоді спрацює денна стеля. Паперові квитки місто планує прибрати в 2027 році. "+L('paper27','Wanted in Rome'),
+  order:"Tap&go карткою на турнікеті",price:"€1.50 за поїздку, максимум €8.50 на добу",hours:"Метро ~5:30–23:30",book:"Ні",conf:"ok"},
+ r_mus:{n:"Musei Vaticani + Сікстинська капела",a:"Вхід з Viale Vaticano · 10 хв від Ottaviano",ll:[41.9065,12.4536],cat:"sight",q:"Musei Vaticani ingresso Viale Vaticano",
+  why:`Онлайн €25 (€20 вхід + €5 бронювання), слоти кожні 30 хв, квиток іменний, як у паспорті. Без броні черга вздовж стін буває до 3 год. ${L('vmus','The Better Vacation')}`,
+  more:`Плечі й коліна закриті, інакше не пустять без повернення грошей. Біля стін стоять «гіди» з ламінованими бейджами й продають «skip-the-line» за готівку: це порожні PDF. Купуйте лише на museivaticani.va. ${L('scams','tabiji')}`,
+  order:"Галерея мап → Станці Рафаеля → Сікстинська (там без фото й тихо)",price:"€25 онлайн",hours:"Пн–сб, у вівторок відкрито; точні години й останній вхід перевірте на museivaticani.va (у джерелі суперечливі)",book:"Так, онлайн; на сьогодні — якщо лишилися слоти",conf:"chk"},
+ r_sq:{n:"Площа Святого Петра",a:"Ватикан",ll:[41.9022,12.4568],cat:"sight",q:"Piazza San Pietro",
+  why:`Колонада Берніні «обіймає» площу. Сюди ж — черга на рамку перед собором. Вівторок — один з найкращих днів: у середу зранку тут папська аудієнція. ${L('spb','The Better Vacation')}`,
+  more:"Станьте на одну з двох кругляшок-фокусів між обеліском і фонтанами: чотири ряди колон зливаються в один.",
+  order:"Рамка під колонадою праворуч",price:"Безкоштовно",hours:"Відкрита площа",book:"Ні",conf:"ok"},
+ r_bas:{n:"Собор Святого Петра",a:"Ватикан",ll:[41.9022,12.4534],cat:"sight",q:"Basilica di San Pietro",
+  why:`Вхід безкоштовний. Відчиняється о 7:00; пік черги починається після 9:00. Купол €10–22 залежно від ліфта; останній підйом ~за 45 хв до закриття. ${L('spb','The Better Vacation')}`,
+  more:`Цього року собору 400 років від освячення: 17.11 тут цикл «Narrationes Petri», а 18.11 урочиста меса з Папою Левом XIV. Можливі обмеження доступу, тож перед виходом гляньте basilicasanpietro.va. ${L('spbNews','Avvenire')}`,
+  order:"Pietà Мікеланджело (одразу праворуч), балдахін Берніні; купол — за бажанням",price:"Безкоштовно; купол €10–22",hours:"З 7:00; закриття взимку 17:00–18:30 (джерела розходяться)",book:"Ні",conf:"chk"},
+ r_pizz:{v:["mid","Популярне в туристів, але якість справжня",`Піца Габріеле Бончі (той самий, що в «Chef's Table»), тож черга тут переважно з туристів. Місцеві частіше йдуть у його Panificio Bonci на Via Trionfale 36: тісто те саме, людей менше. ${L('ftrVat','The Roman Food Tour')}. Вихідний — понеділок, у вівторок працює. ${L('pizzTR','Turismo Roma')}`],n:"Pizzarium Bonci",a:"Via della Meloria 43 · метро Cipro, ~8 хв від виходу з Музеїв",ll:[41.9066,12.4466],cat:"food",q:"Pizzarium Bonci Via della Meloria 43 Roma",
+  why:`Піца al taglio Габріеле Бончі: тісто бродить 72 години, начинки за сезоном. В обід черга, тож місцеві часто йдуть у його ж Panificio Bonci на Via Trionfale 36. ${L('ftrVat','The Roman Food Tour')}`,
+  more:`Місць майже немає, їдять на тротуарі. ${L('pizzTO','Time Out')}`,
+  order:"Показати шматок і сказати «un pezzo così»; 2–3 різні на двох + супплі",price:"На вагу, ~€15–20 на двох",hours:"Щодня ~11:00–22:00 (дані Time Out 2018, перевірити)",book:"Ні",conf:"chk"},
+ r_cast:{n:"Castel Sant'Angelo й міст Ангелів",a:"Lungotevere · 12 хв від собору",ll:[41.9031,12.4663],cat:"view",q:"Ponte Sant'Angelo Roma",
+  why:"Мавзолей Адріана, що став папською фортецею. Міст прикрашають десять ангелів школи Берніні; найкращий кадр замку — з середини мосту.",
+  more:"Усередину не йдемо: це ще година. Просто перейти міст — і ви в історичному центрі.",
+  order:"Фото з мосту, 10 хв",price:"Безкоштовно (зовні)",hours:"Цілодобово",book:"Ні",conf:"ok"},
+ r_suppl:{v:["ok","Автентично",`Заклад Арканджело Дандіні, шефа римської траторії L'Arcangelo. Dissapore поставив його на 2-ге місце серед супплі навинос і назвав форму «досконалою». Мінус: подача «радикал-шик», тож ціна вища, ніж у районних фриггіторіях. ${L('supDis','Dissapore')}`],n:"Supplizio",a:"Via dei Banchi Vecchi 143 · 7 хв від мосту",ll:[41.8988,12.4677],cat:"food",q:"Supplizio Via dei Banchi Vecchi 143 Roma",
+  why:`Gambero Rosso: товста, груба, дуже хрустка скоринка; є версії з арабьятою та з маслом і анчоусами. ${L('gr','Gambero Rosso')}. Ціна — близько €3 за супплі. ${L('supDis','Dissapore')}`,
+  more:`Щодня кілька видів: класичний (м'ясо, томат, моцарела), cacio e pepe, аматрічана, карбонара. Ще є mozzarella in carrozza, котлетки з анчоусів і на десерт crema fritta з пекоріно й корицею. ${L('supTR','Turismo Roma')}`,
+  order:"Класичний + cacio e pepe + crema fritta",price:"≈ €3 за штуку",hours:"Працює щодня, крім неділь улітку; години перевірити",book:"Ні, з собою",conf:"chk"},
+ r_teatro:{v:["ok","Автентично",`Улюблена джелатерія римської авторки The New Roman Times «уже багато років»: лише натуральні свіжі інгредієнти. Її смаки — малина з шавлією й білий шоколад з базиліком. ${L('nrt','The New Roman Times')}`],n:"Gelateria del Teatro",a:"Via di San Simone 70 (з Via dei Coronari)",ll:[41.8999,12.4712],cat:"sweet",q:"Gelateria del Teatro Via di San Simone 70 Roma",
+  why:`Сицилійський мигдаль, лимони з Амальфі, незвичні поєднання. ${L('gelato','Romeing')}`,
+  more:"На Via dei Banchi Vecchi 148, навпроти Supplizio, ще є Pellegrino Monteforte: там морозиво кладуть у бріош.",
+  order:"Два смаки в стаканчику (coppetta)",price:"≈ €3–5",hours:"Перевірити",book:"Ні",conf:"chk"},
+ r_nav:{n:"Piazza Navona",a:"Centro storico",ll:[41.8992,12.4731],cat:"sight",q:"Piazza Navona Roma",
+  why:"Площа на місці стадіону Доміціана, тому вона видовжена. У центрі — фонтан Чотирьох рік Берніні.",
+  more:`Столики на площах біля пам'яток — це плата за вид, не за їжу. ${L('rwPan','Romewise')}. Тут же продають троянди й браслети: нічого не беріть у руки. ${L('scams','tabiji')}`,
+  order:"Пройти площу від краю до краю, 10–15 хв",price:"Безкоштовно",hours:"Цілодобово",book:"Ні",conf:"ok"},
+ r_eust:{v:["ok","Історичний і людний, але не пастка",`Katie Parla радить Sant'Eustachio й попереджає, що там людно; зранку тихіше. An American in Rome вважає його «трохи претензійним». А от сусідню Tazza d'Oro вона ж називає туристичною: туди «щодня, цілий день» ідуть відвідувачі з усього світу. ${L('parla','Katie Parla')}`],n:"Sant'Eustachio Il Caffè",a:"Piazza di Sant'Eustachio 82 · 2 хв до Пантеону",ll:[41.8983,12.4754],cat:"food",q:"Sant'Eustachio Il Caffè Roma",
+  why:`Обсмажують свою каву. Фірмовий gran caffè: еспресо збивають із цукром, і зверху лягає густа крема. ${L('coffee','Italy Planner')}`,
+  more:"Альтернатива за 150 м — Tazza d'Oro (Via degli Orfani 84): кава без цукру, міцніша. Римляни сперечаються, яка краща; можна спробувати обидві.",
+  order:"Спершу каса, потім чек на бар: «un gran caffè» стоячи",price:"≈ €1.30 стоячи; за столиком €2–5",hours:"Перевірити",book:"Ні",conf:"ok"},
+ r_pan:{n:"Пантеон",a:"Piazza della Rotonda",ll:[41.8986,12.4769],cat:"sight",q:"Pantheon Roma",
+  why:`Щодня 9:00–19:00, останній вхід 18:30, каса до 18:00. Квиток €7 з 1.07.2026 (для 18–25 років €2), онлайн на museiitaliani або в автоматах на місці. Skip-the-line немає. ${L('panMC','MiC')} · ${L('pan7','Finestre sull\'Arte')}`,
+  more:"Бетонний купол діаметром 43 м, у центрі отвір-окулюс 9 м. Під час дощу вода падає просто всередину й стікає в отвори в підлозі. Тут похований Рафаель.",
+  order:"Стати під окулюс, знайти гробницю Рафаеля",price:"€7",hours:"9:00–19:00",book:"Не обов'язково",conf:"ok"},
+ r_corsi:{v:["ok","Автентично",`Їдальня для працівників урядових, юридичних і університетських офісів довкола. Туристи додають гамору, але «не визначають залу». Вино за цінами, ближчими до магазинних. Пн–пт обід 12:00–15:30 і вечеря 19:30–22:30. ${L('corsiEP','En Primeur')}`],n:"Enoteca Corsi",a:"Via del Gesù 87/88 · 5 хв від Пантеону",ll:[41.8967,12.4796],cat:"food",q:"Enoteca Corsi Via del Gesù 87 Roma",
+  why:`Недорого; невелике меню, яке змінюється щодня. Буває гучно, але швидко і якісно. ${L('rwPan','Romewise')} · ${L('mli','Mama Loves Italy')}`,
+  more:"Обідня їдальня для офісів центру: меню дня написане від руки, домашнє вино.",
+  order:"Що в меню дня + вино della casa",price:"€",hours:"Обід пн–пт (у вівторок працює)",book:"Ні",conf:"chk"},
+ r_gino:{v:["ok","Автентично, хоч і з кічем",`Інтер'єр із намальованою виноградною лозою, офіціанти жартують. Їдять місцеві, депутати й туристи; меню є англійською. Cacio e pepe зі свіжих тоннареллі «бездоганна», перші страви до €10 (огляд 2018). Увечері дві зміни, о 20:00 і 22:00. ${L('ginoAIR','An American in Rome')}`],n:"Dal Cavalier Gino",a:"Vicolo Rosini 4 · біля Монтечіторіо",ll:[41.9017,12.4775],cat:"food",q:"Da Gino al Parlamento Vicolo Rosini 4 Roma",
+  why:`Сюди ходять місцеві бізнесмени й політики. Gricia, cacio e pepe, аматрічана; бронь обов'язкова. Кави не подають. ${L('rwPan','Romewise')}`,
+  more:"Старий зал із розписами на стінах; рядом депутати з Палаццо Монтечіторіо.",
+  order:"Rigatoni alla gricia або tonnarelli cacio e pepe",price:"€€",hours:"Пн–сб обід і вечеря (у вівторок працює)",book:"Так, обов'язково (зателефонувати)",conf:"ok"},
+ r_sordi:{n:"🚻 Galleria Alberto Sordi",a:"Via del Corso · Piazza Colonna, дорогою від Пантеону до Треві",ll:[41.9007,12.4800],cat:"logistics",q:"Galleria Alberto Sordi Roma",
+  why:`Безкоштовний туалет у торговій галереї просто на маршруті; біля Треві громадських туалетів немає. У жіночому лише дві кабінки, тож буває черга. ${L('wcRW','Romewise')}`,
+  more:"Гарна галерея початку XX століття зі скляним дахом; заодно можна перечекати дощ.",
+  order:"Туалет",price:"Безкоштовно",hours:"Години галереї",book:"Ні",conf:"ok"},
+ r_roscioli:{v:["ok","Найкраще класичне в центрі",`Scatti di Gusto включив тірамісу Roscioli в десятку найкращих в Італії: ремісничі савоярді й органічні яйця. ${L('tiraSDG','Scatti di Gusto')}. Мінус: це ресторан-салумерія, столик треба бронювати, а рейтинг 2019 року.`],n:"🍰 Roscioli Salumeria con Cucina",a:"Via dei Giubbonari 21 · біля Campo de' Fiori, ~8 хв від Supplizio",ll:[41.8942,12.4733],cat:"sweet",q:"Roscioli Salumeria con Cucina Via dei Giubbonari 21 Roma",
+  why:`Класичне тірамісу без фокусів, яке критики ставлять поруч із найкращими в країні. ${L('tiraSDG','Scatti di Gusto')}`,
+  more:"Можна поєднати з обідом: Roscioli відомий і пастою (карбонара, аматрічана), але за столик треба бронювати.",
+  order:"Tiramisù classico",price:"€€",hours:"Перевірити на сайті; столик лише за бронюванням",book:"Так",conf:"chk"},
+ r_pompi:{v:["mid","Знамените, але й туристичне",`Devour Tours називає Pompi «королем тірамісу»: багато римлян замовляють його як торт на день народження. ${L('tiraDV','Devour')}. Водночас це мережа з кількох крамниць у найтуристичніших точках, тож черги переважно туристичні.`],n:"🍰 Pompi (біля Треві)",a:"Via di Santa Maria in Via 17 · 2 хв від Треві; ще одна — Via della Croce 88 біля Іспанських сходів",ll:[41.9013,12.4826],cat:"sweet",q:"Pompi Tiramisù Via di Santa Maria in Via 17 Roma",
+  why:`Найзручніше тірамісу просто на маршруті, з собою в коробочці. Класичне, полуничне, фундукове, фісташкове; є без глютену й лактози. ${L('tiraRM','Romeing')} · ${L('tiraEHT','Everybody Hates a Tourist')}`,
+  more:"Їсти можна вже на Іспанській площі (але не сидячи на сходах).",
+  order:"Classico (савоярді, маскарпоне, какао) з собою",price:"≈ €5",hours:"Перевірити",book:"Ні",conf:"chk"},
+ r_al42:{v:["ok","Автентично",`Everybody Hates a Tourist (2025) назвав тірамісу тут «чудовим, збалансованим і свіжим» і одним із двох найкращих за свій тур. ${L('tiraEHT','EHAT')}. Сам Pasta Chef в Монті радить і Elizabeth Minchilli. ${L('minchilli','Minchilli')}`],n:"🍰 al42 by Pasta Chef",a:"Via Baccina 42 · Монті, 3 хв від Broccoletti",ll:[41.8946,12.4895],cat:"sweet",q:"al42 by Pasta Chef Via Baccina 42 Roma",
+  why:"Тірамісу на десерт після вечері в Монті, замість або разом із гелато Fatamorgana.",
+  more:"Маленький заклад зі свіжою пастою; десерт можна взяти з собою.",
+  order:"Tiramisù",price:"€",hours:"Перевірити (за Minchilli, обід і вечеря, неділя — вихідний)",book:"Ні",conf:"chk"},
+ r_sutira:{v:["mid","Авторське, не класика",`Від кондитерки Лоретти Фанеллі: хрустка шоколадна оболонка над савоярді. ${L('tiraRM','Romeing')}. Це сучасна версія для цікавості, а не «як у бабусі».`],n:"🍰 Sutiramisù @ Casa e Bottega",a:"Via dei Coronari 183 · на маршруті між Supplizio й Навоною",ll:[41.9002,12.4707],cat:"sweet",q:"Sutiramisu Via dei Coronari 183 Roma",
+  why:`Лежить просто на шляху, по тій самій Via dei Coronari, що й Gelateria del Teatro. ${L('tiraRM','Romeing')}`,
+  more:"Поруч, на Via del Governo Vecchio 88 (3 хв від Навони), Two Sizes: маленька порція €2.50, велика €3.50, 5 смаків + смак місяця, лише з собою, без місць; вівторок 11:00–22:00 (дані 03.2025, понеділок вихідний). Черга від TikTok, але рухається швидко. Вердикт: варто як дешева швидка зупинка, якщо черга до 10 хв — беріть маленьке класичне. Визнання критиків (як у Roscioli) немає, хвалять переважно блоги й тури. "+L('tiraDV','Devour')+" · <a href='https://secretroma.com/en/two-sizes-en/' target='_blank' rel='noopener'>Secret Roma</a>",
+  order:"Класичний смак",price:"≈ €5–7",hours:"Перевірити",book:"Ні",conf:"chk"},
+ r_falcone:{v:["ok","Автентично",`«Ідеальне класичне тірамісу», одне з двох найкращих за тур автора. Це звичайна римська траторія в Праті. ${L('tiraEHT','Everybody Hates a Tourist')}`],n:"🍰 Antica Falcone",a:"Via Trionfale 60 · Праті, 10 хв від Музеїв Ватикану",ll:[41.9087,12.4520],cat:"sweet",q:"Antica Falcone Via Trionfale 60 Roma",
+  why:"Якщо обідаєте біля Ватикану, а не в Supplizio, — тут і обід, і десерт.",
+  more:"Поруч Panificio Bonci (Via Trionfale 36).",
+  order:"Tiramisù classico",price:"€",hours:"Перевірити",book:"Бажано",conf:"chk"},
+ r_sciascia:{v:["ok","Автентично",`Dissapore: 8/10, еспресо «помітне й не пересмажене», стійка завжди повна, але обслуговують швидко й привітно. ${L('cofDis','Dissapore')}. Katie Parla зараховує його до історичних барів 1930–40-х. ${L('parla','Katie Parla')}`],n:"☕ Sciascia Caffè 1919",a:"Via Fabio Massimo 80/a · Праті, ~5 хв від метро Ottaviano",ll:[41.9078,12.4626],cat:"coffee",q:"Sciascia Caffè 1919 Via Fabio Massimo 80 Roma",
+  why:"Найкращий старт дня перед Ватиканом: старий бар Праті, куди ходять місцеві.",
+  more:`Фірмове: чашку зсередини вкривають розтопленим темним шоколадом. За Dissapore, ці «солодкі» кави застарілі, тож для чистого смаку беріть звичайне еспресо. ${L('cofDis','Dissapore')}`,
+  order:"Caffè espresso стоячи або Caffè 1919 з шоколадом",price:"≈ €1.20–2 стоячи",hours:"Зранку; точні години перевірити",book:"Ні",conf:"chk"},
+ r_pergamino:{v:["ok","Specialty",`Маленький specialty-бар з ретельно відібраними зернами й нітро-кавою. ${L('cofAIR','An American in Rome')}`],n:"☕ Pergamino Caffè",a:"Piazza del Risorgimento · біля стін Ватикану",ll:[41.9068,12.4582],cat:"coffee",q:"Pergamino Caffè Piazza del Risorgimento Roma",
+  why:"Специалті-кава за 3 хв від входу в Музеї; на тій самій площі відкрився Starbucks, але йдіть сюди.",
+  more:"",order:"Еспресо або flat white",price:"≈ €1.50–4",hours:"Перевірити",book:"Ні",conf:"chk"},
+ r_barnum:{v:["ok","Specialty",`Кава Le Piantagioni del Caffè; бар є в путівнику Gambero Rosso 2025. ${L('cofAIR','An American in Rome')} · ${L('cofFoglio','Il Foglio')}. Katie Parla: черга на столики — «чесний знак якості». ${L('parla','Katie Parla')}`],n:"☕ Barnum Café",a:"Via del Pellegrino 87 · 3 хв від Supplizio",ll:[41.8962,12.4697],cat:"coffee",q:"Barnum Cafe Via del Pellegrino 87 Roma",
+  why:"Specialty-кава просто біля Supplizio: еспресо біля стійки після обіду.",
+  more:"За столиками черга, біля стійки швидше.",order:"Еспресо біля стійки + круасан",price:"≈ €1.50–4",hours:"Перевірити",book:"Ні",conf:"chk"},
+ r_rcaffe:{v:["ok","Автентично",`Бар родини Roscioli на місці старого районного кафе Bernasconi: і еспресо, і фільтр V60. ${L('cofZero','Zero')}. Katie Parla радить еспресо, pour-over або сифон і мариттоццо. ${L('parla','Katie Parla')}`],n:"☕ Roscioli Caffè",a:"Piazza Benedetto Cairoli 16 · 7 хв від Пантеону",ll:[41.8941,12.4752],cat:"coffee",q:"Roscioli Caffè Piazza Benedetto Cairoli 16 Roma",
+  why:"Найкраще поєднання кави й випічки в центрі: еспресо + солодкий або солоний мариттоццо.",
+  more:"Дуже маленький, тож стійка завжди людна. "+L('cofAIR','An American in Rome'),
+  order:"Espresso або V60 + maritozzo",price:"≈ €1.50–5",hours:"Пн–сб 7:00–23:00, нд 8:00–18:00",book:"Ні",conf:"ok"},
+ r_camerino:{v:["ok","Автентично",`Бар середини століття на розі Largo Argentina. Katie Parla радить gran caffè або affogato. ${L('parla','Katie Parla')}`],n:"☕ Caffè Camerino",a:"Largo di Torre Argentina · 5 хв від Пантеону",ll:[41.8961,12.4772],cat:"coffee",q:"Caffè Camerino Largo Argentina Roma",
+  why:"Спокійна заміна переповненим Sant'Eustachio й Tazza d'Oro, у тих самих 5 хв від Пантеону.",
+  more:"",order:"Gran caffè або affogato",price:"≈ €1.20–4",hours:"Перевірити",book:"Ні",conf:"chk"},
+ r_luna:{v:["ok","Specialty, найвищий рівень",`Молодший брат Faro, який отримав найвищу оцінку Gambero Rosso 2025 — «3 чашки, 3 зерна». ${L('cofFoglio','Il Foglio')} · ${L('parla','Katie Parla')}`],n:"☕ Luna by Faro",a:"Via delle Quattro Fontane 175 · угору від Piazza Barberini, ~12 хв від Треві",ll:[41.9010,12.4905],cat:"coffee",q:"Luna Caffè Specialty Via delle Quattro Fontane 175 Roma",
+  why:"Найкраща specialty-кава недалеко від маршруту — невеликий гак між Треві й Іспанськими сходами.",
+  more:"Зачиняється рано: у будні о 16:00. Сам Faro — на Via Piave, поза маршрутом. "+L('cofLuna','Caffe Atlas'),
+  order:"Еспресо з зерна дня або капучино",price:"≈ €2–5",hours:"Пн–пт 8:00–16:00, сб–нд 8:00–17:00",book:"Ні",conf:"chk"},
+ r_trevi:{n:"Фонтан Треві",a:"Piazza di Trevi",ll:[41.9009,12.4833],cat:"sight",q:"Fontana di Trevi",
+  why:`З 2.02.2026 до самої чаші пускають за €2 (щодня 9:00–22:00). Квиток онлайн або на вході, але на місці лише карткою. ${L('trevi','Turismo Roma')}. Каса на Via della Stamperia; дві черги — з квитком і без. Монети з 2024 року кидають у маленький басейн на сходах. ${L('trevi2','Open')}`,
+  more:"Квиток дає доступ лише до внутрішнього периметра біля чаші. Сама площа, судячи з опису, лишається вільною — подивитися здалеку можна безкоштовно. Тут найщільніший натовп дня, а отже кишенькові злодії. "+L('scams','tabiji'),
+  order:"Подивитися з площі; €2, якщо хочеться до води й кинути монету",price:"€2 (опційно)",hours:"Платний доступ 9:00–22:00",book:"Ні",conf:"ok"},
+ r_spagna:{n:"Іспанські сходи · Trinità dei Monti",a:"Piazza di Spagna",ll:[41.9058,12.4826],cat:"sight",q:"Scalinata di Trinità dei Monti",
+  why:`135 сходинок до церкви Trinità dei Monti. З 2019 року сидіти на сходах заборонено: штраф до €400. ${L('fine','Money.it')}`,
+  more:`Головне місце «подарунків»: троянди, браслети на зап'ястя. Потім вимагають €5–10. Не беріть нічого в руки. ${L('scams','tabiji')}`,
+  order:"Піднятися нагору, вид з тераси біля церкви",price:"Безкоштовно",hours:"Цілодобово",book:"Ні",conf:"ok"},
+ r_pincio:{n:"Terrazza del Pincio",a:"Над Piazza del Popolo · 12–20 хв від верху сходів",ll:[41.9113,12.4794],cat:"view",q:"Terrazza del Pincio Roma",
+  why:`Безкоштовно й завжди відкрито. Звідси захід за куполом Святого Петра; приходьте за 30–40 хв. Від Trinità dei Monti рівною тінистою Viale della Trinità dei Monti повз Villa Medici. ${L('pincio','Nomado')} · ${L('pincioTR','Turismo Roma')}`,
+  more:"Внизу Piazza del Popolo з обеліском, на заході купол Св. Петра, на півдні купол Пантеону й Вітторіано. Позаду тераси — парк Villa Borghese.",
+  order:"Місце біля балюстради; захід 16:48, сутінки до 17:18",price:"Безкоштовно",hours:"Цілодобово",book:"Ні",conf:"ok"},
+ r_spm:{n:"Метро Spagna (A)",a:"Vicolo del Bottino, біля сходів",ll:[41.9063,12.4833],cat:"logistics",q:"Metro Spagna Roma",
+  why:"До Колізею: A до Termini → B до Colosseo, ~20 хв. Біля Termini у вагонах найбільше кишенькових злодіїв.",more:"",order:"—",price:"€1.50",hours:"~5:30–23:30",book:"Ні",conf:"ok"},
+ r_flam:{n:"Метро Flaminio (A)",a:"Piazza del Popolo",ll:[41.9115,12.4762],cat:"logistics",q:"Metro Flaminio Roma",
+  why:"Звідси після заходу на Pincio: A → Termini → B → Colosseo, ~25 хв.",more:"",order:"—",price:"€1.50",hours:"~5:30–23:30",book:"Ні",conf:"ok"},
+ r_fori:{n:"Via dei Fori Imperiali",a:"Piazza Venezia → Колізей",ll:[41.8935,12.4870],cat:"view",q:"Via dei Fori Imperiali Roma",
+  why:"Пішохідна вулиця над руїнами імператорських форумів. У сутінках форуми підсвічені, а Колізей поступово виростає попереду.",
+  more:"Вітторіано на Piazza Venezia безкоштовний, але ліфт на дах коштує €10. "+L('colView','Romewise'),
+  order:"Пройти пішки, ~12 хв",price:"Безкоштовно",hours:"Цілодобово",book:"Ні",conf:"ok"},
+ r_agnesi:{n:"Колізей · оглядові точки",a:"Via Nicola Salvi / Via Vittorino da Feltre / Colle Oppio",ll:[41.8916,12.4908],cat:"view",q:"Via Nicola Salvi Roma Colosseo",
+  why:`Найповніший вид — з північного боку над метро Colosseo. Via Vittorino da Feltre найкраща в сутінках, коли вмикають підсвітку; з парку Colle Oppio вид майже фронтальний і людей мало. ${L('colView','Romewise')}`,
+  more:`Колізей: зимовий графік з 25.10.2026 по 28.02.2027 — відкриття 8:30, закриття 16:30, останній вхід 15:30. Квиток іменний, слот обов'язковий. ${L('colos','colosseo.it')} (у rome.info інша версія, з закриттям о 15:30: ${L('colos2','rome.info')}). «Гладіатори» обіймають для фото, потім вимагають €20–50. ${L('scams','tabiji')}`,
+  order:"Обійти Колізей і піднятися на Via Nicola Salvi",price:"Безкоштовно (зовні)",hours:"Зовні цілодобово",book:"Ні",conf:"ok"},
+ r_carb:{v:["mid","Автентична кухня, але зала вже змішана",`Остерія з 1906 року, стіни в графіті відвідувачів. У 2015 Romeing писав «трохи осторонь туристичних стежок», а в 2026 вже «популярна серед туристів, бронюйте рано». Кухня римська, але сусідів за столом будуть переважно не римляни. ${L('carbRM','Romeing 2015')} · ${L('monti','Romeing 2026')}`],n:"La Carbonara (Монті)",a:"Via Panisperna 214 · 10–12 хв від Колізею",ll:[41.8975,12.4908],cat:"food",q:"La Carbonara Via Panisperna 214 Roma",
+  why:`Carciofi alla giudia, cacio e pepe, абакіо, карбонара; у четвер ньоки, у п'ятницю бакалау. Неділя — вихідний. Популярна й у туристів, тому бронюйте заздалегідь. ${L('monti','Romeing')}`,
+  more:"Не плутати з однойменним рестораном на Campo de' Fiori. Монті — район, де їдять, на відміну від вулиць прямо біля Колізею.",
+  order:"Carbonara + cacio e pepe на двох, далі абакіо",price:"€€",hours:"Пн–сб (у вівторок працює); вечеря ~з 19:00 (перевірити)",book:"Так, бажано",conf:"chk"},
+ r_scal:{v:["ok","Автентично",`Fodor's: «надзвичайно популярне місце серед місцевих»; після ~20:00 доводиться чекати. Тому ідеально на аперитив до 19:00. ${L('fodScal',"Fodor's")}`],n:"Ai Tre Scalini",a:"Via Panisperna 251 · Монті",ll:[41.8972,12.4917],cat:"food",q:"Ai Tre Scalini Via Panisperna 251 Roma",
+  why:`Історичний винний бар Монті з натуральними винами; є гарячі перші й другі, салати, закуски до аперитиву. ${L('scal','Turismo Roma')}`,
+  more:"Підходить і для аперитиву перед вечерею деінде, і як сама вечеря без брóні. Телефон: 06 48907495.",
+  order:"Келих вина + тарілка сирів і салумі або гаряча страва",price:"€€",hours:"За Turismo Roma «завжди відкрито»; перевірити",book:"Не обов'язково",conf:"chk"},
+ r_broc:{v:["ok","Автентично",`Romewise, гід, який живе в Римі: «їжа незмінно чудова», це їхнє постійне місце в Монті. Elizabeth Minchilli: «затишна траторія з чудовою їжею». ${L('rwCol','Romewise')} · ${L('minchilli','Elizabeth Minchilli')}`],n:"Broccoletti",a:"Via Urbana 104 · Монті, 10 хв від Колізею",ll:[41.8962,12.4935],cat:"food",q:"Broccoletti Via Urbana 104 Roma",
+  why:`Проста римська кухня з органічних продуктів регіону. Вихідний — понеділок, у вівторок працює на обід і вечерю. ${L('monti','Romeing')} · ${L('rwCol','Romewise')}`,
+  more:"Маленька зала на тихій Via Urbana — це вже «жилий» Монті, без видів на пам'ятки й без зазивал.",
+  order:"Паста дня + broccoletti ripassati (тушковані з часником і перцем броколетті)",price:"€€",hours:"Вт–нд, обід і вечеря (у вівторок працює); вечеря ~з 19:00 (перевірити)",book:"Бажано зателефонувати: зала маленька",conf:"chk"},
+ r_luzzi:{v:["mid","Компроміс",`Revealed Rome: «гарний варіант серед поганих» біля Колізею. Гамірно й по-італійськи, дуже дешево (паста й піца близько €6), але гурмани будуть розчаровані. Піцу беріть лише ввечері: піцайоло працює вечорами, а в обід вона недопечена. ${L('revLuzzi','Revealed Rome')}`],n:"Luzzi",a:"Via di S. Giovanni in Laterano 88 · 5 хв від Колізею",ll:[41.8889,12.4970],cat:"food",q:"Trattoria Luzzi Via di San Giovanni in Laterano 88 Roma",
+  why:`Дешево й жваво біля Колізею: €20–40 за два страви з вином. Гучно, тісно, обслуговування буває хаотичним. Працює 12:00–24:00, вихідний у середу. ${L('luzzi','Time Out')}`,
+  more:`Хвалять бичачий хвіст (coda), піцу, пармиджану, канелоні. ${L('mlrCol','Mama Loves Rome')}`,
+  order:"Coda alla vaccinara або піца + домашнє вино",price:"€",hours:"12:00–24:00, у вівторок працює",book:"Ні",conf:"ok"},
+ r_fata:{v:["ok","Автентично",`Romewise: «без сумніву одне з найкращих джелато в Римі». ${L('rwCol','Romewise')}`],n:"Fatamorgana (Монті)",a:"Piazza degli Zingari 5",ll:[41.8961,12.4929],cat:"sweet",q:"Fatamorgana Piazza degli Zingari 5 Roma",
+  why:`Креативні смаки; є варіанти без цукру й молока, ріжки без глютену. ${L('gelato','Romeing')}`,
+  more:"Маленька площа з фонтаном у серці Монті: гарне місце, щоб закінчити день.",
+  order:"Один незвичний смак + один класичний",price:"≈ €3–5",hours:"Перевірити",book:"Ні",conf:"chk"},
+ r_cav:{n:"Метро Cavour (B)",a:"Монті",ll:[41.8946,12.4935],cat:"logistics",q:"Metro Cavour Roma",
+  why:"Звідси додому. Метро до ~23:30.",more:"",order:"—",price:"€1.50",hours:"~5:30–23:30",book:"Ні",conf:"ok"}
+};
+CATCOL.sight=["#9a3b22","#d0704a"]; CATEMO.sight="🏛";
+CATCOL.sweet=["#8a4f9e","#c48bd6"]; CATEMO.sweet="🍨";
+CATCOL.coffee=["#6b4226","#a8754f"]; CATEMO.coffee="☕";
+
+/* ---------- STATE ---------- */
+const st={start:"09:30",vat:"bas",lunch:"suppl",sun:"pincio",go:"walk",dinner:"broc"};
+try{const s=JSON.parse(localStorage.getItem("rm-st2")||"null"); if(s) Object.assign(st,s);}catch(e){}
+const save=()=>{try{localStorage.setItem("rm-st2",JSON.stringify(st))}catch(e){}};
+const OPTS=[
+ ["start","Старт біля Ватикану",[["08:30","8:30"],["09:30","9:30"],["10:30","10:30"],["11:30","11:30"]]],
+ ["vat","Ватикан",[["bas","Собор (безкоштовно)"],["dome","Собор + купол"],["mus","Музеї + Сікстинська"],["both","Музеї + собор"]]],
+ ["lunch","Обід",[["suppl","Supplizio (супплі на ходу)"],["pizz","Pizzarium (піца на вагу)"],["corsi","Enoteca Corsi (меню дня)"],["gino","Dal Cavalier Gino (бронь)"]]],
+ ["sun","Захід 16:48",[["pincio","Тераса Pincio"],["steps","Верх Іспанських сходів"],["no","Не чекати"]]],
+ ["go","До Колізею",[["walk","Пішки через форуми"],["metro","Метро"]]],
+ ["dinner","Вечеря",[["broc","Broccoletti (Монті, найавтентичніше)"],["carb","La Carbonara (Монті)"],["scal","Ai Tre Scalini (вино)"],["luzzi","Luzzi (дешево)"]]]
+];
+
+/* ---------- TIMELINE ---------- */
+const hm=s=>{const [h,m]=s.replace("~","").split(":").map(Number);return h*60+m};
+const fm=x=>{x=Math.round(x);return String(Math.floor(x/60)).padStart(2,"0")+":"+String(x%60).padStart(2,"0")};
+function tl(s){
+  const R=[]; let t=hm(s.start); const F={};
+  const add=(d,h,c,k,a)=>{R.push([fm(t),h,c||"",k||null,a||null]);t+=d;};
+  const mus=s.vat==="mus"||s.vat==="both", bas=s.vat!=="mus", dome=s.vat==="dome";
+  add(10,`<b>Старт: метро A до Ottaviano.</b> ☕ Кава перед Ватиканом: <b>Sciascia Caffè 1919</b> (Via Fabio Massimo 80/a, 5 хв) або specialty <b>Pergamino</b> на Piazza del Risorgimento. Tap&go карткою (€1.50 за поїздку, денна стеля €8.50) — у кожного своя картка. Плечі й коліна закриті, інакше в собор і Музеї не пустять. ${L('getting','The Better Vacation')}`,"key","r_ott");
+  let last="ott";
+  if(mus){
+    add(15,"Від Ottaviano ~10 хв до входу в Музеї на Viale Vaticano. Будьте за 20–30 хв до слоту: перевірка 10–20 хв","move","r_mus");
+    add(180,`<b>Музеї Ватикану й Сікстинська капела.</b> Квиток іменний, онлайн зі слотом (€25). Не намагайтеся побачити все: Галерея мап → Станці Рафаеля → Сікстинська. У «гідів» з бейджами біля стін нічого не купувати. ${L('vmus','The Better Vacation')} · ${L('scams','tabiji')}`,"key","r_mus","Закінчуємо Музеї, на вихід");
+    last="mus";
+  }
+  const doPizz=()=>{
+    add(last==="mus"?10:20,last==="mus"?"Від виходу з Музеїв ~8–10 хв до Pizzarium":"Від площі Св. Петра ~20 хв на північ до Pizzarium: гак, але воно того варте","move","r_pizz");
+    if(t<hm("11:00")) add(hm("11:00")-t,`Pizzarium відчиняється об 11:00: ~${Math.round(hm("11:00")-t)} хв зазирнути на ринок <b>Mercato Trionfale</b> поруч, де купують місцеві. ${L('ftrVat','The Roman Food Tour')}`,"","r_pizz");
+    add(35,`<b>Обід: Pizzarium Bonci.</b> Піца al taglio на вагу: показуєте шматок і кажете «un pezzo così». Їдять стоячи на тротуарі. Якщо черга, то Panificio Bonci на Via Trionfale 36. ${L('ftrVat','The Roman Food Tour')}`,"","r_pizz","Доїдаємо → далі пішки");
+    last="pizz";
+  };
+  if(s.lunch==="pizz"&&mus) doPizz();
+  if(bas){
+    add(last==="mus"?15:last==="pizz"?20:10,last==="mus"?"Уздовж ватиканських стін до площі Св. Петра, ~15 хв":last==="pizz"?"Від Pizzarium до площі Св. Петра, ~20 хв":"Від Ottaviano до площі Св. Петра, ~10 хв","move","r_sq");
+    add(30,`<b>Площа Святого Петра й рамка.</b> Вхід у собор безкоштовний, черга на перевірку під колонадою праворуч. У вівторок черга зазвичай коротша, ніж у середу (аудієнція). ${L('spb','The Better Vacation')}<br>🚻 <b>Безкоштовні туалети без рамки:</b> праворуч у кінці колонади біля пошти й ліворуч біля сувенірної крамниці. ${L('wcRW','Romewise')} · ${L('wcTIR','Tourist in Rom')}`,"","r_sq");
+    add(dome?120:60,`<b>Собор Святого Петра.</b> Pietà Мікеланджело одразу праворуч від входу, бронзовий балдахін Берніні над вівтарем.`+(dome?" Потім купол: €10–22 (ліфт + сходи або лише сходи), останній підйом ~за 45 хв до закриття.":"")+` Цього тижня в соборі святкують 400-річчя: перед виходом гляньте basilicasanpietro.va. ${L('spbNews','Avvenire')}`,"key","r_bas","Виходимо з собору");
+    last="bas";
+  }
+  if(s.lunch==="pizz"&&!mus) doPizz();
+  add(last==="pizz"?30:15,last==="pizz"?"Через Borgo до Castel Sant'Angelo, ~25–30 хв":"Via della Conciliazione до Castel Sant'Angelo, ~12 хв","move","r_cast");
+  add(10,"<b>Castel Sant'Angelo й міст Ангелів</b>: найкращий кадр замку — з середини мосту. Усередину не йдемо","","r_cast");
+  if(s.lunch==="suppl"&&t<hm("11:40")){ const w=hm("11:45")-t; add(w,`Для обіду ще рано (~${Math.round(w)} хв): зайдіть у <b>Castel Sant'Angelo</b> (музей і тераса з видом на Св. Петра, ~1 год) або пройдіться паралельною Via Giulia`,"","r_cast","Йдемо на обід у Supplizio"); }
+  add(8,"Через міст → Via del Banco di Santo Spirito → Via dei Banchi Vecchi, ~7 хв","move","r_suppl");
+  if(s.lunch==="suppl") add(25,`<b>Обід: Supplizio.</b> За Gambero Rosso, одна з найкращих скоринок у місті. Беріть класичний, cacio e pepe і на десерт crema fritta. Близько €3 за штуку. ${L('gr','Gambero Rosso')} · ${L('supTR','Turismo Roma')}`,"","r_suppl","Доїдаємо → гелато");
+  else add(6,`Повз <b>Supplizio</b>: можна взяти один супплі в руку (~€3)`,"","r_suppl");
+  R[R.length-1][1]+=` ☕ Specialty-еспресо поруч: <b>Barnum</b>, Via del Pellegrino 87 (3 хв)`;
+  add(6,"Via dei Banchi Vecchi → Via dei Coronari (вулиця антикварів)","move","r_teatro");
+  add(10,`<b>Gelateria del Teatro</b>: сицилійський мигдаль, лимони з Амальфі. ${L('gelato','Romeing')}. Тут же, на Via dei Coronari 183, — авторське тірамісу Sutiramisù з шоколадною оболонкою`,"","r_teatro");
+  add(15,`<b>Piazza Navona</b>, фонтан Чотирьох рік Берніні. Столики на площі — це плата за вид. Троянди й браслети не беремо в руки. ${L('scams','tabiji')}<br>🚻 €1 у кіоску-інфоцентрі на Via Giuseppe Zanardelli (північний край площі), 10:00–18:00. ${L('wcTIR','Tourist in Rom')}`,"","r_nav");
+  add(7,"Corso del Rinascimento → Piazza di Sant'Eustachio, ~5 хв","move","r_eust");
+  add(10,`<b>Sant'Eustachio Il Caffè</b>: спершу каса, потім чек на бар. «Un gran caffè» стоячи ~€1.30; за столиком та сама кава €2–5. ${L('coffee','Italy Planner')}. Якщо черга — Caffè Camerino на Largo Argentina (5 хв) або Roscioli Caffè з мариттоццо (7 хв)`,"","r_eust");
+  add(3,"2 хв до Пантеону","move","r_pan");
+  add(40,`<b>Пантеон.</b> €7 (з 1.07.2026), квиток в автоматі на місці або на museiitaliani. Skip-the-line не існує. Окулюс, гробниця Рафаеля. Останній вхід 18:30.${t>hm("18:30")?' <span class="buffer r">Пантеон уже зачинений для входу — лише ззовні</span>':''} ${L('panMC','MiC')}`,"key","r_pan","Виходимо з Пантеону");
+  const lateL=t>hm("14:30");
+  if(lateL&&(s.lunch==="corsi"||s.lunch==="gino")) F.lateLunch=true;
+  const lateLunch=()=>lateL?` <span class="buffer r">о ${fm(t)} обідня кухня вже закривається (~15:00) — оберіть Supplizio, він працює весь день</span>`:"";
+  if(s.lunch==="corsi"){add(6,"5 хв до Via del Gesù"+lateLunch(),"move","r_corsi");add(60,`<b>Обід: Enoteca Corsi.</b> Меню дня від руки, гучно, швидко, недорого. ${L('rwPan','Romewise')}`,"","r_corsi","Розраховуємося → Треві");}
+  if(s.lunch==="gino"){add(6,"5 хв до Vicolo Rosini"+lateLunch(),"move","r_gino");add(70,`<b>Обід: Dal Cavalier Gino.</b> Rigatoni alla gricia або cacio e pepe поруч із депутатами. Бронь обов'язкова; кави немає, тож еспресо — заздалегідь у Sant'Eustachio. ${L('rwPan','Romewise')}`,"","r_gino","Розраховуємося → Треві");}
+  add(6,"Через Piazza di Pietra на Via del Corso: <b>🚻 Galleria Alberto Sordi</b> — безкоштовний туалет, останній зручний перед Треві (біля фонтану громадських немає)","","r_sordi");
+  add(8,"Від галереї до Треві ~7 хв","move","r_trevi");
+  add(20,`<b>Фонтан Треві.</b> З площі безкоштовно; до чаші €2 (9:00–22:00, на місці лише карткою, каса на Via della Stamperia). Монету кидаємо в маленький басейн на сходах. Телефон тримайте в руці, рюкзак спереду. ${L('trevi','Turismo Roma')} · ${L('trevi2','Open')}`,"","r_trevi");
+  add(8,`🍰 Опційно: тірамісу з собою в <b>Pompi</b> (Via di Santa Maria in Via 17, 2 хв). Знамените, але туристичне; найкраще класичне — Roscioli, найкраще в Монті — al42 (див. картки). ${L('tiraDV','Devour')}`,"","r_pompi");
+  add(12,"Via del Nazareno → Via Due Macelli → Piazza di Spagna, ~10 хв","move","r_spagna");
+  add(15,`<b>Іспанські сходи</b>: підніміться до Trinità dei Monti. Не сідати: штраф до €400. ${L('fine','Money.it')}<br>🚻 P.Stop на Piazza di Spagna: €1, 9:00–22:00. ${L('wcTIR','Tourist in Rom')}`,"","r_spagna");
+  const SS=hm("16:48");
+  let fromP=false;
+  const freeTxt=(w,txt)=>`Вільні ~${Math.round(w)} хв: ${txt}`+(w>90?` <span class="buffer y">забагато вільного часу: краще старт пізніше або «Собор + купол» / «Музеї»</span>`:"");
+  if(s.sun==="pincio"){
+    if(t+15>SS){ F.pincioFail=true; R[R.length-1][1]+=` <span class="buffer r">на Pincio до заходу (16:48) вже не встигнути — ідіть одразу до Колізею</span>`; }
+    else{
+      fromP=true;
+      add(15,"Viale della Trinità dei Monti повз Villa Medici до Terrazza del Pincio, рівною алеєю","move","r_pincio");
+      const w=SS-35-t;
+      if(w>15) add(w,freeTxt(w,w>45?"прогулянка парком <b>Villa Borghese</b>: від тераси 10–15 хв до озера з храмом Ескулапа й назад, лавки й тиша":"парк Villa Borghese одразу за терасою, лавки й тиша"),"","r_pincio","Повертаємося на терасу Pincio");
+      add(Math.max(SS+15-t,10),`<b>🌇 Захід із Pincio о 16:48</b> над куполом Святого Петра; внизу Piazza del Popolo. Займіть місце біля балюстради за 30 хв. ${L('pincio','Nomado')}<br>🚻 Туалет є на Salita del Pincio, над Piazza del Popolo (ціну й години джерело не вказує). ${L('wcTIR','Tourist in Rom')}`,"sun","r_pincio","Спускаємося, йдемо до Колізею");
+    }
+  } else if(s.sun==="steps"){
+    if(t>SS){ F.stepsFail=true; R[R.length-1][1]+=` <span class="buffer y">захід о 16:48 уже минув</span>`; }
+    else{
+      if(t<SS-25){const w=SS-20-t; add(w,freeTxt(w,"Via Margutta (вулиця художників) і Via del Babuino поруч"),"","r_spagna","Назад на верх сходів");}
+      add(Math.max(SS+10-t,5),`<b>🌇 Захід із тераси Trinità dei Monti</b>, 16:48: дахи центру й купол Св. Петра на заході. Стоїмо, не сідаємо`,"sun","r_spagna","Йдемо до Колізею");
+    }
+  }
+  if(s.go==="walk"){
+    add(fromP?45:32,(fromP?"Сходами Pincio вниз на Piazza del Popolo → ":"")+"Via del Corso → Piazza Venezia (Вітторіано) → <b>Via dei Fori Imperiali</b>"+(t>hm("16:40")?": форуми підсвічені, Колізей виростає попереду":": над руїнами імператорських форумів")+", "+(fromP?"~45 хв":"~30 хв"),"move","r_fori");
+  } else {
+    if(fromP) add(30,"Сходами вниз до Piazza del Popolo → метро <b>Flaminio</b> (A) → Termini → B → <b>Colosseo</b>, ~30 хв","move","r_flam");
+    else add(22,"Метро <b>Spagna</b> (A) → Termini → B → <b>Colosseo</b>, ~20 хв. На Termini найбільше кишенькових злодіїв","move","r_spm");
+  }
+  const cTitle=t<hm("15:15")?"Колізей (ще можна всередину)":t<hm("16:40")?"Колізей удень, ззовні":"Колізей увечері";
+  const cIn=t<hm("15:15")?`Ви встигаєте до останнього входу о 15:30, але лише з іменним квитком і слотом з ticketing.colosseo.it. Без квитка — огляд ззовні. `:`Усередину вже не пускають (взимку останній вхід 15:30), але зовні він відкритий цілодобово${t>hm("16:40")?" й підсвічений":"; підсвітку вмикають у сутінках, після ~17:00"}. `;
+  add(t<hm("15:15")?90:35,`<b>${cTitle}.</b> ${cIn}Найкращий вид — з північного боку, над метро: Via Nicola Salvi, Via Vittorino da Feltre, парк Colle Oppio. «Гладіаторам» відповідайте «No, grazie». ${L('colos','colosseo.it')} · ${L('colView','Romewise')}<br>🚻 Туалети Колізею лише всередині за квитком. ${L('wcRW','Romewise')}`,"sun","r_agnesi","Йдемо "+(s.dinner==="luzzi"?"до Luzzi":"в Монті"));
+  const D={broc:"r_broc",carb:"r_carb",scal:"r_scal",luzzi:"r_luzzi"}[s.dinner];
+  const DN={broc:"Broccoletti",carb:"La Carbonara",scal:"Ai Tre Scalini",luzzi:"Luzzi"}[s.dinner];
+  if(s.dinner==="luzzi") add(8,"Via di S. Giovanni in Laterano, ~5 хв від Колізею","move","r_luzzi");
+  else add(12,"Угору в Монті"+(s.dinner==="broc"?" через Via dei Serpenti до Via Urbana, ~10 хв":": Via Cavour → Via Panisperna, ~10–12 хв"),"move",((s.dinner==="broc"||s.dinner==="carb")&&hm("19:00")-(t+12)>15)?"r_scal":D);
+  const DIN=hm("19:00"); let g=DIN-t;
+  if(g>60){ add(g-45,`Вільні ~${Math.round(g-45)} хв до вечері: відпочити в житлі або повільно пройтися Монті — Via Urbana, Via del Boschetto, Piazza della Madonna dei Monti`+(g>105?` <span class="buffer y">день закінчується рано: можна було б старт пізніше або додати Музеї</span>`:""),"",null,"Йдемо на аперитив"); g=45; }
+  if(g>15){
+    if(s.dinner==="luzzi") add(g,`До вечері ~${Math.round(g)} хв: парк Colle Oppio з видом на Колізей у вогнях, поруч із Luzzi`,"","r_agnesi","Йдемо до Luzzi");
+    else if(s.dinner==="scal") add(g,`До вечері ~${Math.round(g)} хв: прогулянка Via Urbana й Piazza della Madonna dei Monti. В Ai Tre Scalini краще бути до ~19:30, після 20:00 там черга`,"",null,"Йдемо в Ai Tre Scalini");
+    else add(g,`Аперитив в <b>Ai Tre Scalini</b> (Via Panisperna 251): місцеві ходять сюди саме на келих до вечері, а після ~20:00 тут уже черга. ${L('fodScal',"Fodor's")}`,"","r_scal","На вечерю в "+DN);
+  }
+  const DT={
+   broc:`<b>Вечеря: Broccoletti.</b> Маленька траторія на Via Urbana, проста римська кухня з органічних продуктів регіону. Romewise: «їжа незмінно чудова». Зателефонуйте й забронюйте${t>hm("19:10")?"":" на 19:00–19:30"}. ${L('rwCol','Romewise')}`,
+   carb:`<b>Вечеря: La Carbonara.</b> Carbonara й cacio e pepe, далі абакіо. Популярна й серед туристів, тому бронюйте заздалегідь. Кухня до ~22:00–23:00. ${L('monti','Romeing')}`,
+   scal:`<b>Вечеря: Ai Tre Scalini.</b> Історичний винний бар із натуральними винами й гарячими стравами; бронь не обов'язкова. ${L('scal','Turismo Roma')}`,
+   luzzi:`<b>Вечеря: Luzzi.</b> Римська класика й піца з 1945 року, ~€20–40 за два страви з вином; гучно. Піца — лише ввечері. У вівторок працює (вихідний — середа). ${L('luzzi','Time Out')}`
+  }[s.dinner]+(t>hm("21:15")?` <span class="buffer r">пізно: о ${fm(t)} кухні вже закриваються — дзвоніть заздалегідь</span>`:"");
+  add(80,DT,"",D,"Розраховуємося");
+  if(t<hm("22:15")) add(10,`Опційно на десерт: гелато у <b>Fatamorgana</b> на Piazza degli Zingari${s.dinner==="luzzi"?" (10 хв угору в Монті)":""} ${L('gelato','Romeing')}, або 🍰 тірамісу в <b>al42</b> на Via Baccina 42 ${L('tiraEHT','EHAT')}`,"","r_fata");
+  if(t>hm("23:00")) F.late=true;
+  add(0,"Додому: метро <b>Cavour</b> або <b>Colosseo</b> (B), до ~23:30. Завтра вранці виліт до Лісабона, тож не засиджуйтеся"+(t>hm("23:00")?` <span class="buffer r">метро закривається ~23:30 — таксі (лише білі, з офіційної стоянки) або FreeNow</span>`:""),"key","r_cav");
+  R.flags=F;
+  return R;
+}
+
+/* ---------- MAP ---------- */
+const VIEWS={
+ all:{b:[12.443,41.886,12.500,41.914],label:"Увесь маршрут"},
+ vat:{b:[12.442,41.897,12.470,41.912],label:"Ватикан"},
+ cen:{b:[12.462,41.894,12.488,41.914],label:"Центр"},
+ col:{b:[12.476,41.885,12.500,41.900],label:"Колізей і Монті"}
+};
+const TIBER=[[12.4700,41.9200],[12.4686,41.9145],[12.4716,41.9105],[12.4728,41.9060],[12.4706,41.9033],[12.4667,41.9016],[12.4648,41.8998],[12.4660,41.8962],[12.4705,41.8925],[12.4760,41.8908],[12.4795,41.8885],[12.4790,41.8840],[12.4770,41.8800]];
+function rmap(el,vk,route){
+  const [x0,y0,x1,y1]=VIEWS[vk].b,W=600,H=Math.round(600*((y1-y0)/((x1-x0)*Math.cos(41.9*Math.PI/180))));
+  const cw=el.clientWidth||Math.min(window.innerWidth-60,600);
+  const k=Math.max(1,Math.min(1.9,0.8*W/cw));
+  const fs=11.5*k, r=11*k, nf=11*k;
+  const pj=([la,lo])=>[(lo-x0)/(x1-x0)*W,H-(la-y0)/(y1-y0)*H];
+  let svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема маршруту Римом" style="overflow:hidden">`;
+  svg+=`<polyline points="${TIBER.map(([lo,la])=>pj([la,lo]).map(n=>n.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="#cfe0f3" stroke-width="${12*k}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  svg+=`<text x="${pj([41.8935,12.4664])[0]}" y="${pj([41.8935,12.4664])[1]}" fill="#8fb0d6" font-size="${11*k}" font-style="italic">Тибр</text>`;
+  const inView=kk=>{const[la,lo]=P[kk].ll;return lo>=x0&&lo<=x1&&la>=y0&&la<=y1};
+  const seq=route.filter(kk=>P[kk]);
+  if(seq.length>1) svg+=`<polyline points="${seq.map(kk=>pj(P[kk].ll).map(n=>n.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="#c9781f" stroke-width="${2.5*k}" stroke-dasharray="${6*k} ${5*k}" stroke-linejoin="round"/>`;
+  const order=[];route.forEach(kk=>{if(P[kk]&&!order.includes(kk))order.push(kk)});
+  const boxes=[], marks=[];
+  order.forEach((kk,i)=>{ if(inView(kk)){let [x,y]=pj(P[kk].ll); let tries=0; while(marks.some(m=>Math.hypot(m[2]-x,m[3]-y)<r*1.9)&&tries<6){ const ang=[0,Math.PI,-Math.PI/2,Math.PI/2,Math.PI/4,-3*Math.PI/4][tries++]; const o=pj(P[kk].ll); x=o[0]+Math.cos(ang)*r*2.1; y=o[1]+Math.sin(ang)*r*2.1; } marks.push([kk,i,x,y]); boxes.push([x-r,y-r,x+r,y+r]);} });
+  const minor=["r_teatro","r_eust","r_sordi","r_fata","r_spm","r_flam","r_cav","r_ott"];
+  const hit=(b)=>b[0]<0||b[2]>W||b[1]<0||b[3]>H||boxes.some(o=>!(b[2]<o[0]||b[0]>o[2]||b[3]<o[1]||b[1]>o[3]));
+  let g1="",g2="";
+  marks.forEach(([kk,i,x,y])=>{
+    const c=(CATCOL[P[kk].cat]||CATCOL.view)[0];
+    g1+=`<g class="mk" data-k="${kk}" style="cursor:pointer"><title>${i+1}. ${P[kk].n}</title><circle cx="${x}" cy="${y}" r="${r}" fill="${c}" stroke="#fff" stroke-width="2"/><text x="${x}" y="${y+nf*0.36}" text-anchor="middle" fill="#fff" font-size="${nf}" font-weight="700">${i+1}</text></g>`;
+  });
+  // labels: important first
+  const pri=marks.slice().sort((a,b)=>(minor.includes(a[0])?1:0)-(minor.includes(b[0])?1:0));
+  pri.forEach(([kk,i,x,y])=>{
+    if(vk==="all"&&minor.includes(kk))return;
+    let lab=P[kk].n.replace(/^🚻 /,"").split(" (")[0].split(" ·")[0]; if(lab.length>24)lab=lab.slice(0,23)+"…";
+    const tw=lab.length*fs*0.56, th=fs*1.15, gap=r+3;
+    const cands=[[x+gap,y-th/2,"start",x+gap,y+fs*0.36],[x-gap-tw,y-th/2,"end",x-gap,y+fs*0.36],[x-tw/2,y-gap-th,"middle",x,y-gap-fs*0.25],[x-tw/2,y+gap,"middle",x,y+gap+fs*0.85]];
+    for(const [bx,by,anc,tx,ty] of cands){
+      const b=[bx,by,bx+tw,by+th];
+      if(!hit(b)){boxes.push(b); g2+=`<text x="${tx}" y="${ty}" text-anchor="${anc}" font-size="${fs}" fill="#14213d" stroke="#fbfaf7" stroke-width="${3*k}" paint-order="stroke" pointer-events="none">${lab}</text>`; return;}
+    }
+  });
+  el.innerHTML=svg+g1+g2+"</svg>";
+  el.querySelectorAll(".mk").forEach(g=>g.addEventListener("click",()=>focusCard(g.dataset.k)));
+}
+
+/* ---------- CARDS ---------- */
+function card(k,idx){
+  const p=P[k];
+  return `<div class="card" id="card-${k}"><h4>${idx?idx+". ":""}${p.n}</h4><div class="area">${p.a}</div>
+  ${photos(p.n,p.q,p.cat)}
+  ${p.v?`<div class="verdict">🔎 <span class="badge ${p.v[0]==="ok"?"ok":p.v[0]==="bad"?"bad":"chk"}">${p.v[1]}</span> ${p.v[2]}</div>`:""}
+  <dl><dt>Чому</dt><dd>${p.why}</dd>${p.more?`<dt>Детальніше</dt><dd class="more">${p.more}</dd>`:""}<dt>Що взяти</dt><dd>${p.order}</dd><dt>Ціна</dt><dd>${p.price}</dd><dt>Години</dt><dd>${p.hours}</dd><dt>Бронь</dt><dd>${p.book}</dd>
+  <dt>Статус</dt><dd>${p.conf==="ok"?'<span class="badge ok">підтверджено</span>':'<span class="badge chk">варто перевірити</span>'}</dd></dl>
+  <div class="links"><a href="${gmr(p.q)}" target="_blank" rel="noopener">Google Maps ↗</a></div></div>`;
+}
+
+/* ---------- RENDER DAY ---------- */
+let mv="all";
+let copen=null;
+function renderDay(){
+  const box=document.getElementById("rc-day");
+  if(copen===null) copen=window.innerWidth>700;
+  const T=tl(st);
+  // feasibility of options
+  const dis=(key,v)=>{
+    if(key==="sun"&&v==="pincio"){const f=tl({...st,sun:"pincio"}).flags;return f.pincioFail?"за цього сценарію до заходу на Pincio не встигнути":"";}
+    if(key==="sun"&&v==="steps"){const f=tl({...st,sun:"steps"}).flags;return f.stepsFail?"захід о 16:48 уже минає до того, як ви дійдете":"";}
+    if(key==="lunch"&&(v==="gino"||v==="corsi")){const f=tl({...st,lunch:v}).flags;return f.lateLunch?"обід випадає після 14:30, коли кухні закриваються":"";}
+    return "";
+  };
+  const lab=(key)=>{const o=OPTS.find(x=>x[0]===key);return (o[2].find(x=>x[1]&&x[0]===st[key])||[,"?"])[1];};
+  const sum=`<div class="csum">Сценарій: <b>${["start","vat","lunch","sun","go","dinner"].map(lab).join(" · ")}</b><button type="button" id="rc-tog">${copen?"Згорнути ▴":"Змінити ▾"}</button></div>`;
+  box.innerHTML=sum+`<div class="rows ${copen?"":"closed"}">`+OPTS.map(([key,label,opts])=>{
+    const notes=[];
+    const btns=opts.map(([v,t])=>{const d=dis(key,v); if(d&&st[key]!==v) notes.push(t+": "+d); return `<button data-k="${key}" data-v="${v}" class="${st[key]===v?'on':''}" ${d&&st[key]!==v?`disabled title="${d}"`:""}>${t}</button>`;}).join("");
+    return `<div class="row"><span class="lbl">${label}</span><span class="seg">${btns}</span></div>`+(notes.length?`<div class="hint">⛔ ${notes.join("; ")}</div>`:"");
+  }).join("")+`</div>`;
+  box.querySelectorAll(".rows button").forEach(b=>b.addEventListener("click",()=>{st[b.dataset.k]=b.dataset.v;save();renderDay();}));
+  document.getElementById("rc-tog").addEventListener("click",()=>{copen=!copen;renderDay();});
+  document.getElementById("rtl-day").innerHTML=T.map(([t,h,c,k])=>`<div class="ev ${c}"><div class="t">${t}</div><div class="b">${h}${k&&P[k]?` <span class="plink" data-k="${k}">картка</span>`:''}</div></div>`).join("");
+  document.querySelectorAll("#rtl-day .plink").forEach(a=>a.addEventListener("click",()=>focusCard(a.dataset.k)));
+  const route=[];T.forEach(r=>{if(r[3]&&P[r[3]])route.push(r[3])});
+  const rt=route.filter((k,i)=>k!==route[i-1]);
+  const mz=document.getElementById("rmz-day");
+  mz.innerHTML=Object.keys(VIEWS).map(v=>`<button data-v="${v}" class="${mv===v?'on':''}">${VIEWS[v].label}</button>`).join("");
+  mz.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{mv=b.dataset.v;renderDay();}));
+  rmap(document.getElementById("rmap-day"),mv,rt);
+  // two Google Maps links split at Trevi, without minor stops
+  const minor=["r_teatro","r_eust","r_sordi","r_fata","r_cav","r_spm","r_flam"];
+  const uniq=[...new Set(rt)].filter(k=>!minor.includes(k));
+  const iT=uniq.indexOf("r_trevi");
+  const link=(arr)=>{arr=arr.slice(); if(arr.length>11){const keep=[arr[0],...arr.slice(1,-1).filter(k=>P[k].cat!=="logistics").slice(0,9),arr[arr.length-1]];arr=keep;}
+    const wp=arr.slice(1,-1).map(k=>encodeURIComponent(P[k].q)).join("|");
+    return `https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=${encodeURIComponent(P[arr[0]].q)}&destination=${encodeURIComponent(P[arr[arr.length-1]].q)}${wp?"&waypoints="+wp:""}`;};
+  const D={broc:"r_broc",carb:"r_carb",scal:"r_scal",luzzi:"r_luzzi"}[st.dinner];
+  const partB=uniq.slice(iT); const di=partB.indexOf(D); 
+  document.getElementById("rroute-a").href=link(uniq.slice(0,iT+1));
+  document.getElementById("rroute-b").href=link(di>=0?partB.slice(0,di+1):partB);
+  document.getElementById("rcards-day").innerHTML=[...new Set(rt)].map((k,i)=>card(k,i+1)).join("");
+  renderAlarms();
+}
+let rz;window.addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(renderDay,250);});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#rtabs button");if(b&&b.dataset.v==="r-day")setTimeout(renderDay,30);});
+
+/* ---------- ALL PLACES ---------- */
+const CATS=[["all","Усі"],["sight","Пам'ятки"],["view","Види"],["food","Їжа"],["sweet","Гелато"],["logistics","Метро"]];
+let pc="all";
+function renderAll(){
+  const f=document.getElementById("rpf");
+  f.innerHTML=CATS.map(([c,t])=>`<button data-c="${c}" class="${pc===c?'on':''}">${t}</button>`).join("");
+  f.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{pc=b.dataset.c;renderAll();}));
+  document.getElementById("rcards-all").innerHTML=Object.keys(P).filter(k=>pc==="all"||P[k].cat===pc).map(k=>card(k)).join("");
+}
+
+/* ---------- MENU ---------- */
+const MENU=[
+ {n:"Carbonara",p:"карбонáра",c:"pasta",w:"Спагеті або мецце мáніке з яйцем, гуанчале (в'ялена свиняча щока) і пекоріно. Без вершків. Сучасна форма, за Gambero Rosso, з'явилася лише в 1950-х; легенда про вугільників — вигадка.",t:"Кремова, солона, з перцем і хрусткими шматочками гуанчале.",at:["r_carb"],pr:"≈ €12–16",s:["grPiatti"]},
+ {n:"Cacio e pepe",p:"кáчо е пéпе",c:"pasta",w:"Тоннареллі з пекоріно й чорним перцем; соус — емульсія сиру з водою від варіння. Їжа пастухів, що гнали отари.",t:"Гостра від перцю, солона від сиру, мінімум інгредієнтів.",at:["r_carb","r_gino"],pr:"≈ €11–14",s:["grPiatti"]},
+ {n:"Amatriciana",p:"аматрічáна",c:"pasta",w:"Гуанчале, томат і пекоріно, зазвичай з букатіні. Родом з міста Аматріче; перший відомий рецепт — у книзі Ади Боні 1927 року.",t:"Томатна, з жирком гуанчале, трохи гостра.",at:["r_gino"],pr:"≈ €11–14",s:["grPiatti"]},
+ {n:"Gricia",p:"грíча",c:"pasta",w:"«Біла сестра» аматрічани: гуанчале, пекоріно, перець, без томату.",t:"Як карбонара без яйця: чистий смак гуанчале.",at:["r_gino"],pr:"≈ €11–14",s:["grPiatti","rwPan"]},
+ {n:"Supplì",p:"супплí",c:"street",w:"Рисова крокета в томатному соусі з серцем моцарели. Назва — від французького surprise, яке перекрутили французькі солдати в Римі XIX століття.",t:"Хрустка скоринка, а сир тягнеться ниткою, як телефонний дріт («al telefono»).",at:["r_suppl","r_pizz"],pr:"≈ €3",s:["grPiatti","gr"]},
+ {n:"Pizza al taglio",p:"піцца аль тáльо",c:"street",w:"Прямокутна піца шматками; платять за вагу.",t:"Тонка хрустка основа, повітряне тісто, сезонні начинки.",at:["r_pizz"],pr:"≈ €3–6 за шматок",s:["ftrVat"]},
+ {n:"Trapizzino",p:"трапіццíно",c:"street",w:"Трикутна кишеня з піцового тіста з тушкованою начинкою: бичачий хвіст, рубець, баклажани.",t:"Римське рагу в руці.",at:[],pr:"≈ €4–6",s:["ftrVat"]},
+ {n:"Coda alla vaccinara",p:"кóда алла ваччінáра",c:"main",w:"Бичачий хвіст, тушкований з томатом і овочами. Класика «п'ятої чверті» (quinto quarto), яку готували різники з бойні Тестаччо.",t:"Липкий, дуже ніжний, м'ясо відходить від кістки.",at:["r_luzzi"],pr:"≈ €14–18",s:["grPiatti","mlrCol"]},
+ {n:"Abbacchio a scottadito",p:"аббáккьо а скоттадíто",c:"main",w:"Реберця молочного ягняти, швидко на грилі. «A scottadito» — «обпікаючи пальці».",t:"Димне, ніжне; їдять руками.",at:["r_carb"],pr:"≈ €16–22",s:["grPiatti","monti"]},
+ {n:"Saltimbocca alla romana",p:"сальтімбóкка",c:"main",w:"Телячі ескалопи з шавлією й прошуто, загашені білим вином. Назва — «стрибає в рот».",t:"Солоне прошуто, ароматна шавлія.",at:[],pr:"≈ €14–18",s:["grPiatti"]},
+ {n:"Trippa alla romana",p:"трíппа алла ромáна",c:"main",w:"Рубець у томатному соусі з диким м'ятником (mentuccia) і пекоріно.",t:"Для сміливих: м'який, у густому соусі.",at:[],pr:"≈ €12–15",s:["grPiatti"]},
+ {n:"Carciofi alla giudia",p:"карчóфі алла джýдіа",c:"season",season:"Краще навесні",w:"Цілий артишок, смажений у фритюрі так, що розкривається, як хризантема. Страва римського гетто.",t:"Хрусткі листки, як чипси, ніжне серце.",at:["r_carb"],pr:"≈ €7–10",s:["grPiatti","monti"],note:"Пік римського артишока — пізня зима й весна; у листопаді він може бути не місцевий."},
+ {n:"Gnocchi alla romana",p:"нькóкі алла ромáна",c:"season",season:"Четвер",w:"Запечені кружечки з манної каші з маслом і пекоріно. За традицією — лише в четвер, тож сьогодні їх майже ніде не буде.",t:"Ніжні, маслянисті, з рум'яною скоринкою.",at:[],pr:"≈ €10–13",s:["grPiatti","monti"]},
+ {n:"Filetti di baccalà",p:"філéтті ді баккалà",c:"street",w:"Філе тріски в клярі. Традиційна страва Святвечора, але є цілий рік (у La Carbonara — по п'ятницях).",t:"Хрусткий кляр, солонувата риба.",at:[],pr:"≈ €5–7",s:["grPiatti","monti"]},
+ {n:"Maritozzo",p:"марітóццо",c:"sweet",w:"Булочка, розрізана й набита збитими вершками. Історична версія пісна, з родзинками й кедровими горішками; колись у неї ховали обручку.",t:"Хмара вершків у здобі; на сніданок з капучино.",at:[],pr:"≈ €3–4",s:["grPiatti"]},
+ {n:"Crostata ricotta e visciole",p:"крострáта рікóтта е вíшоле",c:"sweet",w:"Пиріг з рикотою й варенням з дикої вишні між двома шарами пісочного тіста; традиція римських євреїв.",t:"Кисло-солодка вишня, ніжна рикота.",at:[],pr:"≈ €4–5",s:["grPiatti"]},
+ {n:"Tiramisù",p:"тірамісý",c:"sweet",w:"Савоярді, вимочені в каві, з кремом з маскарпоне й яєць, зверху какао. Назва означає «підбадьор мене».",t:"Кавове, вершкове, прохолодне. Класика — без фруктів і без лікерів-сюрпризів.",at:["r_roscioli","r_al42","r_pompi","r_falcone","r_sutira"],pr:"≈ €5–8",map:true,route:["r_sutira","r_roscioli","r_pompi","r_al42"],routeLabel:"Усі тірамісу на одному маршруті",mo:{label:"Схема: де тірамісу"},s:["tiraSDG","tiraEHT","tiraRM","tiraDV"],note:"Найкраще класичне — Roscioli (у десятці найкращих в Італії за Scatti di Gusto, потрібна бронь). На маршруті: Pompi біля Треві (з собою, але туристичне), al42 у Монті (автентично). L'Asino d'Oro в Монті з його «тірамісу з хліба» зачинений назавжди."},
+ {n:"Gelato",p:"джелáто",c:"sweet",w:"Ремісниче морозиво. Ознака доброго — приглушені природні кольори й закриті металеві контейнери, а не гори з неоновими фруктами.",t:"Щільніше й менш холодне за звичайне морозиво.",at:["r_teatro","r_fata"],pr:"≈ €3–5",s:["gelato"]},
+ {n:"Де пити каву",p:"каффè",c:"drink",w:"Перевірені бари вздовж маршруту: від історичних (Sciascia, Sant'Eustachio, Camerino) до specialty (Pergamino, Barnum, Roscioli Caffè, Luna by Faro).",t:"Еспресо біля стійки (al banco) — завжди дешевше й швидше. За столиком біля Пантеону капучино може коштувати ~€8.",at:["r_sciascia","r_pergamino","r_barnum","r_eust","r_camerino","r_rcaffe","r_luna"],pr:"≈ €1.20–2 стоячи",map:true,route:["r_sciascia","r_barnum","r_rcaffe","r_eust","r_luna"],routeLabel:"Кавовий маршрут по ходу дня",mo:{label:"Схема: де пити каву",color:"#6b4226",sides:[true,false,false,true,true,false,false],dy:[0,0,0,-14,10,10,0],noLand:["Пантеон"],names:["Sciascia 1919","Pergamino","Barnum","Sant'Eustachio","Camerino","Roscioli Caffè","Luna by Faro"]},s:["parla","cofDis","cofAIR","cofFoglio","cofZero","cofLuna"],note:`Чого уникати: Antico Caffè Greco біля Іспанських сходів зачинений з жовтня 2025 після виселення ${L('greco','Wanted in Rome')}. Tazza d'Oro — туристичні натовпи «щодня, цілий день» ${L('parla','Katie Parla')}. Столики з видом біля Пантеону й Starbucks на Piazza del Risorgimento ${L('cofAIR','An American in Rome')}.`},
+ {n:"Gran caffè",p:"гран каффè",c:"drink",w:"Фірмова кава Sant'Eustachio: еспресо, збите з цукром, з густою кремою зверху.",t:"Солодкий, густий; просіть «senza zucchero», якщо без цукру.",at:["r_eust"],pr:"≈ €1.30 стоячи",s:["coffee"]},
+ {n:"Caffè al banco",p:"каффè аль бáнко",c:"drink",w:"Еспресо стоячи біля стійки — так п'ють римляни. За столиком та сама кава коштує вдвічі-вчетверо дорожче.",t:"Короткий і міцний. Капучино після обіду — лише якщо дуже хочеться.",at:["r_eust"],pr:"≈ €1–1.30",s:["coffee"]}
+];
+const MCATS=[["all","Усе"],["pasta","Паста"],["street","Вулична"],["main","Друге"],["sweet","Солодке"],["drink","Кава"],["season","Не сьогодні"]];
+let mc="all";
+function dishPhotos(name){
+  const [c1,c2]=CATCOL.dish;
+  const img="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(name+" piatto romano");
+  const tr="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(name+" trattoria Roma");
+  const com="https://commons.wikimedia.org/w/index.php?title=Special:MediaSearch&type=image&search="+encodeURIComponent(name);
+  return `<div class="photos"><a href="${img}" target="_blank" rel="noopener" style="background:linear-gradient(135deg,${c1},${c2})"><span class="e">🍝</span>📷 Фото: Google Картинки</a><a href="${tr}" target="_blank" rel="noopener" style="background:linear-gradient(135deg,${c2},${c1})">🍴 У тратторіях Рима</a><a href="${com}" target="_blank" rel="noopener" style="background:linear-gradient(160deg,${c1}cc,${c2}cc)">🖼 Wikimedia</a></div>`;
+}
+function miniMap(keys,o={}){
+  const B=[12.446,41.888,12.497,41.912],W=600,H=Math.round(600*((B[3]-B[1])/((B[2]-B[0])*Math.cos(41.9*Math.PI/180))));
+  const pj=([la,lo])=>[(lo-B[0])/(B[2]-B[0])*W,H-(la-B[1])/(B[3]-B[1])*H];
+  let g=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${o.label||"Схема"}" style="width:100%;height:auto;display:block;border-radius:10px;background:#fbfaf7">`;
+  g+=`<polyline points="${TIBER.map(([lo,la])=>pj([la,lo]).map(n=>n.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="#cfe0f3" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>`;
+  [["r_bas","Св. Петро"],["r_pan","Пантеон"],["r_spagna","Іспанські сходи"],["r_agnesi","Колізей"]].forEach(([k,n])=>{const [x,y]=pj(P[k].ll);g+=`<circle cx="${x}" cy="${y}" r="7" fill="#b9bfcc"/>`;if((o.noLand||[]).includes(n))return;g+=`<text x="${x}" y="${y+(n==="Треві"?-12:22)}" text-anchor="middle" font-size="15" fill="#7a849c">${n}</text>`;});
+  keys.forEach((k,i)=>{const [x,y]=pj(P[k].ll);const nm=(o.names&&o.names[i])||P[k].n.replace(/^(🍰|☕) /,"").split(" (")[0].split(" @")[0].replace(" Salumeria con Cucina","").replace(" by Pasta Chef","").replace("Pompi","Pompi · Треві");
+    const right=(o.sides||[true,false,true,true,false])[i]??(x<W*0.7); const dy=(o.dy||[0,0,0,0,-26])[i]||0;
+    g+=`<a href="${gmr(P[k].q)}" target="_blank" rel="noopener"><title>${P[k].n} — відкрити в Google Maps</title><circle cx="${x}" cy="${y}" r="16" fill="${o.color||"#8a4f9e"}" stroke="#fff" stroke-width="3"/><text x="${x}" y="${y+6}" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">${i+1}</text><text x="${right?x+22:x-22}" y="${y+6+dy}" text-anchor="${right?"start":"end"}" font-size="18" font-weight="600" fill="#14213d" stroke="#fbfaf7" stroke-width="4" paint-order="stroke">${nm}</text></a>`;});
+  return g+"</svg>";
+}
+function renderMenu(){
+  const f=document.getElementById("rmf");
+  f.innerHTML=MCATS.map(([c,t])=>`<button data-c="${c}" class="${mc===c?'on':''}">${t}</button>`).join("");
+  f.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{mc=b.dataset.c;renderMenu();}));
+  document.getElementById("rmenucards").innerHTML=MENU.filter(d=>mc==="all"||d.c===mc).map(d=>{
+    const where=d.at.length?(d.map?`<ol class="tlist">`+d.at.map((k,i)=>`<li><a href="#" data-go="${k}">${P[k].n.replace(/^(🍰|☕|🚻) /,"")}</a> · <a href="${gmr(P[k].q)}" target="_blank" rel="noopener">📍 карта ↗</a></li>`).join("")+`</ol>`:d.at.map(k=>`<a href="#" data-go="${k}">${P[k].n}</a> <a href="${gmr(P[k].q)}" target="_blank" rel="noopener" title="Google Maps">📍</a>`).join(", ")):"<span style='color:var(--muted)'>у сьогоднішньому маршруті не заплановано</span>";
+    return `<div class="card${d.map?" wide":""}"><h4>${d.n} ${d.season?`<span class="badge season">${d.season}</span>`:""}</h4><div class="pron">🔊 ${d.p}</div>${d.map?"":dishPhotos(d.n)}
+    <dl><dt>Що це</dt><dd>${d.w}</dd><dt>Смак</dt><dd>${d.t}</dd>${d.note?`<dt>Увага</dt><dd>${d.note}</dd>`:""}<dt>Де в плані</dt><dd>${where}</dd><dt>Ціна</dt><dd>${d.pr}</dd>${d.s.length?`<dt>Джерела</dt><dd>${d.s.map(k=>L(k,S[k][0].split(" · ")[0])).join(" · ")}</dd>`:""}</dl>${d.map?`<div class="minimap">${miniMap(d.at,d.mo||{})}</div><a class="routebtn" style="margin-top:6px" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=${encodeURIComponent(P[d.route[0]].q)}&destination=${encodeURIComponent(P[d.route[d.route.length-1]].q)}&waypoints=${d.route.slice(1,-1).map(k=>encodeURIComponent(P[k].q)).join("|")}">${d.routeLabel} ↗</a><div class="mapnote">Приблизна схема; сірі точки — орієнтири маршруту. Натисніть номер, щоб відкрити місце в Google Maps.</div>`:""}</div>`;
+  }).join("");
+  document.querySelectorAll("#rmenucards [data-go]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();pc="all";renderAll();show("r-places");setTimeout(()=>focusCard(a.dataset.go),60);}));
+}
+
+/* ---------- PLAN B ---------- */
+const PB=[
+ ["🏟","Хочете всередину Колізею",`<ul class="tight"><li>Взимку останній вхід о 15:30, закриття о 16:30; квиток іменний, слот обов'язковий, продаж — на ticketing.colosseo.it. ${L('colos','colosseo.it')}</li><li>За вашим порядком (Колізей останнім) це нереально. Варіант — перевернути день: Колізей о 8:30–10:30 → Монті на обід → Пантеон → Навона → Ватикан після 14:00 (собор, музеї до вечора). Тоді Треві й Іспанські сходи — увечері, у вогнях.</li><li>Без квитка не купуйте нічого в «гідів» біля входу: це порожні PDF. ${L('scams','tabiji')}</li></ul>`],
+ ["⛪","Черга в собор понад 45 хв",`<ul class="tight"><li>Не стійте: Пантеон дає не менше враження всередині, і він на маршруті.</li><li>Пізно вдень, близько 16:00, черга теж коротшає, але в нашому плані на цей час Іспанські сходи. ${L('spb','The Better Vacation')}</li><li>18.11 у соборі урочиста меса з Папою: можливі закриття вже 17.11. Перевірте basilicasanpietro.va. ${L('spbNews','Avvenire')}</li></ul>`],
+ ["🎟","Немає квитка в Музеї Ватикану",`<ul class="tight"><li>Перевірте вільні слоти на museivaticani.va просто з телефону: квиток іменний, як у паспорті. ${L('vmus','The Better Vacation')}</li><li>Без броні черга вздовж стін буває до 3 год і без гарантії. Тоді лишайтеся на соборі.</li></ul>`],
+ ["🌧","Дощ",`<ul class="tight"><li>Пантеон у дощ — подія: вода падає крізь окулюс і йде в отвори в підлозі.</li><li>Бруківка sampietrini дуже слизька: замість пішки через форуми беріть метро Spagna → Colosseo.</li><li>Pincio без сонця — пропускайте: більше часу в Музеях або на вечері.</li></ul>`],
+ ["⛲","Треві забитий",`<ul class="tight"><li>З площі видно безкоштовно; до чаші за €2 пускають до 22:00. Можна повернутися після вечері. ${L('trevi','Turismo Roma')}</li><li>У натовпі рюкзак спереду, телефон у руці. ${L('scams','tabiji')}</li></ul>`],
+ ["🚪","Заклад зачинено або повно",`<ul class="tight"><li>Обід біля Пантеону: Pigna Enoteca di Sardegna (Via della Pigna 3, бюджетно, у вівторок працює), Pizza ZaZà (Piazza di Sant'Eustachio 49, швидко). ${L('rwPan','Romewise')}</li><li>Вечеря в Монті: Broccoletti → La Carbonara → Ai Tre Scalini → Luzzi → Pizzeria della Madonna dei Monti (піца шматками й супплі). ${L('mlrCol','Mama Loves Rome')}</li><li>Taverna dei Fori Imperiali, яку радять усі, у вівторок зачинена. ${L('monti','Romeing')}</li><li>Da Fortunata біля Пантеону з довгою чергою місцеві гіди не радять. ${L('rwPan','Romewise')}</li></ul>`],
+ ["🚇","Страйк ATAC або метро стоїть",`<ul class="tight"><li>Увесь маршрут від Ватикану до Колізею — це ~7 км пішки; він і так спланований пішим.</li><li>Таксі — лише білі з логотипом Comune di Roma на офіційних стоянках, або FreeNow/Uber. Не йдіть за тими, хто підходить сам. ${L('scams','tabiji')}</li></ul>`],
+ ["😮‍💨","Сили закінчуються",`<ul class="tight"><li>Перше, що прибрати, — Pincio: захід видно й з верху Іспанських сходів.</li><li>Друге — пішки через форуми: метро Spagna → Colosseo за 20 хв.</li><li>Третє — вечеря просто біля Колізею в Luzzi, без підйому в Монті.</li></ul>`]
+];
+const NU=[
+ ["transport","🎫 Квитки й метро",[
+  `BIT €1.50: 100 хв на автобуси й трамваї плюс один вхід у метро. Доба — €8.50. ${L('getting','The Better Vacation')}`,
+  `Tap&go: безконтактна картка або телефон прямо на турнікеті, денна стеля €8.50. Одна картка — одна людина, і та сама весь день.`,
+  `Метро ~5:30–23:30. Потрібні станції: Ottaviano (A) для Ватикану, Spagna (A), Colosseo і Cavour (B).`,
+  `Паперові квитки місто прибирає з 2027 року. ${L('paper27','Wanted in Rome')}`]],
+ ["dress","👗 Одяг для собору й Музеїв",[
+  `Плечі й коліна закриті в усіх; шапки знімати. За невідповідний одяг не пустять і гроші не повернуть. ${L('vmus','The Better Vacation')}`,
+  `Пантеон — теж діюча церква (меси лише в суботу й неділю), тож поводьтеся тихо. ${L('panMC','MiC')}`]],
+ ["food","🍽 За столом і біля стійки",[
+  `Кава стоячи коштує €1–1.30, за столиком €2–5. Спершу каса, потім чек на бар. ${L('coffee','Italy Planner')}`,
+  `Coperto (плата за сервірування) — законна, якщо вказана в меню. Перевірте його внизу меню на вході; від хліба можна відмовитися. ${L('scams','tabiji')}`,
+  `Ознаки пастки: зазивала на вході, меню з фото кількома мовами, столики з видом прямо на пам'ятку. Ресторани з видом на пам'ятку дорожчі й менш автентичні. ${L('mlrCol','Mama Loves Rome')}`,
+  `Armando al Pantheon хвалять за аматрічану, але бронь важко отримати й є жорсткий ліміт часу. ${L('rwPan','Romewise')} · ${L('mli','Mama Loves Italy')}`]],
+ ["food","🚫 Перевірено: куди НЕ йти",[
+  `Ресторани з видом на Колізей — за словами Romewise, «справжні туристичні пастки в усьому». ${L('rwCol','Romewise')}`,
+  `Taverna dei Fori Imperiali: у вівторок зачинено. До того ж Revealed Rome ще 2011 року писали про «занепад колись доброго ресторану» через популярність на TripAdvisor, а читач Minchilli назвав його «дуже звичайним». ${L('revTav','Revealed Rome')} · ${L('minchilli','Elizabeth Minchilli')}`,
+  `Da Fortunata біля Пантеону: довга черга, їжа «середня». Antico Vinaio: не вартий черги довше 5 хв. Столики на Piazza della Rotonda — плата за вид. ${L('rwPan','Romewise')}`,
+  `Giolitti біля Пантеону: читачі Romeing називають його переоціненим і туристичним. ${L('gelato','Romeing')}`,
+  `Tazza d'Oro: кава нормальна, але публіка туристична «щодня, цілий день». ${L('parla','Katie Parla')}`,
+  `Armando al Pantheon не пастка: аматрічану там хвалять. Але бронь майже не дістати й діє жорсткий ліміт часу. ${L('rwPan','Romewise')} · ${L('mli','Mama Loves Italy')}`]],
+ ["food","🔎 Вердикти по наших закладах",[
+  `<span class="badge ok">автентично</span> Supplizio, Gelateria del Teatro, Sant'Eustachio, Enoteca Corsi, Dal Cavalier Gino, Broccoletti, Ai Tre Scalini, Fatamorgana.`,
+  `<span class="badge chk">з застереженням</span> Pizzarium (якісно, але черга туристів — є Panificio Bonci), La Carbonara (історична, але зала вже туристична), Luzzi (дешевий компроміс біля Колізею).`,
+  `Детальний вердикт з джерелами є на кожній картці, у блоці 🔎.`]],
+ ["scam","🪤 Шахрайство",[
+  `«Гладіатори» біля Колізею: обіймають для фото, потім вимагають €20–50. Відповідь — «No, grazie». ${L('scams','tabiji')}`,
+  `Троянди й браслети на Навоні й Іспанських сходах: втискають у руку, потім вимагають €5–10. Нічого не беріть.`,
+  `«Skip-the-line» за готівку біля Ватикану й Колізею — порожні PDF. Лише офіційні сайти.`,
+  `Кишенькові злодії на Треві, Іспанській площі й у Пантеоні. Поліція: 112 або 113.`]],
+ ["wc","🚻 Туалети: де й скільки коштує",[
+  `<b>Громадських туалетів у центрі мало.</b> Міські P.Stop коштують €1 (безкоштовно з Roma Pass), офіційно працюють 10:00–18:00, але можуть бути зачинені. ${L('wcRW','Romewise')}`,
+  `<b>Безкоштовні на маршруті:</b> площа Св. Петра (праворуч під колонадою біля пошти, ліворуч біля сувенірної крамниці, без рамки); усередині собору — біля камери схову; у Музеях Ватикану кілька, зокрема перед сходами до Сікстинської; Galleria Alberto Sordi на Via del Corso. ${L('wcRW','Romewise')} · ${L('wcTIR','Tourist in Rom')}`,
+  `<b>Платні €1:</b> P.Stop на Piazza della Città Leonina біля Ватикану (10:00–20:00), кіоск на Via Zanardelli біля Навони (10:00–18:00), P.Stop на Piazza di Spagna (9:00–22:00). Інші міські туалети — €1.50 і лише безконтактною карткою; працюють ненадійно. ${L('wcTIR','Tourist in Rom')}`,
+  `<b>Біля Треві й Колізею громадських немає.</b> У Колізеї туалет лише всередині, за квитком. ${L('wcRW','Romewise')}`,
+  `<b>Правило кави:</b> бари не зобов'язані пускати не-клієнтів, і часто висить «solo per i clienti». Купіть еспресо стоячи (~€1) і спитайте «Posso usare il bagno?». У McDonald's туалет за кодом із чека. ${L('wcRW','Romewise')}`,
+  `Туалетного паперу часто немає: серветки й санітайзер — у кишеню. Воду в раковині часто вмикає педаль на підлозі.`]],
+ ["rules","⚖️ Правила й штрафи",[
+  `На Іспанських сходах не сидіти: штраф до €400. ${L('fine','Money.it')}`,
+  `Монети в Треві — лише в маленький басейн на сходах; до головної чаші пускають за €2. ${L('trevi2','Open')}`]]
+];
+const AREAS=[
+ ["Борго й Праті (Ватикан)","Біля стін — черги й продавці «турів». За два квартали, у Праті, їдять місцеві.",[
+  "Квитки — лише на museivaticani.va, ніколи в людей з бейджами. "+L('scams','tabiji'),
+  "Pizzarium і Panificio Bonci — це вже Праті; Mercato Trionfale поруч — найбільший ринок Рима. "+L('ftrVat','The Roman Food Tour')]],
+ ["Навона й Пантеон","Найгарніший і найщільніший шматок центру. Добре їсти в провулках, погано — на площах.",[
+  "Столики на Piazza della Rotonda — плата за вид, їжа навряд чи запам'ятається. "+L('rwPan','Romewise'),
+  "Dal Cavalier Gino, Enoteca Corsi, Pigna — місця для офісів і депутатів, а не для натовпу"]],
+ ["Треві й Іспанська площа","Найбільший натовп дня. Тут дивимося, а не їмо.",[
+  "Тут працюють кишенькові злодії й продавці троянд",
+  "Сидіти на сходах заборонено. "+L('fine','Money.it')]],
+ ["Колізей і Монті","Біля самого Колізею — ресторани з видом і цінами за вид. Через 10 хв угору починається Монті, де місцеві вечеряють.",[
+  "Taverna dei Fori Imperiali у вівторок зачинена. "+L('monti','Romeing'),
+  "Luzzi — чесний дешевий варіант просто біля Колізею. "+L('luzzi','Time Out')]]
+];
+const NC=[["all","Усі"],["wc","🚻 Туалети"],["areas","Райони"],["transport","Транспорт"],["dress","Одяг"],["food","Їжа"],["scam","Шахраї"],["rules","Штрафи"]];
+let nc="all";
+function renderPB(){
+  document.getElementById("rpb").innerHTML=PB.map(([i,t,b])=>`<div class="card"><h4><span>${i}</span>${t}</h4>${b}</div>`).join("");
+  const nf=document.getElementById("rnf");
+  nf.innerHTML=NC.map(([c,t])=>`<button data-c="${c}" class="${nc===c?'on':''}">${t}</button>`).join("");
+  nf.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{nc=b.dataset.c;renderPB();}));
+  let h="";
+  if(nc==="all"||nc==="areas") h+=AREAS.map(([t,d,l])=>`<div class="card"><span class="tag">район</span><h4>${t}</h4><p style="margin:4px 0 6px;font-size:14px">${d}</p><ul class="tight">${l.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+  h+=NU.filter(n=>nc==="all"||n[0]===nc).map(([c,t,l])=>`<div class="card"><h4>${t}</h4><ul class="tight">${l.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+  document.getElementById("rareas").innerHTML=h;
+  document.getElementById("rsrclist").innerHTML=Object.keys(S).map(k=>`<li>${L(k,S[k][0])}</li>`).join("");
+}
+
+/* ---------- QUICK ---------- */
+const QUICK=[
+ ["r_bas","🕊","Найбільший собор світу, а Pietà стоїть одразу праворуч від входу.","Знайти Pietà, потім стати під куполом","60 хв",2,3,"Черга > 45 хв → Пантеон"],
+ ["r_mus","🖼","Сікстинська стеля, і ви дивитеся на неї в повній тиші.","Галерея мап → Сікстинська, решту пропустити","3 год",2,3,"Перевтома → вихід через Pinacoteca"],
+ ["r_cast","👼","Міст, на якому стоять десять ангелів.","Фото замку з середини мосту","10 хв",2,2,"Нудно → одразу до Supplizio"],
+ ["r_suppl","🧀","Рисова кулька з сиром, що тягнеться, як телефонний дріт.","Класичний + cacio e pepe","20 хв",2,2,"Черга → Pellegrino навпроти"],
+ ["r_teatro","🍋","Морозиво з лимонів Амальфі.","Два смаки, які ніколи не пробували","10 хв",1,2,"Черга → далі на Навону"],
+ ["r_nav","⛲","Площа-стадіон з фонтаном Берніні.","Пройти від краю до краю","15 хв",2,3,"Троянди в руку → «No, grazie» й далі"],
+ ["r_eust","☕","Кава, яку пʼють стоячи за 30 секунд.","Каса → «un gran caffè» → бар","5 хв",2,2,"Черга → Tazza d'Oro за 2 хв"],
+ ["r_pan","🕳","2000-річний купол з діркою в небо.","Стати точно під окулюсом","30–40 хв",2,3,"Черга → спершу Треві, потім назад"],
+ ["r_trevi","🪙","Найвідоміший фонтан і найгустіший натовп дня.","Монету в маленький басейн на сходах","15 хв",3,3,"Забагато людей → дивитися збоку й далі"],
+ ["r_spagna","🪜","135 сходинок і вид на дахи.","Нагору без зупинок, сідати не можна","15 хв",2,3,"Натовп → одразу на Pincio"],
+ ["r_pincio","🌇","Сонце сідає за купол Святого Петра.","Місце біля балюстради, 10 хв без телефону","40 хв",1,2,"Холодно → вниз, на метро Flaminio"],
+ ["r_agnesi","🏟","Колізей у підсвітці згори.","Знайти Via Nicola Salvi над метро","30 хв",2,2,"Гладіатори → «No, grazie»"],
+ ["r_broc","🥦","Маленька траторія Монті, де немає зазивал.","Паста дня + broccoletti ripassati","80 хв",2,2,"Повно → La Carbonara за 5 хв"],
+ ["r_carb","🍝","Остерія 1906 року з графіті на стінах.","Carbonara + cacio e pepe на двох","80 хв",2,2,"Повно → Ai Tre Scalini за 2 хв"]
+];
+const POCKET=[
+ ["card","Безконтактна картка в кожного (tap&go у метро, оплата на Треві лише карткою)"],
+ ["dress","Закриті плечі й коліна (собор, Музеї)"],
+ ["vm","QR квитка в Музеї офлайн (якщо обрано)"],
+ ["book","Бронь на вечерю (Broccoletti або La Carbonara) або на обід у Gino"],
+ ["map","Офлайн-карта центру Рима"],
+ ["wc","Паперові й вологі серветки, санітайзер, пара монет по €1 (туалети)"],
+ ["pwr","Павербанк"],
+ ["shoe","Зручне взуття: ~7 км бруківки"],
+ ["warm","Теплий шар на захід і вечір"]
+];
+const TRAPS=[
+ "Музеї Ватикану затягують: будильник «Ідемо до Сікстинської», інакше залишитеся там до 15:00.",
+ "Навона й Треві — місця, де вам вкладають у руку троянду чи браслет. Руки в кишенях, «No, grazie», не зупинятися.",
+ "Столики на площі з видом — це пастка для гаманця. Кава стоячи, обід у провулку.",
+ "Захід о 16:48 не чекає: якщо після Треві вже 16:20, прибирайте Pincio й дивіться з верху Іспанських сходів.",
+ "Біля Колізею «гладіатори» обіймають для фото без питань. Тримайте дистанцію.",
+ "Завтра ранній виліт до Лісабона: будильник на «Розраховуємося», щоб не засидітися до ночі."
+];
+function renderAlarms(){
+  const el=document.getElementById("ral"); if(!el)return;
+  const T=tl(st);
+  el.innerHTML=T.map((r,i)=>[r,T[i+1]]).filter(([r,n])=>r[4]&&n).map(([r,n])=>`<li><b>${minus10(n[0])}</b><span>${r[4]} <span style="color:var(--muted)">(о ${n[0]} уже наступний крок)</span></span></li>`).join("");
+  const seen=[];T.forEach(r=>{if(r[3]&&P[r[3]]&&P[r[3]].cat!=="logistics"&&!seen.includes(r[3]))seen.push(r[3])});
+  document.getElementById("roneline").innerHTML=seen.map(k=>P[k].n.split(" (")[0].split(" ·")[0]).join(" → ");
+}
+function renderQuick(){
+  const m=n=>"●".repeat(n)+"○".repeat(3-n);
+  document.getElementById("rqcards").innerHTML=QUICK.map(([k,e,hook,act,time,noise,crowd,bail])=>
+   `<div class="card"><h4>${e} ${P[k].n}</h4>${photos(P[k].n,P[k].q,P[k].cat)}<div class="hook">${hook}</div>
+    <div class="q"><span>🎯</span><span><b>${act}</b></span><span>⏱</span><span>${time}</span><span>🔊</span><span class="meter">${m(noise)} шум</span><span>👥</span><span class="meter">${m(crowd)} натовп / черга</span><span>🚪</span><span>${bail}</span></div>
+    <div class="links"><a href="${gmr(P[k].q)}" target="_blank" rel="noopener">Google Maps ↗</a></div></div>`).join("");
+  let done={}; try{done=JSON.parse(localStorage.getItem("rm-pocket")||"{}")}catch(e){}
+  const pk=document.getElementById("rpocket"); pk.className="pk";
+  pk.innerHTML=POCKET.map(([k,t])=>`<label><input type="checkbox" data-k="${k}" ${done[k]?"checked":""}> <span>${t}</span></label>`).join("");
+  pk.querySelectorAll("input").forEach(i=>i.addEventListener("change",()=>{done[i.dataset.k]=i.checked;try{localStorage.setItem("rm-pocket",JSON.stringify(done))}catch(e){}}));
+  document.getElementById("rtraps").innerHTML=TRAPS.map(t=>`<li>${t}</li>`).join("");
+  renderAlarms();
+}
+
+renderDay(); renderAll(); renderMenu(); renderPB(); renderQuick();
+{const h=location.hash.slice(1); show(h&&document.getElementById("v-"+h)?h:"r-day");}
+})();
 </script>
 </body>
 </html>
+
+</body></html>
